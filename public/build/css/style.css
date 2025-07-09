@@ -1,0 +1,33 @@
+.astrick {
+    color: red;
+    font-weight: bold;
+}
+
+
+
+/* this css for text area of ckeditor  */
+
+.editor-wrapper {
+    min-height: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.editor-wrapper textarea {
+    min-height: 100%;
+    resize: vertical;
+    /* optional: allow vertical resizing */
+}
+
+
+/* arrange the item of table in vertically center of table 
+ */
+.v-center {
+    vertical-align: middle;
+}
+
+
+/* intially hide form in a page  */
+#create-form-section{
+   display: none; 
+}

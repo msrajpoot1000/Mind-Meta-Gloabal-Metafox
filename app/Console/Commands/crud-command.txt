@@ -1,0 +1,11 @@
+php artisan make:crud Program --fields="email:string" --fields="photo:image" --fields="sas:boolean" --fields="des:text"
+
+
+to transfer seeder
+php artisan db:seed --class=YourSeederClassName
+
+
+php artisan make:custom-blade program --fields="input:email:email" --fields="input:file:photo" --fields="select:sas" --fields="textarea:des"
+
+
+php artisan make:custom-blade-edit program-edit --fields="input:email:email" --fields="input:file:photo" --fields="select:sas" --fields="textarea:des"
