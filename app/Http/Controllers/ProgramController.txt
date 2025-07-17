@@ -1,0 +1,156 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Program;
+use Illuminate\Http\Request;
+
+class ProgramController extends Controller
+{
+    public function indexF()
+    {
+        return view('user.pages.programs');
+    }
+
+    public function index()
+    {
+        $items = Program::latest()->get();
+        return view('admin.pages.programs', compact('items'));
+    }
+
+    public function create() {}
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'phot1o' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        'phot2o' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'phot3o' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        'description1' => 'required|string',
+        'description2' => 'required|string',
+        'description3' => 'nullable|string',
+        'name' => 'required|string',
+        'is_active' => 'required|boolean'
+        ]);
+        
+        if ($request->hasFile('phot1o')) {
+            $folder = 'upload/programs';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('phot1o');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['phot1o'] = $folder . '/' . $filename;
+        }
+        if ($request->hasFile('phot2o')) {
+            $folder = 'upload/programs';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('phot2o');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['phot2o'] = $folder . '/' . $filename;
+        }
+        if ($request->hasFile('phot3o')) {
+            $folder = 'upload/programs';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('phot3o');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['phot3o'] = $folder . '/' . $filename;
+        }
+
+        Program::create($data);
+        return redirect()->route('admin-programs.index')->with('success', 'Program created successfully.');
+    }
+
+    public function edit(string $id)
+    {
+        $item = Program::findOrFail($id);
+        return view('admin.pages.programs-edit', compact('item'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        // dd($request);
+        $item = Program::findOrFail($id);
+
+      $request->validate([
+    'status_phot1o' => 'required|in:1',
+    'status_phot2o' => 'nullable|in:0,1',
+    'status_phot3o' => 'required|in:1',
+    'description1' => 'required|string',
+    'description2' => 'required|string',
+    'description3' => 'nullable|string',
+    'name' => 'required|string',
+    'is_active' => 'required|boolean',
+]);
+
+
+        $data = $request->only(['description1', 'description2', 'description3', 'name', 'is_active']);
+
+        $photoFields = ['phot1o', 'phot2o', 'phot3o'];
+
+        foreach ($photoFields as $field) {
+            $statusField = 'status_' . $field;
+
+            if ($request->input($statusField)) {
+                if ($request->hasFile($field)) {
+                    if (!empty($item->$field) && file_exists(public_path($item->$field))) {
+                        unlink(public_path($item->$field));
+                    }
+
+                    $folder = 'upload/programs';
+                    $path = public_path($folder);
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+
+                    $file = $request->file($field);
+                    $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->move($path, $filename);
+
+                    $data[$field] = $folder . '/' . $filename;
+                } else {
+                    $data[$field] = $item->$field;
+                }
+            } else {
+                if (!empty($item->$field) && file_exists(public_path($item->$field))) {
+                    unlink(public_path($item->$field));
+                }
+
+                $data[$field] = null;
+            }
+        }
+
+
+        $item->update($data);
+
+        return redirect()->route('admin-programs.index')->with('success', 'Program updated successfully.');
+    }
+
+        public function destroy(string $id)
+        {
+            $item = Program::findOrFail($id);
+    
+            // Delete image file(s)
+            if ($item->photo && file_exists(public_path($item->photo))) {
+                unlink(public_path($item->photo));
+            }
+    
+            if ($item->photo2 && file_exists(public_path($item->photo2))) {
+                unlink(public_path($item->photo2));
+            }
+    
+            $item->delete();
+    
+            return redirect()->route('admin-programs.index')->with('success', 'Program deleted successfully.');
+    }
+}

@@ -20,29 +20,28 @@
                     <form action="{{ route('admin-testimonial.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
+
                         <div class="row">
-                            <!-- Testimonial Photo -->
-                            <div class="col-md-6">
+                            <div class="col-md-6 ">
                                 <div class="mb-3">
-                                    <label for="photo" class="form-label">Client Photo</label>
-                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"
-                                        name="photo" id="photo1" accept="image/*">
+                                    <label for="photo1" class="form-label">Client Photo</label>
+                                    <input type="file"
+                                        class="form-control preview-image-input @error('photo') is-invalid @enderror"
+                                        data-preview-id="photo_preview1" name="photo1" id="photo1" accept="image/*">
                                     @error('photo')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-
-                            <!-- Image Preview -->
-                            <div class="col-md-6 d-flex align-items-center justify-content-center">
-                                <img id="image_preview1" src="#" alt="Selected Image"
+                            <div class="col-md-6 mt-3 d-flex align-items-center justify-content-center">
+                                <img id="photo_preview1" src="#" alt="Selected Image"
                                     style="max-width: 5rem; display: none; border: 1px solid #ccc; padding: 5px;">
                             </div>
                         </div>
 
                         <div class="row">
                             <!-- Client Name -->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="mb-3">
                                     <label for="client_name" class="form-label">Client Name <span
                                             class="astrick">*</span></label>
@@ -54,7 +53,7 @@
                                 </div>
                             </div>
 
-                            <!-- Client Position -->
+                            {{-- <!-- Client Position -->
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="client_position" class="form-label">Client Position<span class="astrick"> *
@@ -67,11 +66,11 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         {{-- rating and status  --}}
-                        {{-- <div class="row">
+                        <div class="row">
                             <!-- Rating -->
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -88,20 +87,23 @@
                             <!-- Status -->
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    
+
                                     <label for="status" class="form-label">Status</label>
                                     <br>
-                                    <select name="status" 
+                                    <select name="status"
                                         class="form-select form-control @error('status') is-invalid @enderror">
-                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Inactive</option>
+                                        <option value="1" {{ old('status', '1') == '1' ? 'selected' : '' }}>Active
+                                        </option>
+                                        <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactive
+                                        </option>
+
                                     </select>
                                     @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <!-- Testimonial Description -->
                         <div class="row mt-4">
@@ -145,7 +147,7 @@
                                 <tr>
                                     <th>SN.</th>
                                     <th> Client Name
-                                    <th> Client Position</th>
+                                        {{-- <th> Client Position</th> --}}
                                     <th>Photo</th>
                                     <th>Description</th>
                                     <th>rating</th>
@@ -158,9 +160,9 @@
                                     <tr>
                                         <th class="v-center" scope="row">{{ $loop->iteration }}</th>
                                         <td class="v-center">{{ $testimonial->client_name ?? 'N/A' }}</td>
-                                        <td class="v-center">{{ $testimonial->client_position ?? 'N/A' }}</td>
+                                        {{-- <td class="v-center">{{ $testimonial->client_position ?? 'N/A' }}</td> --}}
                                         <td class="v-center">
-                                            <img src="{{ asset($testimonial->photo) }}" width="60" height="60"
+                                            <img src="{{ asset($testimonial->photo1) }}" width="60" height="60"
                                                 class="rounded-circle" alt="no image">
                                         </td class="v-center">
                                         <td
@@ -168,7 +170,15 @@
                                             {{ strip_tags($testimonial->description) }}
                                         </td>
                                         <td class="v-center">{{ $testimonial->rating ?? 'N/A' }}</td>
-                                        <td class="v-center">{{ $testimonial->status ?? 'N/A' }}</td>
+                                        <td class="v-center">
+                                            @if ($testimonial->status == 1)
+                                                <span class="badge bg-success">Active</span>
+                                            @elseif ($testimonial->status == 0)
+                                                <span class="badge bg-danger">Inactive</span>
+                                            @else
+                                                <span class="badge bg-secondary">N/A</span>
+                                            @endif
+                                        </td>
 
 
 
@@ -199,37 +209,6 @@
             </div>
         </div>
     </div>
-
-
-@endsection
-
-
-@section('scripts')
-
-
-
-
-    <script>
-        function addInput(type) {
-            let wrapperId = type + "-wrapper";
-            let wrapper = document.getElementById(wrapperId);
-
-            let row = document.createElement('div');
-            row.className = "row g-2 mt-2";
-            row.innerHTML = `
-            <div class="col-md-10">
-                <input type="text" name="${type == 'container' ? 'containerstuffing[]' : type + '[]'}" class="form-control" placeholder="Enter ${type}">
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger w-100" onclick="this.closest('.row').remove()">−</button>
-            </div>
-        `;
-            wrapper.appendChild(row);
-        }
-    </script>
-
-
-
 
 
 @endsection

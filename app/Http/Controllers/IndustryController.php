@@ -12,8 +12,8 @@ class IndustryController extends Controller
      */
     public function index()
     {
-        $industries = Industry::all();
-        return view('admin.pages.industries', compact('industries'));
+        $items = Industry::orderBy('created_at', 'desc')->get();
+        return view('admin.pages.industries', compact('items'));
     }
 
     /**
@@ -24,9 +24,9 @@ class IndustryController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
+
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -35,7 +35,7 @@ class IndustryController extends Controller
 
         Industry::create($request->only('name'));
 
-        return redirect()->route('admin-industries.index')->with('success', 'Industry created successfully.');
+        return redirect()->route('admin-industries.index')->with('success', 'Item created successfully.');
     }
 
     /**
@@ -52,8 +52,9 @@ class IndustryController extends Controller
     public function edit(string $id)
     {
 
-        $industry = Industry::findOrFail($id);
-        return view('admin.pages.industries-edit', compact('industry'));
+        $item = Industry::findOrFail($id);
+        
+        return view('admin.pages.industries-edit', compact('item'));
     }
         
 
@@ -72,7 +73,7 @@ class IndustryController extends Controller
     
         $industry->update($request->only('name', 'status'));
     
-        return redirect()->route('admin-industries.index')->with('success', 'Industry updated successfully.');
+        return redirect()->route('admin-industries.index')->with('success', 'Item updated successfully.');
     }
     
 
@@ -83,6 +84,7 @@ class IndustryController extends Controller
     {
         $industry = Industry::findOrFail($id);
         $industry->delete();
-        return redirect()->route('admin-industries.index')->with('success', 'Industry deleted successfully.');
+        return redirect()->route('admin-industries.index')->with('success', 'Item deleted successfully.');
     }
 }
+

@@ -17,28 +17,31 @@
                         @method('PUT')
 
                         <div class="row">
-                            <!-- Testimonial Photo -->
-                            <div class="col-md-6">
+                            <div class="col-md-6 ">
                                 <div class="mb-3">
-                                    <label for="photo" class="form-label">Client Photo</label>
-                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"
-                                        name="photo" id="photo1" accept="image/*">
+                                    <label for="photo1" class="form-label">Client Photo</label>
+                                    <input type="file"
+                                        class="form-control preview-image-input @error('photo') is-invalid @enderror"
+                                        data-preview-id="photo_preview1" name="photo1" id="photo1" accept="image/*">
                                     @error('photo')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-
-                            {{-- Image Preview --}}
-                            <div class="col-md-6 d-flex align-items-center justify-content-center">
-                                <img id="image_preview1" src="{{ asset($testimonial->photo) }}" alt="Selected Image"
+                            <div class="col-md-6 mt-3 d-flex align-items-center justify-content-center">
+                                <img id="photo_preview1" src="{{ asset($testimonial->photo1) }}" alt="Selected Image"
                                     style="max-width: 100%; max-width: 5rem; border: 1px solid #ccc; padding: 5px;">
+                                <input type="hidden" name="status_photo1" value="1">
+                                <button type="button" id="statusPhotoBtn1" class="btn btn-danger btn-sm m-2">
+                                    <i class="fas fa-trash"></i> Delete Image
+                                </button>
                             </div>
                         </div>
 
+
                         <div class="row">
                             <!-- Client Name -->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="mb-3">
                                     <label for="client_name" class="form-label">Client Name <span
                                             class="astrick">*</span></label>
@@ -52,7 +55,7 @@
                             </div>
 
                             <!-- Client Position -->
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="client_position" class="form-label">Client Position<span class="astrick"> *
                                         </span></label>
@@ -64,11 +67,11 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         {{-- rating  && status --}}
-                        {{-- <div class="row">
+                        <div class="row">
                             <!-- Rating -->
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -102,7 +105,7 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <!-- Testimonial Description -->
                         <div class="row mt-4">
@@ -110,8 +113,8 @@
                                 <label for="description" class="form-label">Testimonial Description <span
                                         class="astrick">*</span></label>
                                 <div class="editor-wrapper">
-                                    <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror"
-                                        placeholder="Write testimonial...">{{ old('description', $testimonial->description) }}</textarea>
+                                    <textarea name="description" id="description1" class="form-control @error('description') is-invalid @enderror"
+                                        placeholder="Write testimonial...">{{ $testimonial->description }}</textarea>
                                 </div>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>

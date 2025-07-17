@@ -90,5 +90,6 @@ class SubIndustryController extends Controller
         $subIndustry->delete();
         return redirect()->route('admin-sub-industries.index')->with('success', 'Sub-Industry deleted successfully.');
 
+        
     }
 }

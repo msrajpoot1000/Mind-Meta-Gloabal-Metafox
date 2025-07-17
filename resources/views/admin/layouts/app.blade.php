@@ -57,6 +57,7 @@
 
     <!-- vendor-scripts -->
     @include('admin.partials.vendor-scripts')
+    @yield('script')
 
 </body>
 

@@ -58,32 +58,25 @@
 
 {{-- // CKEditor --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>;
-
-{{-- // Initialize CKEditor --}}
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const descriptionElement = document.querySelector("#description");
+        // Select all elements with IDs that start with 'description'
+        const descriptionFields = document.querySelectorAll('[id^="description"]');
 
-        if (descriptionElement) {
-            ClassicEditor.create(descriptionElement).catch((error) => {
-                console.log("Error initializing CKEditor:", error);
-            });
-        }
+        descriptionFields.forEach((element) => {
+            ClassicEditor.create(element)
+                .catch((error) => {
+                    console.error(`Error initializing CKEditor on #${element.id}:`, error);
+                });
+        });
     });
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const descriptionElement = document.querySelector("#description1");
-
-        if (descriptionElement) {
-            ClassicEditor.create(descriptionElement).catch((error) => {
-                console.log("Error initializing CKEditor:", error);
-            });
-        }
-    });
+    window.validationErrors = {!! json_encode($errors->all()) !!};
 </script>
+
+
 
 
 @yield('scripts')

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('client_name');
             $table->string('client_position')->nullable();
             $table->text('description');
-            $table->string('photo')->nullable();
+            $table->string('photo1')->nullable();
             $table->tinyInteger('rating')->default(5);
             $table->boolean('status')->default(true);
             $table->timestamps();

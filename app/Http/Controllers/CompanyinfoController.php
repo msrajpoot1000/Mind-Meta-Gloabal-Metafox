@@ -57,7 +57,7 @@ class CompanyinfoController extends Controller
         if ($request->hasFile('favicon')) {
             $file = $request->file('favicon');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $destination = public_path('upload/favicon');
+            $destination = public_path('default/image/favicon');
             $file->move($destination, $filename);
     
             // Delete old favicon if it exists

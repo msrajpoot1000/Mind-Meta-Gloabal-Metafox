@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\SubSubProgram;
+use Illuminate\Http\Request;
+use App\Models\Program;
+use App\Models\SubProgram;
+
+class SubSubProgramController extends Controller
+{
+    public function index()
+    {
+        $items1 = Program::all();
+        $items3 = SubSubProgram::with(['subProgram', 'subProgram.program'])->get();
+        return view('admin.pages.sub-sub-programs', compact('items1', 'items3'));
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png',
+            'photo2' => 'nullable|image|mimes:jpg,jpeg,png',
+            'description1' => 'required|string',
+            'description2' => 'required|string',
+            'name' => 'required|string',
+            'is_active' => 'boolean',
+            'ref_id' => 'required|exists:sub_programs,id'
+        ]);
+        if ($request->hasFile('photo')) {
+            $folder = 'upload/categories';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('photo');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['photo'] = $folder . '/' . $filename;
+        }
+        if ($request->hasFile('photo2')) {
+            $folder = 'upload/categories';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('photo2');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['photo2'] = $folder . '/' . $filename;
+        }
+
+        SubSubProgram::create($data);
+        return redirect()->route('admin-sub-sub-programs.index')->with('success', 'SubSubProgram created successfully.');
+    }
+
+  public function edit(string $id)
+{
+    $items1 = Program::all();
+
+    // Get the SubSubProgram record
+    $item3 = SubSubProgram::findOrFail($id);
+
+    // Get subcategory (SubProgram) using ref_id from SubSubProgram
+    $subProgram = SubProgram::find($item3->ref_id);
+
+    // Get category (Program) using ref_id from SubProgram
+    $program = $subProgram ? Program::find($subProgram->ref_id) : null;
+
+    // Extract IDs
+    $item2Id = $subProgram?->id;
+    $item1Id = $program?->id;
+
+    return view('admin.pages.sub-sub-programs-edit', compact('items1', 'item3', 'item2Id', 'item1Id'));
+}
+
+
+    public function update(Request $request, string $id)
+    {
+        $item = SubSubProgram::findOrFail($id);
+        $data = $request->validate([
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png',
+            'photo2' => 'nullable|image|mimes:jpg,jpeg,png',
+            'description1' => 'required|string',
+            'description2' => 'required|string',
+            'name' => 'required|string',
+            'is_active' => 'boolean',
+            'ref_id' => 'required|exists:sub_programs,id'
+        ]);
+        if ($request->hasFile('photo')) {
+            if (!empty($item->photo) && file_exists(public_path($item->photo))) {
+                unlink(public_path($item->photo));
+            }
+            $folder = 'upload/categories';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('photo');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['photo'] = $folder . '/' . $filename;
+        }
+        if ($request->hasFile('photo2')) {
+            if (!empty($item->photo2) && file_exists(public_path($item->photo2))) {
+                unlink(public_path($item->photo2));
+            }
+            $folder = 'upload/categories';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('photo2');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['photo2'] = $folder . '/' . $filename;
+        }
+
+        $item->update($data);
+        return redirect()->route('admin-sub-sub-programs.index')->with('success', 'SubSubProgram updated successfully.');
+    }
+
+    public function destroy(string $id)
+    {
+        $item = SubSubProgram::findOrFail($id);
+        $item->delete();
+        return redirect()->route('admin-sub-sub-programs.index')->with('success', 'SubSubProgram deleted successfully.');
+    }
+
+    public function indexF()
+    {
+        return view('user.pages.sub-sub-programs');
+    }
+}

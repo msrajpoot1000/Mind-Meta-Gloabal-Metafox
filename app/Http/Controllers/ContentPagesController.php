@@ -13,24 +13,23 @@
  
      public function privacyPolicy()
      {   
-        $pageData=ContentPagesContent::where('type','privacy_policy')->first();
-         return view('user.pages.privacy-policy',compact('pageData'));
+        $item=ContentPagesContent::where('type','privacy_policy')->first();
+         return view('user.pages.default-page.privacy-policy',compact('item'));
      }
 
      public function cookiePolicy()
      {   
-        $pageData=ContentPagesContent::where('type','cookie_policy')->first();
-         return view('user.pages.cookie-policy',compact('pageData'));
+        $item=ContentPagesContent::where('type','cookie_policy')->first();
+         return view('user.pages.default-page.cookie-policy',compact('item'));
      }
 
      public function termsConditions()
      {   
-        $pageData=ContentPagesContent::where('type','terms_conditions')->first();
-         return view('user.pages.terms-conditions',compact('pageData'));
+        $item=ContentPagesContent::where('type','terms_conditions')->first();
+         return view('user.pages.default-page.terms-conditions',compact('item'));
      }
-     /**
-      * Display a listing of the resource.
-      */
+
+    
      public function index()
      {
         $contentPagesContents = ContentPagesContent::orderBy('created_at', 'desc')->get();

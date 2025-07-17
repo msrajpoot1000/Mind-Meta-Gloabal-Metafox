@@ -12,8 +12,8 @@ class ContactController extends Controller
 {
     public function contactF()
     {   
-         $companyinfos = Companyinfo::first();
-        return view('user.pages.contact', compact('companyinfos'));
+         $company = Companyinfo::first();
+        return view('user.pages.contact', compact('company'));
     }
 
     public function storeContact(Request $request)

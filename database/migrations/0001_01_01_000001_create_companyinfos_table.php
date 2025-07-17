@@ -17,9 +17,9 @@ return new class extends Migration
         $table->string('logo')->nullable();
         $table->string('favicon')->nullable();
         $table->string('email')->unique();
-        $table->string('phone', 15);
-        $table->string('phone2', 15);
-        $table->string('phone3', 15);
+        $table->string('phone', 15)->nullable();
+        $table->string('phone2', 15)->nullable();
+        $table->string('phone3', 15)->nullable();
         $table->string('address');
         $table->string('facebook')->nullable();
         $table->string('instagram')->nullable();

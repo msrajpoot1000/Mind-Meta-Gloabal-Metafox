@@ -11,7 +11,7 @@
                     <h4 class="card-title mb-0">Add Blog</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin-industries.update', $industry->id) }}" method="POST"
+                    <form action="{{ route('admin-industries.update', $item->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -24,7 +24,7 @@
                                             class="astrick">*</span></label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                         name="name" id="name" required
-                                        value="{{ old('name', $industry->name ?? '') }}">
+                                        value="{{ old('name', $item->name ?? '') }}">
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -45,9 +45,9 @@
                                     <select name="status"
                                         class="form-select form-control @error('status') is-invalid @enderror">
                                         <option value="1"
-                                            {{ old('status', $industry->status) == 1 ? 'selected' : '' }}>Active</option>
+                                            {{ old('status', $item->status) == 1 ? 'selected' : '' }}>Active</option>
                                         <option value="0"
-                                            {{ old('status', $industry->status) == 0 ? 'selected' : '' }}>Inactive
+                                            {{ old('status', $item->status) == 0 ? 'selected' : '' }}>Inactive
                                         </option>
                                     </select>
 

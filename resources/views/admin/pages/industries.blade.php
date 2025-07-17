@@ -92,14 +92,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($industries as $industry)
+                                @forelse ($items as $item)
                                     <tr>
                                         <th class="v-center" scope="row">{{ $loop->iteration }}</th>
-                                        <td class="v-center">{{ $industry->name ?? 'N/A' }}</td>
+                                        <td class="v-center">{{ $item->name ?? 'N/A' }}</td>
                                         <td class="v-center">
-                                            @if ($industry->status == 1)
+                                            @if ($item->status == 1)
                                                 <span class="badge bg-success">Active</span>
-                                            @elseif ($industry->status == 0)
+                                            @elseif ($item->status == 0)
                                                 <span class="badge bg-danger">Inactive</span>
                                             @else
                                                 <span class="badge bg-secondary">N/A</span>
@@ -107,10 +107,10 @@
                                         </td>
                                         <td class="v-center" class="d-flex flex-wrap row-gap-2">
 
-                                            <a href="{{ route('admin-industries.edit', $industry->id) }}"
+                                            <a href="{{ route('admin-industries.edit', $item->id) }}"
                                                 class="btn btn-sm btn-success px-4 m-1">Edit</a>
 
-                                            <form action="{{ route('admin-industries.destroy', $industry->id) }}"
+                                            <form action="{{ route('admin-industries.destroy', $item->id) }}"
                                                 method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')

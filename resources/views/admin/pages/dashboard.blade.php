@@ -85,7 +85,7 @@
 
 
                                 <div class="mt-n5 position-relative text-center border-bottom pb-3">
-                                    <img src="{{ asset($company->logo ?? 'default/image/company_log/company_logo.png') }}"
+                                    <img src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}"
                                         alt="" class="avatar-xl rounded-circle img-thumbnail">
 
                                     <div class="mt-3">

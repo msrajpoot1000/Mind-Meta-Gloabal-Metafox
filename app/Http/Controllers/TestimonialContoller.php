@@ -53,7 +53,7 @@ class TestimonialContoller extends Controller
             'client_name'     => 'required|string|max:255',
             'client_position' => 'nullable|string|max:255',
             'description'     => 'required|string',
-            'photo'           => 'nullable|image|max:2048',
+            'photo1'           => 'nullable|image|max:2048',
             'rating'          => 'nullable|integer|min:1|max:5',
             'status'          => 'nullable|boolean',
         ]);
@@ -66,7 +66,7 @@ class TestimonialContoller extends Controller
             'status',
         ]);
     
-        if ($request->hasFile('photo')) {
+        if ($request->hasFile('photo1')) {
             $folder = 'upload/testimonials';
             $path = public_path($folder);
     
@@ -74,11 +74,11 @@ class TestimonialContoller extends Controller
                 mkdir($path, 0777, true);
             }
     
-            $file = $request->file('photo');
+            $file = $request->file('photo1');
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move($path, $filename);
     
-            $data['photo'] = $folder . '/' . $filename;
+            $data['photo1'] = $folder . '/' . $filename;
         }
     
         Testimonial::create($data);
@@ -114,13 +114,15 @@ class TestimonialContoller extends Controller
     
      public function update(Request $request, $id)
      {
+
+        // dd($request);
          $testimonial = Testimonial::findOrFail($id);
      
          $request->validate([
              'client_name'     => 'required|string|max:255',
              'client_position' => 'nullable|string|max:255',
              'description'     => 'required|string',
-             'photo'           => 'nullable|image|max:2048', // Max 2MB
+             'photo1'           => 'nullable|image|max:2048', // Max 2MB
              'rating'          => 'nullable|integer|min:1|max:5',
              'status'          => 'nullable|boolean',
          ]);
@@ -133,28 +135,44 @@ class TestimonialContoller extends Controller
              'status',
          ]);
      
-            // Handle new photo upload
-            if ($request->hasFile('photo')) {
-                $folder = 'upload/testimonials';
-                $path = public_path($folder);
-        
-                // Delete old photo if it exists
-                if ($testimonial->photo && file_exists(public_path($testimonial->photo))) {
-                    unlink(public_path($testimonial->photo));
-                }
-        
-                // Create folder if not exists
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-        
-                // Save new photo
-                $file = $request->file('photo');
-                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-                $file->move($path, $filename);
-        
-                $data['photo'] = $folder . '/' . $filename;
+
+       if ($request->status_photo1) {
+            if ($request->hasFile('photo1')) {
+            $folder = 'upload/testimonials';
+            $path = public_path($folder);
+
+        // Delete old photo if it exists
+            if ($testimonial->photo1 && file_exists(public_path($testimonial->photo1))) {
+                unlink(public_path($testimonial->photo1));
             }
+
+        // Create folder if it doesn't exist
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+        // Save new photo
+            $file = $request->file('photo1');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+
+            $data['photo1'] = $folder . '/' . $filename;
+            } else {
+        // No new file uploaded, keep old one
+                $data['photo1'] = $testimonial->photo1;
+            }
+
+        } 
+        else {
+    // If user clicked delete, remove the old image
+            if ($testimonial->photo1 && file_exists(public_path($testimonial->photo1))) {
+                unlink(public_path($testimonial->photo1));
+            }
+
+            // Set photo to null or empty
+            $data['photo1'] = null;
+        }
+
         
          // Update testimonial
          $testimonial->update($data);
@@ -171,8 +189,8 @@ class TestimonialContoller extends Controller
         $testimonial = Testimonial::findOrFail($id);
 
         // Delete image file if it exists
-        if ($testimonial->photo && file_exists(public_path($testimonial->photo))) {
-            unlink(public_path($testimonial->photo));
+        if ($testimonial->photo1 && file_exists(public_path($testimonial->photo1))) {
+            unlink(public_path($testimonial->photo1));
         }
     
         // Delete blog entry from the database

@@ -47,7 +47,7 @@
                                 <label for="answer" class="form-label">Answer<span class="astrick">*</span></label>
                                 <div class="editor-wrapper">
                                     <textarea name="answer" id="description" class="form-control @error('answer') is-invalid @enderror"
-                                        placeholder="Write testimonial...">{{ old('answer') }}</textarea>
+                                        placeholder="Write answer...">{{ old('answer') }}</textarea>
                                 </div>
                                 @error('answer')
                                     <div class="invalid-feedback">{{ $message }}</div>

@@ -1,13 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Blog;
-use App\Models\Testimonial;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Faq;
-
-use App\Models\Productcategory;
 class FaqController extends Controller
 {
 
@@ -64,7 +60,7 @@ class FaqController extends Controller
       
         Faq::create($data);
     
-        return redirect()->route('admin-faq.index')->with('success', 'Testimonial added successfully!');
+        return redirect()->route('admin-faq.index')->with('success', 'Item added successfully!');
     }
     
 
@@ -110,7 +106,7 @@ class FaqController extends Controller
         ]);
      
         
-         // Update testimonial
+         // Update faq
          $faq->update($data);
      
          return redirect()->route('admin-faq.index')->with('success', 'Faq updated successfully!');

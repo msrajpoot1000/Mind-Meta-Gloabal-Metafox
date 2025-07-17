@@ -10,21 +10,23 @@
         <div class="navbar-brand-box">
             <a href="index.html" class="logo logo-dark">
                 <span class="logo-sm">
-                    <img src="{{ asset($company->logo) }}" alt="" height="26">
+
+                    <img src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}" alt=""
+                        height="26">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ asset($company->logo ?? 'default/image/company_log/company_logo.png') }}" alt=""
-                        height="80" width="180">
+                    <img src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}"
+                        alt="" height="80" width="180">
                 </span>
             </a>
 
             <a href="index.html" class="logo logo-light">
                 <span class="logo-lg">
-                    <img src="{{ asset($company->logo ?? 'default/image/company_log/company_logo.png') }}"
+                    <img src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}"
                         alt="" height="30">
                 </span>
                 <span class="logo-sm">
-                    <img src="{{ asset($company->logo ?? 'default/image/company_log/company_logo.png') }}"
+                    <img src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}"
                         alt="" height="26">
                 </span>
             </a>
@@ -87,7 +89,7 @@
                             <span class="menu-item" data-key="t-email">Content Pages</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="email-inbox.html" data-key="t-inbox">Pages</a></li>
+                            <li><a href="{{ route('admin-content-pages.index') }}" data-key="t-inbox">Pages</a></li>
 
                         </ul>
                     </li>
@@ -127,10 +129,12 @@
                 <div class="navbar-brand-box">
                     <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-dark-sm.png" alt="" height="26">
+                            <img src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}"
+                                alt="" height="26">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-dark.png" alt="" height="28">
+                            <img src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}"
+                                alt="" height="28">
                         </span>
                     </a>
 

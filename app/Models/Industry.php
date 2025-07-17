@@ -15,3 +15,5 @@ class Industry extends Model
     }
 
 }
+
+

@@ -1,0 +1,68 @@
+simple crud
+
+//for custom controller with thier built function, model, table, seeder. 
+php artisan make:crud Program --fields="email:string" --fields="photo:image" --fields="sas:boolean" --fields="des:text"
+// for custom blade template and thier design and also inbuilt fields and thier name
+php artisan make:custom-blade program --fields="input:email:email" --fields="input:file:photo" --fields="select:sas" --fields="textarea:des"
+// this is for custom edit blade
+php artisan make:custom-blade-edit program-edit --fields="input:email:email" --fields="input:file:photo" --fields="select:sas" --fields="textarea:des"
+
+
+
+//category crud
+//singular 
+//this is custom controller, model , table, seeder, 
+php artisan make:cat-crud Category --fields="photo:image" --fields="photo2:image" --fields="description1:text" --fields="description2:text" --fields="client:string" --fields="is_active:boolean" --fields="subCategory:hasMany:SubCategory"
+php artisan make:custom-blade categories --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:client"  --fields="select:is_active" 
+php artisan make:custom-blade-edit categories-edit --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2" --fields="input:text:client"  --fields="select:is_active" 
+
+//plural
+php artisan make:cat-crud Program --fields="photo:image:required" --fields="photo2:image:nullable" --fields="photo3:image:nullable" --fields="description1:text:required" --fields="description2:text:nullable" --fields="description3:text;required" --fields="name:string:required" --fields="is_active:boolean" --fields="subProgram:hasMany:SubProgram"
+php artisan make:custom-blade programs --fields="input:file:photo"  --fields="input:file:photo2" --fields="input:file:photo3" --fields="textarea:description1"  --fields="textarea:description2"  --fields="textarea:description3" --fields="input:text:name"  --fields="select:is_active" 
+php artisan make:custom-blade-edit programs-edit --fields="input:file:photo"  --fields="input:file:photo2" --fields="input:file:photo3" --fields="textarea:description1"  --fields="textarea:description2"  --fields="textarea:description3" --fields="input:text:name"  --fields="select:is_active" 
+
+
+php artisan make:cat-crud Program --fields="photo:image:required" --fields="photo2:image:n-required" --fields="photo3:image:required" --fields="description1:text:required" --fields="description2:text:n-required" --fields="description3:text:n-required" --fields="name:string:required" --fields="is_active:boolean:default=1" --fields="subProgram:hasMany:SubProgram"
+
+
+
+//sub category crud 
+//singular
+php artisan make:subcat-crud SubCategory --fields="photo:image" --fields="photo2:image" --fields="description1:text" --fields="description2:text" --fields="client:string" --fields="is_active:boolean"  --fields="ref_id:belongsTo:Category"
+php artisan make:sub-cat-blade sub-categories --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:client"  --fields="select:is_active" 
+php artisan make:sub-cat-edit-blade sub-categories-edit --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:client"  --fields="select:is_active" 
+
+
+plural
+php artisan make:subcat-crud SubProgram --fields="photo:image" --fields="photo2:image" --fields="description1:text" --fields="description2:text" --fields="name:string" --fields="is_active:boolean"  --fields="ref_id:belongsTo:Program"
+php artisan make:sub-cat-blade sub-programs --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active" 
+php artisan make:sub-cat-edit-blade sub-programs-edit --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active" 
+php artisan migrate
+
+
+php artisan make:subcat-crud SubProduct --fields="photo:image" --fields="photo2:image" --fields="description1:text" --fields="description2:text" --fields="name:string" --fields="is_active:boolean"  --fields="ref_id:belongsTo:Program"
+php artisan make:sub-cat-blade sub-products --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active" 
+php artisan make:sub-cat-edit-blade sub-products-edit --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active" 
+php artisan migrate
+
+
+
+
+
+
+//sub sub category crud 
+php artisan make:subsubcat-crud SubSubProduct --fields="photo:image" --fields="photo2:image" --fields="description1:text" --fields="description2:text" --fields="name:string" --fields="is_active:boolean"  --fields="ref_id:belongsTo:Program"  --fields="ref_id:belongsTo:SubProgram"
+php artisan make:sub-sub-cat-blade sub-sub-products --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active" --fields="ref_id:belongsTo:Program" --fields="ref_id:belongsTo:SubProgram"
+php artisan make:sub-sub-cat-edit-blade sub-sub-products-edit --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active" --fields="ref_id:belongsTo:Program" --fields="ref_id:belongsTo:SubProgram"
+
+php artisan make:subsubcat-crud SubSubProduct --fields="photo:image" --fields="photo2:image" --fields="description1:text" --fields="description2:text" --fields="name:string" --fields="is_active:boolean"  --fields="ref_id:belongsTo:SubProduct"
+php artisan make:sub-sub-cat-blade sub-sub-products --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active" --fields="ref_id:belongsTo:SubProduct"
+php artisan make:sub-sub-cat-edit-blade sub-sub-products-edit --fields="input:file:photo"  --fields="input:file:photo2" --fields="textarea:description1"  --fields="textarea:description2"  --fields="input:text:name"  --fields="select:is_active"  --fields="ref_id:belongsTo:SubProduct"
+
+
+
+// this is for delete crud
+php artisan delete:crud SubCategory
+
+
+

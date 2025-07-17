@@ -1,0 +1,28 @@
+// level 1
+php artisan make:cat-crud Tree1 --fields="img1:image:required" --fields="img2:image:nullable" --fields="img3:image:required" --fields="description1:text:required" --fields="description2:text:required" --fields="description3:text:nullable" --fields="name:string:required" --fields="is_active:boolean:required:default=1" --fields="subTree2:hasMany:SubTree2"
+php artisan make:custom-blade tree1s --fields="input:file:img1:required" --fields="input:file:img2:nullable" --fields="input:file:img3:required" --fields="textarea:description1:required" --fields="textarea:description2:required" --fields="textarea:description3:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1"
+php artisan make:custom-blade-edit tree1s-edit --fields="input:file:img1:required" --fields="input:file:img2:nullable" --fields="input:file:img3:required" --fields="textarea:description1:required" --fields="textarea:description2:required" --fields="textarea:description3:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1"
+php artisan migrate
+
+
+
+// level 2
+php artisan make:subcat-crud SubTree2 --fields="photo:image:required" --fields="photo2:image:nullable" --fields="photo3:image:required" --fields="description1:text:required" --fields="description2:text:nullable" --fields="name:string:required" --fields="is_active:boolean:required:default=1"  --fields="ref_id:belongsTo:Tree1:required"
+php artisan make:sub-cat-blade sub-tree2s --fields="input:file:photo:required" --fields="input:file:photo2:nullable" --fields="photo3:image:required" --fields="textarea:description1:required" --fields="textarea:description2:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1" --fields="ref_id:belongsTo:Tree1:required"
+php artisan make:sub-cat-edit-blade sub-tree2s-edit --fields="input:file:photo:required" --fields="input:file:photo2:nullable" --fields="photo3:image:required" --fields="textarea:description1:required" --fields="textarea:description2:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1"
+php artisan migrate
+
+
+php artisan make:subcat-crud SubTree3 --fields="photo:image:required"  --fields="photo322:image:required" --fields="description1:text:required" --fields="description2:text:nullable" --fields="name:string:required" --fields="is_active:boolean:required:default=1"  --fields="ref_id:belongsTo:Tree1:required"
+php artisan make:sub-cat-blade sub-tree3s --fields="input:file:photo:required" --fields="photo322:image:required" --fields="textarea:description1:required" --fields="textarea:description2:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1" --fields="ref_id:belongsTo:Tree1:required"
+php artisan make:sub-cat-edit-blade sub-tree3s-edit --fields="input:file:photo:required" --fields="photo322:image:required" --fields="textarea:description1:required" --fields="textarea:description2:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1"
+php artisan migrate
+
+
+
+// level 3
+a) 
+php artisan make:subsubcat-crud SubSubTree4 --fields="photo:image:required" --fields="photo2:image:nullable"  --fields="photo33:image:required" --fields="description1:text:required" --fields="description2:text:nullable" --fields="name:string:required" --fields="is_active:boolean:required:default=1"   --fields="ref_id:belongsTo:Tree1:required"  --fields="ref_id:belongsTo:SubTree2:required"
+php artisan make:sub-sub-cat-blade sub-sub-tree4s --fields="input:file:photo:required" --fields="input:file:photo2:nullable" --fields="input:file:photo33:required" --fields="textarea:description1:required" --fields="textarea:description2:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1" --fields="ref_id:belongsTo:Tree1:required" --fields="ref_id:belongsTo:SubTree2:required"
+php artisan make:sub-sub-cat-edit-blade sub-sub-tree4s-edit --fields="input:file:photo:required" --fields="input:file:photo2:nullable" --fields="input:file:photo33:required" --fields="textarea:description1:required" --fields="textarea:description2:nullable" --fields="input:text:name:required" --fields="select:is_active:default=1" --fields="ref_id:belongsTo:Tree1:required" --fields="ref_id:belongsTo:SubTree2:required"
+php artisan migrate
