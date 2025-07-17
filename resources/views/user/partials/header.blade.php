@@ -20,7 +20,7 @@
         }
 
         li {
-            z-index: 1!important;
+            z-index: 1 !important;
         }
     </style>
 @endsection
@@ -86,7 +86,7 @@
                                     <a style="font-size: 1rem">Juridiction</a>
                                     <ul>
                                         <li>
-                                            <a href="project.html" style="padding: 0px;margin:0px">
+                                            <a href="{{ route('user.pages.dumy') }}" style="padding: 0px;margin:0px">
                                                 <i class="fas fa-chevron-right "></i>
                                                 Mainland
                                             </a>
