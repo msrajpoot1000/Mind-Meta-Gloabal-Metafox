@@ -38,7 +38,7 @@
 @section('content')
 
 
-    <!-- Start Breadcrumb
+    <!-- banner
                                     ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/shape/contact.jpg);">
@@ -57,7 +57,9 @@
             </div>
         </div>
     </div>
-    <!-- End Breadcrumb -->
+
+
+
     <!-- Start Contact Us
                                         ============================================= -->
     <div class="contact-style-one-area overflow-hidden default-padding">

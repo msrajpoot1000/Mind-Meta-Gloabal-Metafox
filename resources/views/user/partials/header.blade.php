@@ -74,7 +74,7 @@
 
                 <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp" style="color:white">
                     <li class="dropdown">
-                        <a href="#" class="active" data-toggle="dropdown">Home</a>
+                        <a href="{{ route('user.pages.index') }}" class="active" data-toggle="dropdown">Home</a>
                     </li>
 
 
@@ -161,7 +161,7 @@
                                 <li><a href="services-details.html">Services Details</a></li>
                             </ul>
                         </li> --}}
-                    <li class="dropdown">
+                    {{-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
                         <ul class="dropdown-menu ">
                             <li><a href="blog-standard.html">Blog Standard</a></li>
@@ -171,10 +171,10 @@
                             <li><a href="blog-single.html">Blog Single</a></li>
                             <li><a href="blog-single-with-sidebar.html">Blog Single With Sidebar</a></li>
                         </ul>
+                    </li> --}}
+                    <li class="dropdown"><a href="{{ route('user.pages.aboutus') }}">About Us</a>
                     </li>
-                    <li class="dropdown">About</a>
-                    </li>
-                    <li><a href="{{ route('user.pages.contact') }}">contact</a></li>
+                    <li><a href="{{ route('user.pages.contact') }}">Contact Us</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
 

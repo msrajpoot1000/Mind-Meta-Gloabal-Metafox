@@ -1,3 +1,11 @@
+@php
+    use Illuminate\Support\Facades\DB;
+    $company = DB::table('companyinfos')->first(); // ✅ returns only the first row (an object)
+@endphp
+
+@section('style')
+@endsection
+
 <footer class="bg-dark text-light">
     <div class="footer-shape">
         <div class="item">
@@ -12,32 +20,49 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 footer-item pr-50 pr-xs-15">
                     <div class="f-item about">
-                        <img class="logo" src="assets/img/logo-light.png" alt="Logo">
-                        <h2>Mind Meta Global</h2>
-                        <p>
-                            Your one-stop destination for all your business setup in Dubai, UAE solutions. We specialize
-                            in company formation, corporate structuring, and Golden Visa services. Our team of experts
-                            assists you with all your business needs and offers reliable solutions essential to scale
-                            your business in the UAE and beyond.
-                        </p>
+                        <img class="logo"
+                            src="{{ asset($company->logo ?? 'default/image/company_logo/company_logo.png') }}"
+                            alt="Logo">
+                        @if ($company->companyname)
+                            <h2>{{ $company->companyname }}</h2>
+                        @endif
+                        @if ($company->description)
+                            <p>
+                                {!! $company->description !!}
+                            </p>
+                        @endif
                         <div class="social-icons" style="display: flex; gap: 15px;">
-                            <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="https://www.twitter.com/yourhandle" target="_blank" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://www.instagram.com/yourhandle" target="_blank" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/company/yourcompany" target="_blank"
-                                aria-label="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://www.youtube.com/yourchannel" target="_blank" aria-label="YouTube">
-                                <i class="fab fa-youtube"></i>
-                            </a>
+                            @if ($company->facebook)
+                                <a href="{{ $company->facebook }}" target="_blank" aria-label="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            @endif
+
+                            {{-- @if ($company->twitter)
+                                <a href="{{ $company->twitter }}" target="_blank" aria-label="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            @endif --}}
+
+                            @if ($company->instagram)
+                                <a href="{{ $company->instagram }}" target="_blank" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            @endif
+
+                            @if ($company->linkedin)
+                                <a href="{{ $company->linkedin }}" target="_blank" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            @endif
+
+                            {{-- @if ($company->youtube)
+                                <a href="{{ $company->youtube }}" target="_blank" aria-label="YouTube">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            @endif --}}
                         </div>
+
 
                     </div>
                 </div>
@@ -106,22 +131,39 @@
                     <div class="f-item link">
                         <h4 class="widget-title">Get in Touch</h4>
                         <ul class="contact-info">
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                Level 36, Burj Al Salam Tower, Trade Center First, Sheikh Zayed Road, Dubai, UAE.
-                            </li>
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <a href="mailto:info@avyanco.com">info@avyanco.com</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone-alt"></i>
-                                <a href="tel:+971503989000">+971 50 398 9000</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone-alt"></i>
-                                <a href="tel:+97142405000">+971 4 240 5000</a>
-                            </li>
+                            @if ($company->address)
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ $company->address }}
+                                </li>
+                            @endif
+                            @if ($company->email)
+                                <li>
+
+                                    <i class="fas fa-envelope"></i>
+                                    <a href="mailto:{{ $company->email }}">{{ $company->email }}</a>
+
+                                </li>
+                            @endif
+                            @if ($company->phone)
+                                <li>
+                                    <i class="fas fa-phone-alt"></i>
+                                    <a href="tel:{{ $company->phone }}">{{ $company->phone }}</a>
+                                </li>
+                            @endif
+                            @if ($company->phone2)
+                                <li>
+                                    <i class="fas fa-phone-alt"></i>
+                                    <a href="tel:{{ $company->phone2 }}">{{ $company->phone2 }}</a>
+                                </li>
+                            @endif
+                            @if ($company->phone3)
+                                <li>
+                                    <i class="fas fa-phone-alt"></i>
+                                    <a href="tel:{{ $company->phone3 }}">{{ $company->phone3 }}</a>
+                                </li>
+                            @endif
+
                         </ul>
 
 
@@ -141,13 +183,13 @@
                 <div class="col-lg-6 text-end">
                     <ul>
                         <li>
-                            <a href="{{route('user.pages.terms-conditions')}}">Terms</a>
+                            <a href="{{ route('user.pages.terms-conditions') }}">Terms</a>
                         </li>
                         <li>
-                            <a href="{{route('user.pages.privacy-policy')}}">Privacy</a>
+                            <a href="{{ route('user.pages.privacy-policy') }}">Privacy</a>
                         </li>
                         <li>
-                            <a href="{{route('user.pages.cookie-policy')}}">Cookie</a>
+                            <a href="{{ route('user.pages.cookie-policy') }}">Cookie</a>
                         </li>
                     </ul>
                 </div>

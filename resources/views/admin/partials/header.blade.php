@@ -106,12 +106,12 @@
                           <h6 class="mb-0 text-capitalize">{{ $userName }}</h6>
                           <p class="mb-0 font-size-11 text-muted">{{ $user->email }}</p>
                       </div>
-                      <a class="dropdown-item" href="/profile">
+                      {{-- <a class="dropdown-item" href="/profile">
                           <i class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i>
                           <span class="align-middle">Profile</span>
-                      </a>
+                      </a> --}}
 
-                      <div class="dropdown-divider"></div>
+                      {{-- <div class="dropdown-divider"></div> --}}
                       <form action="{{ route('logout') }}" method="POST">
                           @csrf
                           <button type="submit" class="dropdown-item">

@@ -4,7 +4,7 @@
 @endphp
 @extends('user.layouts.app')
 
-@section('title', 'Contact Page | Meta Mind Global')
+@section('title', 'Mainland | Meta Mind Global')
 
 @section('style')
     <style>
@@ -51,6 +51,15 @@
         .hero-description {
             color: white;
         }
+
+        .typeOfCol {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .typeOfCol .info {
+            flex-grow: 1;
+        }
     </style>
 @endsection
 
@@ -58,63 +67,32 @@
 
 
 
-    <!-- hero section Area
-                                                                                                                                                                                                                                                                                                                            ============================================= -->
-    <div class="banner-area banner-style-two content-right navigation-icon-solid navigation-right-botom navigation-custom-large overflow-hidden bg-cover"
-        style="background: url(assets/img/shape/front-banner.jpg);">
-        <!-- Slider main container -->
-        <div class="banner-style-two-carousel">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
 
-                <!-- Single Item -->
-                <div class="swiper-slide banner-style-two">
-                    <div class="container">
-                        <div class="row align-center">
-                            <div class="col-xl-12 col-lg-12">
-                                <div class="content">
-                                    <h2 class="hero-heading">
-                                        Mainland Company Formation in Dubai, UAE</h2>
-                                    <p class="hero-description">
-                                        Are you thinking about establishing your business in Dubai? Dubai mainland company
-                                        formation is the answer. It's your path to expansive business success. Ready for a
-                                        smooth setup? Let's turn your business vision into reality.​
-                                    </p>
-                                    <div class="button">
-                                        <a class="btn circle btn-theme btn-md radius animation" href="#">Get
-                                            Consultant</a>
-                                    </div>
-                                    <div class="shape-circle"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Banner Thumb -->
-                        {{-- <div class="banner-thumb">
-                            <img src="assets/img/illustration/1.png" alt="illustration">
-                        </div> --}}
-                        <!-- End Banner Thumb -->
-                    </div>
-                    <!-- Start Shape -->
-                    {{-- <div class="banner-shape-right" style="background: url(assets/img/shape/3.png);"></div> --}}
-                    <!-- End Shape -->
+
+    {{-- hero section  --}}
+    <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
+        style="background-image: url(assets/img/shape/contact.jpg);">
+        <div class="breadcrum-shape">
+            {{-- <img src="assets/img/shape/cont.jpg" alt="Image Not Found" style="width: 100%;opacity:0.5"> --}}
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h1>Mainland Company Formation in Dubai, UAE</h1>
+                    <p class="hero-description">
+                        Are you thinking about establishing your business in Dubai? Dubai mainland company
+                        formation is the answer. It's your path to expansive business success. Ready for a
+                        smooth setup? Let's turn your business vision into reality.​
+                    </p>
                 </div>
-                <!-- End Single Item -->
-
             </div>
-
-            {{-- <!-- Navigation -->
-            <div class="swiper-nav-left">
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div> --}}
-
         </div>
     </div>
-    <!-- End Main -->
 
 
 
-    {{-- benifits --}}
+
+    {{-- benifits && features --}}
     <div class="mission-vision-style-one-area overflow-hidden default-padding"
         style="background-image: url(assets/img/shape/banner-4.png);">
 
@@ -239,24 +217,211 @@
     </div>
 
 
+    {{-- overview  --}}
+    <div class="about-style-five-area default-padding overflow-hidden bg-cover"
+        style="background: url(assets/img/shape/banner-3.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-style-five-thumb">
+                        {{-- <img src="assets/img/overview.png" alt="Image Not Found"> --}}
+                        {{-- <img src="assets/img/800x800.png" alt="Image Not Found"> --}}
+                        <h2 style="margin-left:-7rem">Overview</h2>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="about-style-five-info">
+                        <h4 class="sub-heading">Overview</h4>
+                        <h2> Dubai Mainland Company Formation</h2>
+                        <p>
+                            Dubai Mainland companies enjoy extensive flexibility with minimal restrictions. They can conduct
+                            business within and outside the UAE. Specific business activities do not even need local
+                            sponsors. You get access to government contracts and a favorable environment. With over 2000+
+                            activities and 100% ownership, seize the chance!
+
+                            The cost of Mainland company formation in Dubai varies from AED 15,000 to AED 35,000. This range
+                            depends on license type, business size, visas, office space, nature of operations, and other
+                            variables.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Type of
+                                    ============================================= -->
+    <div class="home-blog-area default-padding bottom-less bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        {{-- <h4 class="sub-heading">Latest Blog</h4> --}}
+                        <h2 class="title">Types of Dubai Mainland License</h2>
+                        <div class="devider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-md-6 mb-30 wow fadeInUp typeOfCol" data-wow-delay="300ms">
+                    <div class="blog-style-one">
+                        <div class="thumb">
+                            <a href="#"><img src="assets/img/800x600.png" alt="Thumb" /></a>
+                        </div>
+                        <div class="info">
+                            <h4>
+                                <a href="blog-single-with-sidebar.html"> Professional License</a>
+                            </h4>
+                            <p> Professional licensing confirms expertise for specific services. To get this license, you
+                                need to have the necessary skills or training required for those services.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Item -->
+                <!-- Single Item -->
+                <div class="col-xl-3 col-md-6 mb-30 wow fadeInUp  typeOfCol" data-wow-delay="300ms">
+                    <div class="blog-style-one">
+                        <div class="thumb">
+                            <a href="#"><img src="assets/img/800x600.png" alt="Thumb" /></a>
+                        </div>
+                        <div class="info">
+                            <h4>
+                                <a href="blog-single-with-sidebar.html"> Commercial License</a>
+                            </h4>
+                            <p>Mainland companies in the UAE must get a commercial trade license to do business, like buying
+                                and selling goods. This license is vital for them to trade legally in the country.
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Item -->
+                <!-- Single Item -->
+                <div class="col-xl-3 col-md-6 mb-30 wow fadeInUp  typeOfCol" data-wow-delay="300ms">
+                    <div class="blog-style-one">
+                        <div class="thumb">
+                            <a href="#"><img src="assets/img/800x600.png" alt="Thumb" /></a>
+                        </div>
+                        <div class="info">
+                            <h4>
+                                <a href="blog-single-with-sidebar.html"> Industrial License</a>
+                            </h4>
+                            <p>If businesses want to do industrial or manufacturing activities in the UAE, they must have an
+                                industrial trade license.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Item -->
+                <!-- Single Item -->
+                <div class="col-xl-3 col-md-6 mb-30 wow fadeInUp  typeOfCol" data-wow-delay="300ms">
+                    <div class="blog-style-one">
+                        <div class="thumb">
+                            <a href="#"><img src="assets/img/800x600.png" alt="Thumb" /></a>
+                        </div>
+                        <div class="info">
+                            <h4>
+                                <a href="blog-single-with-sidebar.html"> Tourism License</a>
+                            </h4>
+                            <p> Your business must have this license if it offers tourism-related services, such as hotels,
+                                restaurants, and travel agencies..</p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End Single Item -->
+
+
+            </div>
+        </div>
+    </div>
+
+
     <!-- Business Legal
-                                                                                                                                                                                                                                                                                                                ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
         <div class="container">
             <div class="row align-center">
-                <div class="about-style-two col-lg-12 offset-lg-1">
+                <div class="about-style-two col-lg-12 ">
                     <h2 class="title text-center">Business Legal Structures for Mainland</h2>
                     <p>
                         Have you aligned the structure of the company to your goal yet? A mainland business setup in Dubai
                         can choose from many types of legal entities. This variety allows entrepreneurs to determine the
                         structure that best suits their needs and circumstances.
                     </p>
-                    <div class="default-features mt-30">
-                        list item by ck edito
+                </div>
+
+
+                <div class="col-lg-12  mt-5">
+                    <div class="faq-style-one">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Civil Company
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            A Civil Company is owned by two or more partners. This type of company is
+                                            engaged in professional activity, like consultancy, beauty salon, and coaching,
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Limited Liability Company (LLC)
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            A business structure with a single person or up to 50 partners where liability
+                                            is only limited to the number of shares owned by the shareholders.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Sole Proprietorship
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            A business structure where a single person is the owner. The owner is completely
+                                            liable for all liabilities and financial obligations.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+
             </div>
+
         </div>
     </div>
     <!-- End About -->
@@ -265,7 +430,7 @@
 
 
     <!-- Start Servics Style One
-                                                                            ============================================= -->
+                                                                                                                                                                    ============================================= -->
     <div class="services-style-one-area default-padding bg-gray">
         <div class="triangle-shape">
             <img src="assets/img/shape/10.png" alt="Shape" />
@@ -327,41 +492,7 @@
 
 
 
-    {{-- overview  --}}
-    <!-- Start About
-                                                                                                    ============================================= -->
-    <div class="about-style-five-area default-padding overflow-hidden bg-cover"
-        style="background: url(assets/img/shape/banner-3.jpg);">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="about-style-five-thumb">
-                        {{-- <img src="assets/img/overview.png" alt="Image Not Found"> --}}
-                        {{-- <img src="assets/img/800x800.png" alt="Image Not Found"> --}}
-                        <h2 style="margin-left:-7rem">Overview</h2>
-                    </div>
-                </div>
-                <div class="col-lg-5 offset-lg-1">
-                    <div class="about-style-five-info">
-                        <h4 class="sub-heading">Overview</h4>
-                        <h2> Dubai Mainland Company Formation</h2>
-                        <p>
-                            Dubai Mainland companies enjoy extensive flexibility with minimal restrictions. They can conduct
-                            business within and outside the UAE. Specific business activities do not even need local
-                            sponsors. You get access to government contracts and a favorable environment. With over 2000+
-                            activities and 100% ownership, seize the chance!
 
-                            The cost of Mainland company formation in Dubai varies from AED 15,000 to AED 35,000. This range
-                            depends on license type, business size, visas, office space, nature of operations, and other
-                            variables.
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End About -->
 
 
     <!-- Business Legal                                                        ============================================= -->
@@ -410,7 +541,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="list-item-style-two wow fadeInUp">
-                                <div class="number" >04</div>
+                                <div class="number">04</div>
                                 <div class="info" tyle="margin-top: 0.55rem">
                                     <h4>Trade Name Reservation</h4>
                                 </div>
@@ -466,7 +597,7 @@
 
 
     <!-- about
-                                                                                                                                                                                                                                                ============================================= -->
+                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="mission-vision-style-one-area overflow-hidden default-padding"
         style="background-image: url(assets/img/shape/banner-4.png);">
 
@@ -478,12 +609,13 @@
                         <!-- Tab Single Item -->
                         <div class="tab-pane fade show active" id="tab1" role="tabpanel"
                             aria-labelledby="nav-id-1">
-                            <h2>Why Avyanco for Mainland Company Formation in Dubai?</h2>
+                            <h2>Why Mind Meta Global for Mainland Company Formation in Dubai?</h2>
                             <p>
-                                Avyanco is a prominent consulting firm in Dubai. We focus on free zone and mainland company
+                                Mind Meta Global is a prominent consulting firm in Dubai. We focus on free zone and mainland
+                                company
                                 formation in Dubai. Our experts also help with financial and legal support. We handle
                                 everything, from registering your business setup in Dubai mainland to helping it grow.
-                                Avyanco makes sure your business succeeds so you can have peace of mind.
+                                Mind Meta Global makes sure your business succeeds so you can have peace of mind.
                             </p>
                             {{-- <ul>
                                 <li>Commitment and fairness</li>
@@ -588,7 +720,7 @@
 
     {{-- updated faq  --}}
     <!-- Start Faq
-                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="faq-style-one-area relative" style="background-image: url(assets/img/shape/banner-4.png);">
         <div class="container">
             <div class="row align-center">
@@ -673,133 +805,6 @@
         </div>
     </div>
     <!-- End Faq -->
-
-
-
-
-
-
-    {{-- type of dubai mainland  --}}
-
-    <!-- Start Blog
-                                                                                                                                                                                                                    ============================================= -->
-    <div class="home-blog-area default-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="site-heading text-center">
-                        <h4 class="sub-heading">Latest Blog</h4>
-                        <h2 class="title">News & Update</h2>
-                        <div class="devider"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <!-- Single Item -->
-                <div class="col-lg-3 mt-md-30 mt-xs-30">
-                    <div class="p-2 shadow-sm rounded h-100 solid mb-30">
-                        <div class="thumb">
-                            <img src="assets/img/1500x800.png" alt="Image Not Found">
-                            <div class="tags"><a href="#">Success</a></div>
-                            <div class="info">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li>
-                                            <a href="#"><i class="fas fa-user"></i> Md Sohag</a>
-                                        </li>
-                                        <li>
-                                            16 August, 2023
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4>
-                                    <a href="blog-single-with-sidebar.html">Perceived determine departure explained no
-                                        forfeited he something an.</a>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mt-md-30 mt-xs-30">
-                    <div class="p-2 shadow-sm rounded h-100 solid mb-30">
-                        <div class="thumb">
-                            <img src="assets/img/1500x800.png" alt="Image Not Found">
-                            <div class="tags"><a href="#">Success</a></div>
-                            <div class="info">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li>
-                                            <a href="#"><i class="fas fa-user"></i> Md Sohag</a>
-                                        </li>
-                                        <li>
-                                            16 August, 2023
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4>
-                                    <a href="blog-single-with-sidebar.html">Perceived determine departure explained no
-                                        forfeited he something an.</a>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mt-md-30 mt-xs-30">
-                    <div class="p-2 shadow-sm rounded h-100 solid mb-30">
-                        <div class="thumb">
-                            <img src="assets/img/1500x800.png" alt="Image Not Found">
-                            <div class="tags"><a href="#">Success</a></div>
-                            <div class="info">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li>
-                                            <a href="#"><i class="fas fa-user"></i> Md Sohag</a>
-                                        </li>
-                                        <li>
-                                            16 August, 2023
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4>
-                                    <a href="blog-single-with-sidebar.html">Perceived determine departure explained no
-                                        forfeited he something an.</a>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mt-md-30 mt-xs-30">
-                    <div class="p-2 shadow-sm rounded h-100 solid mb-30">
-                        <div class="thumb">
-                            <img src="assets/img/1500x800.png" alt="Image Not Found">
-                            <div class="tags"><a href="#">Success</a></div>
-                            <div class="info">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li>
-                                            <a href="#"><i class="fas fa-user"></i> Md Sohag</a>
-                                        </li>
-                                        <li>
-                                            16 August, 2023
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4>
-                                    <a href="blog-single-with-sidebar.html">Perceived determine departure explained no
-                                        forfeited he something an.</a>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Item -->
-            </div>
-        </div>
-    </div>
-    <!-- End Blog  -->
-
 
 
 

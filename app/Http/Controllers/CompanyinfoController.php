@@ -19,16 +19,22 @@ class CompanyinfoController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         // ✅ Step 1: Validate inputs
         $request->validate([
-            'companyname' => 'required|string|max:255',
+            'companyname' => 'nullable|string|max:255',
+            'client_name'=>'nullable|string',
+             'title' => 'nullable|string',
+              'description' => 'nullable|string',
             'email'       => 'required|email',
-            'phone'       => 'required|string|max:15',
-            'phone2'      => 'nullable|string|max:15',
-            'phone3'      => 'nullable|string|max:15',
-            'address'     => 'required|string|max:500',
+            'phone'       => 'nullable|string|max:20',
+            'phone2'      => 'nullable|string|max:20',
+            'phone3'      => 'nullable|string|max:20',
+            'address'     => 'nullable|string|max:500',
             'facebook'    => 'nullable|url',
             'instagram'   => 'nullable|url',
+            'twitter'   => 'nullable|url',
+            'youtube'   => 'nullable|url',
             'linkedin'    => 'nullable|url',
             'pinterest'   => 'nullable|url',
             'logo'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -57,7 +63,7 @@ class CompanyinfoController extends Controller
         if ($request->hasFile('favicon')) {
             $file = $request->file('favicon');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $destination = public_path('default/image/favicon');
+            $destination = public_path('upload/favicon');
             $file->move($destination, $filename);
     
             // Delete old favicon if it exists
@@ -70,13 +76,18 @@ class CompanyinfoController extends Controller
     
         // ✅ Step 5: Update other fields
         $company->companyname = $request->companyname;
+        $company->client_name = $request->client_name;
         $company->email       = $request->email;
+        $company->title       = $request->title;
+        $company->description       = $request->description;
         $company->phone       = $request->phone;
         $company->phone2      = $request->phone2;
         $company->phone3      = $request->phone3;
         $company->address     = $request->address;
         $company->facebook    = $request->facebook;
         $company->instagram   = $request->instagram;
+        $company->twitter   = $request->twitter;
+        $company->youtube   = $request->youtube;
         $company->linkedin    = $request->linkedin;
         $company->pinterest   = $request->pinterest;
     

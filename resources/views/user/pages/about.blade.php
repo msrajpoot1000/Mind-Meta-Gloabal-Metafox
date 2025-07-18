@@ -40,7 +40,32 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
-      
+
+        .navbar.validnavs.navbar-default .navbar-nav li a {
+            color: white;
+        }
+
+        .navbar.validnavs.navbar-default.scrolled .navbar-nav li a {
+            color: black !important;
+        }
+
+        .headerContact p,
+        .headerContact h5 a {
+            color: white !important;
+        }
+
+        .headerContact .icon i {
+            color: #022b6d !important;
+        }
+
+        .navbar.validnavs.navbar-default.scrolled .headerContact p,
+        .navbar.validnavs.navbar-default.scrolled .headerContact h5 a {
+            color: #022b6d !important;
+        }
+
+        .navbar.validnavs.navbar-default.scrolled .headerContact .icon i {
+            color: black !important;
+        }
     </style>
 @endsection
 
@@ -48,11 +73,11 @@
 
 
     <!-- Start Breadcrumb
-                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
-        style="background-image: url(assets/img/2440x1578.png);">
+        style="background-image: url(assets/img/about_banner.jpg);">
         <div class="breadcrum-shape">
-            <img src="assets/img/shape/50.png" alt="Image Not Found">
+            {{-- <img src="assets/img/shape/50.png" alt="Image Not Found"> --}}
         </div>
         <div class="container">
             <div class="row">
@@ -417,7 +442,7 @@
     {{-- our partners  --}}
 
     <!-- Start Partner Area
-                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                            ============================================= -->
 
     <!-- Logo Section -->
     <section class="partner-logo-section bg-light " style="padding-top: 2rem;">

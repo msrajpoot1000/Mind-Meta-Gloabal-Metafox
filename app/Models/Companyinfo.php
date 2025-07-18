@@ -10,6 +10,9 @@ class Companyinfo extends Model
 
     protected $fillable = [
         'companyname',
+        'client_name',
+        'title',
+        'description',
         'logo',
         'favicon',
         'email',
@@ -19,6 +22,8 @@ class Companyinfo extends Model
         'address',
         'facebook',
         'instagram',
+        'twitter',
+        'youtube',
         'linkedin',
         'pinterest',
     ];
