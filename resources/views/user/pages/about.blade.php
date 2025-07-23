@@ -1,7 +1,3 @@
-@php
-    use Illuminate\Support\Facades\DB;
-    $company = DB::table('companyinfos')->first(); // ✅ returns only the first row (an object)
-@endphp
 @extends('user.layouts.app')
 
 @section('title', 'Home | Meta Mind Global')
@@ -73,7 +69,7 @@
 
 
     <!-- Start Breadcrumb
-                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/about_banner.jpg);">
         <div class="breadcrum-shape">
@@ -108,16 +104,12 @@
             registration in Dubai and providing all financial compliance services to upcoming entrepreneurs and foreign
             companies.
         </p>
-        <a href="path/to/your-file.pdf" download class="btn btn-primary  mb-5" style="background-color:black">
+        <a href="{{ url($company->about_pdf) }}" type="black" download class="btn btn-primary  mb-5"
+            style="background-color:black">
             <i class="fas fa-download"></i> Download PDF
         </a>
 
     </div>
-
-
-
-
-
 
 
     {{-- what we offer  --}}
@@ -168,281 +160,12 @@
 
 
 
-    {{-- missoion vision and all  --}}
-    {{-- <div class="services-style-one-area default-padding bg-gray">
-        <div class="triangle-shape">
-        </div>
-        <div class="center-shape" style="background-image: url(assets/img/shape/5.png);"></div>
-        <div class="container">
-            <div class="row align-center">
-
-                <div class="col-lg-12 pl-50 pl-md-15 pl-xs-15">
-                    <div class="tab-content services-tab-content" id="nav-tabContent">
-
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="nav-id-1">
-                            <div class="row">
-                              
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 wow fadeInUp">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-personal"></i>
-                                        <h4><a href="services-single.html">Our Mission</a></h4>
-                                        <p>
-                                            In the fast-developing business landscape, we strive to empower entrepreneurs
-                                            and founders by delivering them with the most appropriate business and fiscal
-                                            consultation.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 wow fadeInUp" data-wow-delay="300ms">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-career"></i>
-                                        <h4><a href="services-single.html">Our Vision</a></h4>
-                                        <p>
-                                            We are committed to designing your business world through an unbeatable
-                                            assistance plan, thus empowering you to acquaint yourself with emerging
-                                            processes, regulations, and technologies.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 wow fadeInUp" data-wow-delay="500ms">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-group"></i>
-                                        <h4><a href="services-single.html">Our Values</a></h4>
-                                        <p>
-                                            At Avyanco, we're committed to client success, integrity, expertise, efficiency,
-                                            and global-local partnerships. Your journey to business setup is our priority.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 wow fadeInUp" data-wow-delay="700ms">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-solution-5"></i>
-                                        <h4><a href="services-single.html">Company Culture</a></h4>
-                                        <p>
-                                            At Avyanco, we cultivate innovation, collaboration, and diversity. Our culture
-                                            promotes growth, client dedication, and unwavering integrity.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                            </div>
-                        </div>
-                        <!-- End Tab Single Item -->
-
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="nav-id-2">
-                            <div class="row">
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-business-trip"></i>
-                                        <h4><a href="services-single.html">Strategy & Planning</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-online-store"></i>
-                                        <h4><a href="services-single.html">Online Business</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-funds"></i>
-                                        <h4><a href="services-single.html">Saving & Investments</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-career"></i>
-                                        <h4><a href="services-single.html">Markets Research</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                            </div>
-                        </div>
-                        <!-- End Tab Single Item -->
-
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="nav-id-3">
-                            <div class="row">
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-budget"></i>
-                                        <h4><a href="services-single.html">Investment Planning</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-money-1"></i>
-                                        <h4><a href="services-single.html">Mutual Funds</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-funds"></i>
-                                        <h4><a href="services-single.html">Saving & Investments</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-world-globe"></i>
-                                        <h4><a href="services-single.html">Global Business</a></h4>
-                                        <p>
-                                            Prevailed always tolerably discourse and loser assurance creatively coin
-                                            applauded more uncommonly. Him everything trouble
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                            </div>
-                        </div>
-                        <!-- End Tab Single Item -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- testimonial  --}}
-
-    <!-- Start Testimonials ============================================= -->
-    {{-- @if ($testimonials->count())
-        <div class="testimonials-style-two-area bg-dark default-padding-top half-shape-light-bottom"
-            style="background-image: url(assets/img/shape/34.png);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
-                        <div class="site-heading text-light text-center">
-                            <h4 class="sub-heading">Success Stories</h4>
-                            <h2 class="title">Join 10,000 Happy Customers</h2>
-                            <p>Don't just take our word for it. Hear from entrepreneurs who have successfully established
-                                their
-                                businesses in Dubai. Learn from their experiences and gain insights into the possibilities
-                                that
-                                await you.</p>
-                            <div class="devider"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fill">
-                <div class="row">
-                    <div class="testimonial-style-two-carousel swiper">
-                        <div class="swiper-wrapper">
-
-
-                            @foreach ($testimonials as $testimonial)
-                                <div class="swiper-slide">
-                                    <div class="testimonial-style-two" style="padding:1.5rem">
-                                        <img src="assets/img/shape/quote.png" alt="Quote">
-
-
-                                        <div class="info">
-                                            <div id="testimonialText{{ $testimonial->id }}"
-                                                style="display: flex; flex-direction: column;">
-                                                <p class="short">
-                                                    {{ \Illuminate\Support\Str::limit(strip_tags($testimonial->description), 100, '...') }}
-                                                </p>
-                                                <p class="full" style="display: none;">
-                                                    {{ strip_tags($testimonial->description) }}
-                                                </p>
-                                            </div>
-
-                                            <button onclick="toggleFlexReadMore({{ $testimonial->id }})"
-                                                id="readMoreBtn {{ $testimonial->id }}" class="readBtn">Read More</button>
-                                        </div>
-
-
-
-
-                                        <div class="top-info">
-                                            <div class="testimonial-rating">
-                                                @for ($i = 1; $i <= $testimonial->rating; $i++)
-                                                    <i class="fas fa-star"></i>
-                                                @endfor
-
-                                            </div>
-                                        </div>
-                                        <div class="provider">
-                                            <div class="content">
-                                                <h4>{{ $testimonial->client_name }}</h4>
-                                            </div>
-                                            <div class="thumb">
-                                                <img src="{{ $testimonial->photo ?? 'assets/img/logo/01.png' }}"
-                                                    alt="Logo">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div class="swiper-pagination mb-4"></div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    @endif --}}
-
-
-
 
 
     {{-- our partners  --}}
 
     <!-- Start Partner Area
-                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                ============================================= -->
 
     <!-- Logo Section -->
     <section class="partner-logo-section bg-light " style="padding-top: 2rem;">

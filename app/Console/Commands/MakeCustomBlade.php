@@ -16,9 +16,11 @@ class MakeCustomBlade extends Command
 
     public function handle()
     {
-        $viewName = $this->argument('viewName');
-        $fields = $this->option('fields');
+        $viewName = $this->argument('viewName'); // e.g., TreeMy
+        $viewFile = Str::kebab($viewName); // e.g., tree-my
+        $readableName = Str::headline($viewName);
 
+        $fields = $this->option('fields');
         $parsedFields = [];
 
         foreach ($fields as $field) {
@@ -55,24 +57,24 @@ class MakeCustomBlade extends Command
             ];
         }
 
-        $viewPath = resource_path("views/admin/pages/{$viewName}.blade.php");
+        $viewPath = resource_path("views/admin/pages/{$viewFile}.blade.php");
 
         if (File::exists($viewPath)) {
             $this->error("Blade view already exists: $viewPath");
             return;
         }
 
-        $content = $this->generateBladeView($viewName, $parsedFields);
-
+        $content = $this->generateBladeView($viewFile, $viewName, $parsedFields,$readableName);
         File::ensureDirectoryExists(dirname($viewPath));
         File::put($viewPath, $content);
 
         $this->info("Blade view created: $viewPath");
     }
 
-    private function generateBladeView($viewName, $fields): string
+    private function generateBladeView($viewFile, $viewName, $fields,$readableName): string
     {
         $fieldsHtml = collect($fields)->map(fn($field) => $this->renderField($field))->implode("\n\n");
+
         $tableHeaders = collect($fields)->map(fn($field) => "<th>" . $this->label($field['name']) . "</th>")->implode("\n");
 
         $tableCells = collect($fields)->map(function ($field) {
@@ -115,10 +117,10 @@ HTML;
 HTML;
         })->implode("\n");
 
-        return <<<BLADE
+        return <<<"BLADE"
 @extends('admin.layouts.app')
 
-@section('title', 'Dashboard | Add ' . ucfirst('$viewName'))
+@section('title', 'Dashboard | Add ' . ucfirst("$readableName"))
 
 @section('content')
 
@@ -133,17 +135,17 @@ HTML;
 @endif
 
 <div class="mb-2 d-flex justify-content-end fw-bold">
-    <button id="toggleButton" class="btn btn-sm btn-success px-4 fs-5">Create {{ ucfirst('$viewName') }}</button>
+    <button id="toggleButton" class="btn btn-sm btn-success px-4 fs-5">Create {{ ucfirst("$readableName") }}</button>
 </div>
 
 <div id="create-form-section">
     <div class="col">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Add {{ ucfirst('$viewName') }}</h4>
+                <h4 class="card-title mb-0">Add {{ ucfirst("$readableName") }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin-$viewName.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin-$viewFile.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     $fieldsHtml
@@ -161,7 +163,7 @@ HTML;
     <div class="col">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">All {{ ucfirst('$viewName') }}</h4>
+                <h4 class="card-title">All {{ ucfirst("$readableName") }}</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -179,8 +181,8 @@ HTML;
                                     <td class="v-center">{{ \$loop->iteration }}</td>
                                     $tableCells
                                     <td class="v-center">
-                                        <a href="{{ route('admin-$viewName.edit', \$item->id) }}" class="btn btn-sm btn-success px-4 m-1">Edit</a>
-                                        <form action="{{ route('admin-$viewName.destroy', \$item->id) }}" method="POST" style="display:inline-block;">
+                                        <a href="{{ route('admin-$viewFile.edit', \$item->id) }}" class="btn btn-sm btn-success px-4 m-1">Edit</a>
+                                        <form action="{{ route('admin-$viewFile.destroy', \$item->id) }}" method="POST" style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm px-4 m-1" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
@@ -201,7 +203,6 @@ HTML;
 </div>
 
 @endsection
-
 BLADE;
     }
 
@@ -213,8 +214,7 @@ BLADE;
         $inputClass = "@error('$name') is-invalid @enderror";
         $errorBlock = "@error('$name')<div class=\"invalid-feedback\">{{ \$message }}</div>@enderror";
 
-
-         if ($field['type'] === 'input' && $field['inputType'] === 'file') {
+        if ($field['type'] === 'input' && $field['inputType'] === 'file') {
             $this->fileInputCounter++;
             $previewId = "photo_preview_{$this->fileInputCounter}";
             return <<<HTML

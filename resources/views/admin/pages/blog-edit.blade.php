@@ -1,161 +1,75 @@
 @extends('admin.layouts.app')
 
-@section('title', 'dashboard | Add Product')
+@section('title', 'Dashboard | Edit Item')
 
 @section('content')
-
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Add Blog</h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('admin-blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-
-                       
-
-                        <div class="row">
-                            {{-- File Input --}}
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="blog_image" class="form-label">Blog Image</label>
-                                    <input type="file" class="form-control @error('blog_image') is-invalid @enderror"
-                                           name="blog_image" id="photo1" accept="image/*">
-                                    @error('blog_image')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        
-                            {{-- Image Preview --}}
-                            <div class="col-md-6 d-flex align-items-center justify-content-center">
-                                <img id="image_preview1"
-                                     src="{{ asset($blog->blog_image) }}"
-                                     alt="Selected Image"
-                                     style="max-width: 100%; max-width: 5rem; border: 1px solid #ccc; padding: 5px;">
-                            </div>
-                        </div>
-                        
-
-                        {{-- Uncomment if needed --}}
-                        {{-- <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="heading" class="form-label">Blog Heading</label>
-                                    <input type="text" class="form-control @error('heading') is-invalid @enderror" name="heading" id="heading" value="{{ old('heading') }}">
-                                    @error('heading')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div> --}}
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Blog Title <span
-                                            class="astrick">*</span></label>
-                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                        name="title" id="title" required
-                                        value="{{ old('title', $blog->title ?? '') }}">
-
-                                    @error('title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="blog_date" class="form-label">Blog Date <span
-                                            class="astrick">*</span></label>
-                                    <input type="date" class="form-control @error('blog_date') is-invalid @enderror"
-                                        name="blog_date" id="blog_date" required
-                                        value="{{ old('blog_date', $blog->blog_date ?? '') }}">
-                                    @error('blog_date')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-md-12">
-                                <label for="description" class="form-label">Blog Description <span
-                                        class="astrick">*</span></label>
-                                <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror"
-                                    rows="5" required placeholder="Write blog description...">{{ old('description', $blog->description ?? '') }}</textarea>
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-primary w-md">Submit</button>
-                        </div>
-                    </form>
-
-
-                </div>
-                <!-- end card body -->
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Edit Item</h4>
             </div>
-            <!-- end card -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="card-body">
+
+                <form action="{{ route('admin-blog.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="row">
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label for="blog_image" class="form-label">Blog Image </label>
+            <input type="file" class="form-control preview-image-input @error('blog_image') is-invalid @enderror" name="blog_image" id="blog_image" data-preview-id="photo_preview_blog_image" accept="image/*">
+            @error('blog_image')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
-        <!-- end col -->
-        <!-- end col -->
     </div>
-    <!-- end row -->
 
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <img id="photo_preview_blog_image" src="{{ asset($item->blog_image) }}" alt="No Image" style="max-width: 5rem; border: 1px solid #ccc; padding: 5px;">
+        <input type="hidden" name="status_blog_image" id="status_blog_image" value="{{ $item->blog_image ? 1 : 0 }}">
+        <button type="button" id="statusPhotoBtn_blog_image" class="btn btn-danger btn-sm m-2">
+            <i class="fas fa-trash"></i> Delete Image
+        </button>
+    </div>
+</div>
 
+<div class="mb-3">
+    <label for="blog_title" class="form-label">Blog Title <span class="text-danger">*</span></label>
+    <input type="text" name="blog_title" id="blog_title" class="form-control @error('blog_title') is-invalid @enderror" value="{{ old('blog_title', $item->blog_title ?? '') }}">
+    @error('blog_title')<div class="invalid-feedback">{{ $message }}</div>@enderror
+</div>
 
+<div class="mb-3">
+    <label for="blog_description" class="form-label">Blog Description </label>
+    <textarea name="blog_description" id="blog_description" class="form-control @error('blog_description') is-invalid @enderror" rows="4">{{ old('blog_description', $item->blog_description ?? '') }}</textarea>
+    @error('blog_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
+</div>
 
-@endsection
+<div class="mb-3">
+    <label for="is_active" class="form-label">Is Active </label>
+    <select name="is_active" id="is_active" class="form-select @error('is_active') is-invalid @enderror">
+        <option value="1" {{ old('is_active', $item->is_active) == '1' ? 'selected' : '' }}>Active</option>
+        <option value="0" {{ old('is_active', $item->is_active) == '0' ? 'selected' : '' }}>Inactive</option>
+    </select>
+    @error('is_active')<div class="invalid-feedback">{{ $message }}</div>@enderror
+</div>
 
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary w-md">Update</button>
+                    </div>
+                </form>
 
-@section('scripts')
-    <script src="{{ URL::asset('assets/admin/libs/eva-icons/eva.min.js') }}"></script>
-
-    <!-- CKEditor 5 -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
-
-    <!-- Initialize CKEditor 5 -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            ClassicEditor
-                .create(document.querySelector('#description'))
-                .catch(error => {
-                    console.error(error);
-                });
-        });
-    </script>
-
-    <script>
-        function addInput(type) {
-            let wrapperId = type + "-wrapper";
-            let wrapper = document.getElementById(wrapperId);
-
-            let row = document.createElement('div');
-            row.className = "row g-2 mt-2";
-            row.innerHTML = `
-            <div class="col-md-10">
-                <input type="text" name="${type == 'container' ? 'containerstuffing[]' : type + '[]'}" class="form-control" placeholder="Enter ${type}">
             </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-danger w-100" onclick="this.closest('.row').remove()">−</button>
-            </div>
-        `;
-            wrapper.appendChild(row);
-        }
-    </script>
-
-    
-
-
-
+        </div>
+    </div>
+</div>
 @endsection

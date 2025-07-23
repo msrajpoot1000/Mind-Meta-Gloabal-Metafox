@@ -4,6 +4,13 @@
 @endphp
 
 
+@php
+    use App\Models\ComReg;
+    $comRegs = ComReg::with('comRegPages')->get();
+@endphp
+
+
+
 @section('style')
     <style>
         .navbar.validnavs.navbar-default .navbar-nav li a {
@@ -19,8 +26,9 @@
             max-width: 1000px !important;
         }
 
-        li {
-            z-index: 1 !important;
+
+        nav.navbar.validnavs ul li.dropdown ul.dropdown-menu li a {
+            padding: 0px
         }
     </style>
 @endsection
@@ -79,102 +87,127 @@
 
 
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Company Registration</a>
-                        <ul class="dropdown-menu " style="width: 700px">
-                            <div class="row">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Company Registration</a>
+                        <ul class="dropdown-menu p-2" style="width: 800px;background-color:white;margin-top:-1rem">
+                            <div class="row p-2">
+                                @foreach ($comRegs as $comReg)
+                                    <div class="col-lg-4 mt-2">
+                                        <a style="font-size:1rem;color:black;">{{ $comReg->name }}</a>
+                                        <ul>
+                                            @foreach ($comReg->comRegPages->where('ref_id', $comReg->id) as $page)
+                                                <li class="ml-2">
+                                                    <a href="{{ route('user.pages.comRegPage',  $page->id) }}"
+                                                        style="font-size:0.9rem;padding:0px;margin:0px"
+                                                        class="d-flex align-items-center">
+                                                        <i class="fas fa-chevron-right "
+                                                            style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                        <span>{{ $page->name }}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Financial Services</a>
+                        <ul class="dropdown-menu p-2" style="width: 600px;background-color:white;margin-top:-1rem">
+                            <div class="row p-2">
                                 <div class="col-lg-4 mt-2">
-                                    <a style="font-size: 1rem">Juridiction</a>
+                                    <a style="font-size:1rem;color:black;">Juridiction</a>
                                     <ul>
-                                        <li>
-                                            <a href="{{ route('user.pages.dumy') }}" style="padding: 0px;margin:0px">
-                                                <i class="fas fa-chevron-right "></i>
-                                                Mainland
-                                            </a>
+                                        <li class="ml-2">
+                                            <a href="{{ route('user.pages.dumy') }}"
+                                                style="font-size:0.8rem;padding:0px;margin:0px"
+                                                class="d-flex align-items-center">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                <span>Mainland</span> </a>
                                         </li>
                                         <li>
-                                            <a href="project.html">
-                                                <i class="fas fa-chevron-right"></i>
+                                            <a href="project.html" style="font-size:0.8rem;">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
                                                 <span> FreeZone</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="project.html">
-                                                <i class="fas fa-chevron-right"></i>
+                                            <a href="project.html" style="font-size:0.8rem;">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
                                                 <span> Offshore</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-4 mt-2">
-                                    <a href="project.html" style="font-size: 1rem">Project style one</a>
+                                    <a style="font-size:1rem;color:black;">Juridiction</a>
                                     <ul>
+                                        <li class="ml-2">
+                                            <a href="{{ route('user.pages.dumy') }}"
+                                                style="font-size:0.8rem;padding:0px;margin:0px"
+                                                class="d-flex align-items-center">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                <span>Mainland</span> </a>
+                                        </li>
                                         <li>
-                                            <a href="project.html">
-                                                <i class="fas fa-chevron-right"></i>
-                                                <span> Projectstyle one</span>
+                                            <a href="project.html" style="font-size:0.8rem;">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                <span> FreeZone</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="project.html">
-                                                <i class="fas fa-chevron-right"></i>
-                                                <span> Projectstyle one</span>
+                                            <a href="project.html" style="font-size:0.8rem;">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                <span> Offshore</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-4 mt-2">
-                                    <a href="project.html" style="font-size: 1rem">Project style one</a>
+                                    <a style="font-size:1rem;color:black;">Juridiction</a>
                                     <ul>
+                                        <li class="ml-2">
+                                            <a href="{{ route('user.pages.dumy') }}"
+                                                style="font-size:0.8rem;padding:0px;margin:0px"
+                                                class="d-flex align-items-center">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                <span>Mainland</span> </a>
+                                        </li>
                                         <li>
-                                            <a href="project.html">
-                                                <i class="fas fa-chevron-right"></i>
-                                                <span> Projectstyle one</span>
+                                            <a href="project.html" style="font-size:0.8rem;">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                <span> FreeZone</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="project.html">
-                                                <i class="fas fa-chevron-right"></i>
-                                                <span> Projectstyle one</span>
+                                            <a href="project.html" style="font-size:0.8rem;">
+                                                <i class="fas fa-chevron-right "
+                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                <span> Offshore</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
 
+
                             </div>
                         </ul>
                     </li>
 
-
-
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Financial Services</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="project.html">Project style one</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                        </ul>
-                    </li>
-                    {{-- <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="services.html">Services Version One</a></li>
-                                <li><a href="services-2.html">Services Version Two</a></li>
-                                <li><a href="services-details.html">Services Details</a></li>
-                            </ul>
-                        </li> --}}
-                    {{-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
-                        <ul class="dropdown-menu ">
-                            <li><a href="blog-standard.html">Blog Standard</a></li>
-                            <li><a href="blog-with-sidebar.html">Blog With Sidebar</a></li>
-                            <li><a href="blog-2-colum.html">Blog Grid Two Colum</a></li>
-                            <li><a href="blog-3-colum.html">Blog Grid Three Colum</a></li>
-                            <li><a href="blog-single.html">Blog Single</a></li>
-                            <li><a href="blog-single-with-sidebar.html">Blog Single With Sidebar</a></li>
-                        </ul>
-                    </li> --}}
                     <li class="dropdown"><a href="{{ route('user.pages.aboutus') }}">About Us</a>
                     </li>
                     <li><a href="{{ route('user.pages.contact') }}">Contact Us</a></li>
+                    
                 </ul>
             </div><!-- /.navbar-collapse -->
 

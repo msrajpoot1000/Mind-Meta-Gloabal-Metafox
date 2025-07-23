@@ -1,4 +1,3 @@
-
 @extends('user.layouts.app')
 
 @section('title', 'Home | Cookie Policy')
@@ -7,19 +6,19 @@
 
 
     <!-- Start Breadcrumb
-                                                ============================================= -->
+                                                        ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
-        style="background-image: url(assets/img/2440x1578.png);">
+        style="background-image: url(assets/img/banner/cookie_banner.jpeg);">
         <div class="breadcrum-shape">
-            <img src="assets/img/shape/50.png" alt="Image Not Found">
+            {{-- <img src="assets/img/shape/50.png" alt="Image Not Found"> --}}
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    <h1>Contact Us</h1>
+                    <h1>Cookie Policy</h1>
                     <ul class="breadcrumb">
-                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li>Contact</li>
+                        <li><a href="{{ route('user.pages.index') }}"><i class="fas fa-home"></i> Home</a></li>
+                        <li>Cookie Policy</li>
                     </ul>
                 </div>
             </div>

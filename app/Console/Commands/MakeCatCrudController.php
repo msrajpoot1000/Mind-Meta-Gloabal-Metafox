@@ -13,12 +13,14 @@ class MakeCatCrudController extends Command
 
     public function handle()
     {
-        $baseName = $this->argument('name');
-        $controllerName = $baseName . 'Controller';
-        $modelName = $baseName;
-        $snakeSingular = Str::snake($modelName);
-        $snakePlural = Str::plural($snakeSingular);
-        $routeSlug = Str::kebab($modelName);
+   $baseName = $this->argument('name');
+$names = $this->normalizeNames($baseName);
+
+$controllerName = $names['controller'];
+$modelName = $names['model'];
+$snakeSingular = $names['snakeSingular'];
+$snakePlural = $names['snakePlural'];
+$routeSlug = $names['kebab'];
 
         $fieldsInput = $this->option('fields');
         $fields = [];
@@ -122,7 +124,29 @@ $fieldDefinitions .= "            {$line};\n";
         $this->updateSeederFile($modelName, $fields, $snakePlural);
 
         $this->appendRoutes($controllerName, $routeSlug, $snakeSingular, $snakePlural);
+
     }
+
+
+    protected function createBladeFiles($modelName)
+{
+    $viewBase = Str::kebab($modelName); // singular
+$viewPaths = [
+    resource_path("views/admin/pages/{$viewBase}.blade.php"),
+    resource_path("views/admin/pages/{$viewBase}-edit.blade.php"),
+];
+
+
+    foreach ($viewPaths as $path) {
+        if (!File::exists($path)) {
+            File::put($path, "<!-- View: " . basename($path) . " -->");
+            $this->info("✅ View created: " . basename($path));
+        } else {
+            $this->warn("⚠️ View already exists: " . basename($path));
+        }
+    }
+}
+
 
     protected function updateModelFillable($modelName, $fields)
     {
@@ -229,7 +253,7 @@ PHP;
 // {$controllerName}
 use App\Http\Controllers\\{$controllerName};
 Route::get('/{$routeSlug}', [{$controllerName}::class, 'indexF'])->name('user.pages.{$snakeSingular}');
-Route::resource('admin-{$snakePlural}', {$controllerName}::class)->middleware(['auth', 'verified']);
+Route::resource('admin-{$routeSlug}', {$controllerName}::class)->middleware(['auth', 'verified']);
 
 ROUTE;
         File::append($routePath, $routeStub);
@@ -242,6 +266,9 @@ ROUTE;
     $updateRules = [];       // For update()
     $imageFields = [];
     $nonImageFields = [];
+
+    $bladeBase =  Str::kebab($modelName); // e.g., TreeMy → admin-tree-my
+
 
     foreach ($fields as $field) {
         if (in_array($field['type'], ['hasMany', 'belongsTo', 'hasOne', 'morphMany', 'morphTo'])) continue;
@@ -381,7 +408,10 @@ class {$modelName}Controller extends Controller
     public function index()
     {
         \$items = {$modelName}::latest()->get();
-        return view('admin.pages.{$snakePlural}', compact('items'));
+  return view('admin.pages.{$bladeBase}', compact('items'));
+
+
+
     }
 
     public function create() {}
@@ -394,13 +424,16 @@ class {$modelName}Controller extends Controller
         {$uploadStore}
 
         {$modelName}::create(\$data);
-        return redirect()->route('admin-{$snakePlural}.index')->with('success', '{$modelName} created successfully.');
+        return redirect()->route('admin-{$bladeBase}.index')->with('success', '{$modelName} created successfully.');
     }
 
     public function edit(string \$id)
     {
         \$item = {$modelName}::findOrFail(\$id);
-        return view('admin.pages.{$snakePlural}-edit', compact('item'));
+   return view("admin.pages.{$bladeBase}-edit", compact('item'));
+
+
+
     }
 
     public function update(Request \$request, string \$id)
@@ -417,7 +450,7 @@ class {$modelName}Controller extends Controller
 
         \$item->update(\$data);
 
-        return redirect()->route('admin-{$snakePlural}.index')->with('success', '{$modelName} updated successfully.');
+        return redirect()->route('admin-{$bladeBase}.index')->with('success', '{$modelName} updated successfully.');
     }
 
    public function destroy(string \$id)
@@ -427,12 +460,30 @@ class {$modelName}Controller extends Controller
 {$destroyImageDelete}
     \$item->delete();
 
-    return redirect()->route('admin-{$snakePlural}.index')->with('success', '{$modelName} deleted successfully.');
+    return redirect()->route('admin-{$bladeBase}.index')->with('success', '{$modelName} deleted successfully.');
 }
 
 }
 PHP;
 }
+
+
+
+protected function normalizeNames(string $baseName): array
+{
+    $snakeSingular = Str::snake($baseName);               // e.g., tree_my
+    $snakePlural = Str::plural($snakeSingular);           // e.g., tree_mys (or keep tree_my if you don’t want plural)
+    $kebab = Str::kebab($baseName);                       // e.g., tree-my
+
+    return [
+        'model' => $baseName,
+        'controller' => $baseName . 'Controller',
+        'snakeSingular' => $snakeSingular,
+        'snakePlural' => $snakePlural,
+        'kebab' => $kebab,
+    ];
+}
+
 
     
 }

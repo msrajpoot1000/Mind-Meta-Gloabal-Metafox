@@ -26,6 +26,8 @@ class Companyinfo extends Model
         'youtube',
         'linkedin',
         'pinterest',
+        'tax_guid_link',
+        'about_pdf'
     ];
 }
 

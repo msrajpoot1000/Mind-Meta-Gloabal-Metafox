@@ -11,9 +11,9 @@
         <div class="item">
             <!--<img src="assets/img/shape/7.png" alt="Shape">-->
         </div>
-        <div class="item">
+        {{-- <div class="item">
             <img src="assets/img/shape/9.png" alt="Shape">
-        </div>
+        </div> --}}
     </div>
     <div class="container">
         <div class="f-items relative pt-70 pb-120 pt-xs-0 pb-xs-50">
@@ -38,11 +38,11 @@
                                 </a>
                             @endif
 
-                            {{-- @if ($company->twitter)
+                            @if ($company->twitter)
                                 <a href="{{ $company->twitter }}" target="_blank" aria-label="Twitter">
                                     <i class="fab fa-twitter"></i>
                                 </a>
-                            @endif --}}
+                            @endif
 
                             @if ($company->instagram)
                                 <a href="{{ $company->instagram }}" target="_blank" aria-label="Instagram">
@@ -56,11 +56,18 @@
                                 </a>
                             @endif
 
-                            {{-- @if ($company->youtube)
+                            @if ($company->pinterest)
+                                <a href="{{ $company->pinterest }}" target="_blank" aria-label="Pinterest">
+                                    <i class="fab fa-pinterest-p"></i>
+                                </a>
+                            @endif
+
+
+                            @if ($company->youtube)
                                 <a href="{{ $company->youtube }}" target="_blank" aria-label="YouTube">
                                     <i class="fab fa-youtube"></i>
                                 </a>
-                            @endif --}}
+                            @endif
                         </div>
 
 
@@ -78,12 +85,12 @@
                                     Registration</a></li>
                             <li><a href="corporate-tax-services.html"><i class="fas fa-chevron-right mr-4"></i>
                                     Corporate Tax Services</a></li>
-                            <li><a href="{{ route('user.pages.privacy-policy') }}"><i
+                            {{-- <li><a href="{{ route('user.pages.privacy-policy') }}"><i
                                         class="fas fa-chevron-right mr-4"></i> Privacy
-                                    Policy</a></li>
-                            <li><a href="{{ route('user.pages.terms-conditions') }}"><i
+                                    Policy</a></li> --}}
+                            {{-- <li><a href="{{ route('user.pages.terms-conditions') }}"><i
                                         class="fas fa-chevron-right mr-4"></i> Terms &
-                                    Conditions</a></li>
+                                    Conditions</a></li> --}}
                             <li><a href="{{ route('user.pages.contact') }}"><i class="fas fa-chevron-right mr-4"></i>
                                     Contact Us</a></li>
                             <li><a href="career.html"><i class="fas fa-chevron-right mr-4"></i> Career</a></li>
@@ -178,7 +185,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <p>&copy; Copyright 2023. All Rights Reserved by <a href="#">Mind Meta Globals</a></p>
+                    <p>&copy; Copyright {{ date('Y') }}. All Rights Reserved by <a href="#">Mind Meta
+                            Globals</a></p>
+
                 </div>
                 <div class="col-lg-6 text-end">
                     <ul>

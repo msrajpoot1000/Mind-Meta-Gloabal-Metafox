@@ -58,6 +58,20 @@
                     <li class="menu-title" data-key="t-applications">Pages</li>
 
 
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="bx bx-file icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-email">Home Page</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('admin-home-slider.index') }}" data-key="t-inbox">Home Slider</a>
+                            </li>
+                            <li><a href="{{ route('admin-our-partners.index') }}" data-key="t-inbox">Our Partners</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
 
 
 
@@ -91,6 +105,58 @@
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{ route('admin-content-pages.index') }}" data-key="t-inbox">Pages</a></li>
 
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="bx bx-file icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-email">Company Registration</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('admin-com-reg.index') }}" data-key="t-inbox">Category</a></li>
+                            <li><a href="{{ route('admin-com-reg-page.index') }}" data-key="t-inbox">Pages</a></li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-file icon nav-icon"></i>
+                                    <span class="menu-item" data-key="t-email">Section</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="{{ route('admin-com-reg-license-sec.index') }}" data-key="t-inbox"><i
+                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>License
+                                            Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-com-reg-business-legal-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>Business Legal
+                                            Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-com-reg-require-doc-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>Require Doc
+                                            Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-com-reg-step-sec.index') }}" data-key="t-inbox"><i
+                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>Step
+                                            Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-com-reg-why-sec.index') }}" data-key="t-inbox"><i
+                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>Why
+                                            Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-com-reg-faq-sec.index') }}" data-key="t-inbox"><i
+                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>
+                                            Faq Section </a>
+                                    </li>
+
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 

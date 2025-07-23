@@ -7,50 +7,25 @@
 @section('title', 'Home | Meta Mind Global')
 
 @section('style')
-<style>
-    .clampx {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .readBtn {
-        border: none;
-        color: black;
-        background-color: white;
-    }
-
-    .readBtn:hover {
-        color: blue
-    }
-</style>
-@endsection
-<script>
-    function toggleFlexReadMore(id) {
-        const container = document.getElementById("testimonialText" + id);
-        const shortPara = container.querySelector(".short");
-        const fullPara = container.querySelector(".full");
-        const btn = document.getElementById("readMoreBtn" + id);
-
-        if (fullPara.style.display === "none") {
-            shortPara.style.display = "none";
-            fullPara.style.display = "block";
-            container.style.display = "flex";
-            btn.innerText = "Read Less";
-        } else {
-            shortPara.style.display = "block";
-            fullPara.style.display = "none";
-            container.style.display = "flex";
-            btn.innerText = "Read More";
-        }
-    }
-</script>
-
-
-
-@section('content')
     <style>
+        .clampx {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .readBtn {
+            border: none;
+            color: black;
+            background-color: white;
+        }
+
+        .readBtn:hover {
+            color: blue
+        }
+
+
         .company form button {
             position: absolute;
             right: 5px;
@@ -127,74 +102,102 @@
             color: black;
             background-color: #0b57e3 !important;
         }
+
+        .para {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            -webkit-line-clamp: 3;
+            transition: all 0.3s ease;
+        }
+
+        .para.expanded {
+            -webkit-line-clamp: unset;
+        }
+
+
+        .navbar.validnavs.navbar-default .navbar-nav li a {
+            color: white;
+        }
+
+        .navbar.validnavs.navbar-default.scrolled .navbar-nav li a {
+            color: black !important;
+        }
+
+        .headerContact p,
+        .headerContact h5 a {
+            color: white !important;
+        }
+
+        .headerContact .icon i {
+            color: #022b6d !important;
+        }
+
+        .navbar.validnavs.navbar-default.scrolled .headerContact p,
+        .navbar.validnavs.navbar-default.scrolled .headerContact h5 a {
+            color: #022b6d !important;
+        }
+
+        .navbar.validnavs.navbar-default.scrolled .headerContact .icon i {
+            color: black !important;
+        }
+
+
+        .img-head {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease;
+        }
+
+        .img-head:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
     </style>
+@endsection
+
+
+
+@section('content')
+
     <!-- Start Banner Area
-                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="banner-area banner-style-one shadow navigation-custom-large zoom-effect overflow-hidden text-light">
         <!-- Slider main container -->
         <div class="banner-fade">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-
                 <!-- Single Item -->
-                <div class="swiper-slide banner-style-one">
-                    <div class="banner-thumb bg-cover shadow dark" style="background: url(assets/img/banner/home.png);"></div>
-                    <div class="container">
-                        <div class="row align-center">
-                            <div class="col-xl-7 offset-xl-5">
-                                <div class="content">
-                                    <h3>Simplify Your Start<br>
-                                        <strong>Business Setup in Dubai</strong>
-                                    </h3>
-                                    <h4><strong>From Beginning to Your Personalized Needs</strong></h4>
-                                    <p>Your personalized advisor, who answers all your new business setup queries, helps you
-                                        grow your business hassle-free by providing all-in-one company setup solutions under
-                                        one roof.</p>
-                                    <p><strong>Idea Concept | Business Plan | Company Registration | Corporate Bank
-                                            Account</strong></p>
-                                    <div class="button mt-40">
-                                        <a class="btn-animation" href="#"><i class="fas fa-arrow-right"></i> <span>Our
-                                                Services</span></a>
+
+                @foreach ($homeSliders as $item)
+                    @if ($item->banner_heading)
+                        <div class="swiper-slide banner-style-one">
+                            <div class="banner-thumb bg-cover shadow dark"
+                                style="background: url('{{ asset($item->banner_image) }}');"></div>
+                            <div class="container">
+                                <div class="row align-center">
+                                    <div class="col-xl-7 offset-xl-5">
+                                        <div class="content">
+                                            <h3> {!! $item->banner_heading !!}</h3>
+                                            <h4>{!! $item->banner_sub_heading !!}</h4>
+                                            <p>{!! $item->banner_description !!}</p>
+
+                                            <div class="button mt-40">
+                                                <a class="btn-animation" href="#"><i class="fas fa-arrow-right"></i>
+                                                    <span>Our
+                                                        Services</span></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Shape -->
+
+                            <!-- End Shape -->
                         </div>
-                    </div>
-                    <!-- Shape -->
-
-                    <!-- End Shape -->
-                </div>
-                <!-- End Single Item -->
-
-                <!-- Single Item -->
-                <div class="swiper-slide banner-style-one">
-                    <div class="banner-thumb bg-cover shadow dark" style="background: url(assets/img/banner/home2.png);">
-                    </div>
-                    <div class="container">
-                        <div class="row align-center">
-                            <div class="col-xl-7 offset-xl-5">
-                                <div class="content">
-                                    <h3>Simplify Your Start<br>
-                                        <strong>Business Setup in Dubai</strong>
-                                    </h3>
-                                    <h4><strong>From Beginning to Your Personalized Needs</strong></h4>
-                                    <p>Your personalized advisor, who answers all your new business setup queries, helps you
-                                        grow your business hassle-free by providing all-in-one company setup solutions under
-                                        one roof.</p>
-                                    <p><strong>Idea Concept | Business Plan | Company Registration | Corporate Bank
-                                            Account</strong></p>
-                                    <div class="button mt-40">
-                                        <a class="btn-animation" href="#"><i class="fas fa-arrow-right"></i> <span>Our
-                                                Services</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Shape -->
-
-                    <!-- End Shape -->
-                </div>
+                    @endif
+                @endforeach
                 <!-- End Single Item -->
 
             </div>
@@ -206,7 +209,7 @@
     </div>
     <!-- End Main -->
     <!-- Start Our Features
-                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="feature-style-one-area half-angle-shape overflow-hidden default-padding">
         <div class="container">
             <div class="row align-center">
@@ -241,7 +244,7 @@
     <!-- End Our Features -->
 
     <!-- Start Aobut
-                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding"
         style="background-image: url(assets/img/shape/29.png);">
         <div class="container">
@@ -296,7 +299,7 @@
     <!-- End About -->
 
     <!-- Start Services
-                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-two-area default-padding bottom-less bg-cover bg-gray"
         style="background-image: url(assets/img/shape/27.png);">
         <div class="container">
@@ -326,7 +329,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <p>
+                            <p class="para para1" data-lines="3">
                                 Mainland Company Setup
                                 Setting up your company in the UAE Mainland provides the flexibility to operate anywhere in
                                 the Emirates and ensures direct engagement with the government for smoother operations.
@@ -340,7 +343,7 @@
                                 requirement for a UAE national as a partner, a recent change that enhances ease of setup.
                             </p>
                             <div class="button">
-                                <a href="#">Read More</a>
+                                <a class="toggle-btn-read-more" data-target="para1" role="button">Read More</a>
                                 <div class="devider"></div>
                             </div>
                         </div>
@@ -361,7 +364,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <p>
+                            <p class="para para2" data-lines="3">
 
                                 Registering a company in any UAE Free Zones qualifies you for 100% ownership without
                                 partnering with a UAE national. Free Zones offers multiple benefits to investors looking to
@@ -372,7 +375,7 @@
                                 to rent office premises, resulting in considerable cost savings.
                             </p>
                             <div class="button">
-                                <a href="#">Read More</a>
+                                <a class="toggle-btn-read-more" data-target="para2" role="button">Read More</a>
                                 <div class="devider"></div>
                             </div>
                         </div>
@@ -393,7 +396,7 @@
                             </div>
                         </div>
                         <div class="info">
-                            <p>
+                            <p class="para para3" data-lines="3">
 
                                 You can register your offshore company and operate it anywhere from overseas. It provides
                                 financial perks, international market access, and a clear regulatory framework to foreign
@@ -401,7 +404,7 @@
                                 your business at the global level with an offshore company setup.
                             </p>
                             <div class="button">
-                                <a href="#">Read More</a>
+                                <a class="toggle-btn-read-more" data-target="para3" role="button">Read More</a>
                                 <div class="devider"></div>
                             </div>
                         </div>
@@ -414,7 +417,7 @@
     </div>
     <!-- End Services -->
     <!-- Start Pricing
-                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="pricing-style-one-area secondary default-padding bottom-less">
 
         <div class="container">
@@ -578,7 +581,7 @@
     <!-- End Pricng -->
 
     <!-- Start About
-                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-one-area default-padding">
         <div class="shape-animated-left">
             <img src="assets/img/shape/anim-1.png" alt="Image Not Found">
@@ -630,7 +633,7 @@
     <!-- End About -->
 
     <!-- Start Servics Style One
-                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-one-area default-padding bg-gray">
         <div class="triangle-shape">
             <img src="assets/img/shape/10.png" alt="Shape">
@@ -964,10 +967,23 @@
                         partners as you set up your firm in Dubai.
                     </p>
                     <div class="project-details-items">
-                        <div class="thumb">
-                            <img src="assets/img/affilations.jpg" alt="Thumb">
-                        </div>
 
+
+                        <div class="container " style="margin-top: 4rem; margin-bottom: 4rem;">
+
+
+                            <div class="row g-3">
+                                @foreach ($ourPartners as $item)
+                                    <div class="col-6 col-md-3 ">
+                                        <div class="img-head  d-flex justify-content-center p-3 ">
+                                            <img src="{{ asset($item->partner_image) }}"
+                                                style="width: 100%;height:100%;object-fit:contain;aspect-ratio:1/0.5"
+                                                alt="Logo 1">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1080,97 +1096,47 @@
     <!-- End Testimonials  -->
 
 
-    <div class="blog-area blog-grid default-padding">
-        <div class="container">
-            <div class="blog-item-box">
-                <div class="row">
-                    <h2 class="title" style="text-align:center;margin-bottom:2rem">Our Recents Blogs</h2>
-                    <!-- Single Item -->
-                    <div class="col-xl-4 col-md-6 single-item">
-                        <div class="blog-style-one">
-                            <div class="thumb">
-                                <a href="#"><img src="assets/img/img3.jpg" alt="Thumb"></a>
-                            </div>
-                            <div class="info">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li>
-                                            <i class="fas fa-user"></i>
-                                            <a href="#">John Baus</a>
-                                        </li>
-                                        <li>
-                                            12 August, 2023
-                                        </li>
-                                    </ul>
+    @if ($blogs->count())
+        <div class="blog-area blog-grid default-padding">
+            <div class="container">
+                <div class="blog-item-box">
+                    <div class="row">
+                        <h2 class="title" style="text-align:center;margin-bottom:2rem">Our Recents Blogs</h2>
+                        <!-- Single Item -->
+                        @foreach ($blogs as $blog)
+                            <div class="col-xl-4 col-md-6 single-item">
+                                <div class="blog-style-one">
+                                    <div class="thumb">
+                                        <a href="#"><img src="{{ asset($blog->blog_image) }}" alt="Thumb"></a>
+                                    </div>
+                                    <div class="info">
+                                        <div class="blog-meta">
+                                            <ul>
+                                                <li>
+                                                    <i class="fas fa-user"></i>
+                                                    <a href="#">John Baus</a>
+                                                </li>
+                                                <li>
+                                                    12 August, 2023
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h3>
+                                            <a href="blog-single-with-sidebar.html">{{ $blog->blog_title }}</a>
+                                        </h3>
+                                        <a href="{{ route('user.pages.blogDetail', $blog->id) }}" class="btn-simple"><i
+                                                class="fas fa-angle-right"></i> Read
+                                            more</a>
+                                    </div>
                                 </div>
-                                <h3>
-                                    <a href="blog-single-with-sidebar.html">Why Invest in Dubai? Not in Other Countries</a>
-                                </h3>
-                                <a href="#" class="btn-simple"><i class="fas fa-angle-right"></i> Read more</a>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-xl-4 col-md-6 single-item">
-                        <div class="blog-style-one">
-                            <div class="thumb">
-                                <a href="#"><img src="assets/img/img2.jpg" alt="Thumb"></a>
-                            </div>
-                            <div class="info">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li>
-                                            <span>By </span>
-                                            <a href="#">Mohon</a>
-                                        </li>
-                                        <li>
-                                            12 July, 2023
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h4>
-                                    <a href="blog-single-with-sidebar.html">Setting up a business in Dubai, UAE – Your
-                                        Complete Step by Step Guide 2025</a>
-                                </h4>
-                                <a href="#" class="btn-simple"><i class="fas fa-angle-right"></i> Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-xl-4 col-md-6 single-item">
-                        <div class="blog-style-one">
-                            <div class="thumb">
-                                <a href="#"><img src="assets/img/img3.jpg" alt="Thumb"></a>
-                            </div>
-                            <div class="info">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li>
-                                            <i class="fas fa-user"></i>
-                                            <a href="#">John Baus</a>
-                                        </li>
-                                        <li>
-                                            12 August, 2023
-                                        </li>
-                                    </ul>
-                                </div>
-                                <h3>
-                                    <a href="blog-single-with-sidebar.html">Set Up a Company in Dubai as a UK Citizen – How
-                                        to Guide 2025</a>
-                                </h3>
-                                <a href="#" class="btn-simple"><i class="fas fa-angle-right"></i> Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Item -->
-
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
+    @endif
 
 
 
@@ -1181,63 +1147,55 @@
 
 
     <!-- Start Faq Area
-                                                                                        ============================================= -->
-    <div class="faq-area bg-gray default-padding">
-        <!-- End Shape -->
-        <div class="container">
-            <div class="row">
+                                         
+                                    ============================================= -->
 
-                <div class="col-lg-12 faq-style-one dark pl-50 pl-md-15 pl-xs-15">
+    @if ($faqs->count())
+        <div class="faq-area bg-gray default-padding">
+            <!-- End Shape -->
+            <div class="container">
+                <div class="row">
 
-                    <h2 class="title mb-40">FAQ </h2>
+                    <div class="col-lg-12 faq-style-one dark pl-50 pl-md-15 pl-xs-15">
 
-                    <div class="accordion" id="faqAccordion">
+                        <h2 class="title mb-40">FAQ </h2>
 
-                        @foreach ($faqs as $faq)
-                            @if ($loop->first)
+                        <div class="accordion" id="faqAccordion">
+
+                            @foreach ($faqs as $index => $item)
+                                @php
+                                    $headingId = 'heading' . $index;
+                                    $collapseId = 'collapse' . $index;
+                                    $isFirst = $loop->first;
+                                @endphp
+
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                            {{ $faq->question }}
+                                    <h2 class="accordion-header" id="{{ $headingId }}">
+                                        <button class="accordion-button {{ $isFirst ? '' : 'collapsed' }}" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#{{ $collapseId }}"
+                                            aria-expanded="{{ $isFirst ? 'true' : 'false' }}"
+                                            aria-controls="{{ $collapseId }}">
+                                            {{ $item->ques }}
                                         </button>
                                     </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show"
-                                        aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div id="{{ $collapseId }}"
+                                        class="accordion-collapse collapse {{ $isFirst ? 'show' : '' }}"
+                                        aria-labelledby="{{ $headingId }}" data-bs-parent="#faqAccordion">
                                         <div class="accordion-body">
-                                            <p>
-                                                {{ strip_tags($faq->answer) }}
-                                            </p>
+                                            <p>{{ strip_tags($item->ans ?? $item->faq) }}</p>
                                         </div>
                                     </div>
                                 </div>
-                            @else
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingTwo">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                                            aria-controls="collapseTwo">
-                                            {{ $faq->question }}
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            <p>
-                                                {{ strip_tags($faq->answer) }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
+                            @endforeach
+
+                        </div>
+
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
+
+    @endif
     <!-- End Faq Area -->
 
 
@@ -1247,7 +1205,7 @@
 
 
 
-    
+
     <div class="process-style-one-area text-center default-padding">
         <div class="large-shape">
             <!--<img src="assets/img/shape/11.png" alt="Shape">-->
@@ -1267,51 +1225,22 @@
         <div class="container">
             <div class="row">
                 <!-- Single Item -->
-                <div class="col-lg-4">
-                    <div class="">
-                        <div class="thumb">
-                            <img src="assets/img/cServices1.svg" class="cImageServices" alt="Thumb">
+                @foreach ($keyCorServices as $item)
+                    <div class="col-lg-4">
+                        <div class="">
+                            <div class="thumb">
+                                <img src="{{ asset($item->photo) }}" class="cImageServices" alt="Thumb">
 
+                            </div>
+                            <h4>{{ $item->name }}</h4>
+                            <p>
+                                {!! $item->description !!}
+                            </p>
                         </div>
-                        <h4>Business Advisory</h4>
-                        <p>
-                            Our knowledgeable consultants offer forward-looking advice to help you overcome challenging
-                            business decisions and promise the expansion and success of your business.
-                        </p>
                     </div>
-                </div>
+                @endforeach
                 <!-- End Single Item -->
-                <!-- Single Item -->
-                <div class="col-lg-4">
-                    <div class="">
-                        <div class="thumb">
-                            <img src="assets/img/cServices2.png"c class="cImageServices" alt="Thumb">
 
-                        </div>
-                        <h4>Financial Consulting</h4>
-                        <p>
-                            Our financial professionals provide specialized solutions that maximize your financial
-                            well-being. We’ll support you to reach your financial goals with everything, from budgeting to
-                            investing strategies.
-                        </p>
-                    </div>
-                </div>
-                <!-- End Single Item -->
-                <!-- Single Item -->
-                <div class="col-lg-4">
-                    <div class="">
-                        <div class="thumb">
-                            <img src="assets/img/cServices3.jpeg" class="cImageServices" alt="Thumb">
-
-                        </div>
-                        <h4>Coworking-Space</h4>
-                        <p>
-                            Get the best modern workspaces with our expert guidance. We help you select and get an ideal
-                            coworking space with state-of-the-art facilities, easing lease contracts.
-                        </p>
-                    </div>
-                </div>
-                <!-- End Single Item -->
             </div>
         </div>
     </div>

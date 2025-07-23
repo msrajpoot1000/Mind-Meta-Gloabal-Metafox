@@ -20,8 +20,9 @@
                                     <th>SN.</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Code</th>
                                     <th>Phone</th>
-                                    <th>Subject</th>
+                                    
                                     <th>Message</th>
                                     <th>Date</th>
                                     <th>Action</th>
@@ -33,8 +34,9 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $contact->name }}</td>
                                         <td>{{ $contact->email }}</td>
+                                         <td>{{ $contact->country_code }}</td>
                                         <td>{{ $contact->phone }}</td>
-                                        <td>{{ $contact->subject }}</td>
+                                       
                                         <td>{{ Str::limit($contact->message, 100) }}</td>
                                         <td>{{ $contact->created_at->format('d-m-Y') }}</td>
                                         

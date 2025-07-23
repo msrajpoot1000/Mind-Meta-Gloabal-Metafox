@@ -30,6 +30,8 @@ return new class extends Migration
         $table->string('youtube')->nullable();
         $table->string('linkedin')->nullable();
         $table->string('pinterest')->nullable();
+        $table->string('tax_guid_link')->nullable();
+        $table->string('about_pdf')->nullable();
         $table->timestamps();
         });
     }

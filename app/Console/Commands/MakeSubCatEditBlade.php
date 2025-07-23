@@ -21,7 +21,9 @@ class MakeSubCatEditBlade extends Command
 
         $modelSlug = Str::before($viewName, '-edit');
         $routeName = 'admin-' . $modelSlug . '.update';
-        $viewPath = resource_path("views/admin/pages/{$viewName}.blade.php");
+        $kebabView = Str::kebab($viewName); // ensures hyphen-case
+        $viewPath = resource_path("views/admin/pages/{$kebabView}-edit.blade.php");
+
 
         if (File::exists($viewPath)) {
             $this->error("Blade view already exists: $viewPath");
@@ -106,7 +108,7 @@ class MakeSubCatEditBlade extends Command
                     @endif
             <div class="card-body">
 
-                <form action="{{ route('$routeName', \$item2->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin-$kebabView.update', \$item2->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -211,7 +213,7 @@ HTML;
     <div class="col-md-6">
         <div class="mb-3">
             <label>$label <span class="text-danger">*</span></label>
-            <select name="ref_id" class="form-control">
+            <select name="ref_id" class="form-control" required>
                 <option value="">-- Select --</option>
                 @foreach (\$items1 as \$item)
                     <option value="{{ \$item->id }}" {{ old('ref_id', \$item2->ref_id ?? '') == \$item->id ? 'selected' : '' }}>{{ \$item->name }}</option>

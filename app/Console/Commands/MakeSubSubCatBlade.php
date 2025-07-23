@@ -17,6 +17,9 @@ class MakeSubSubCatBlade extends Command
     public function handle()
     {
         $viewName = $this->argument('viewName');
+        $kebabSingular = Str::kebab(Str::singular($viewName));
+        $readableName = Str::headline($viewName);
+
         $fields = $this->option('fields');
 
         $parsedFields = [];
@@ -52,7 +55,8 @@ else {
 
         $topSlug = $this->extractTopSlug($viewName);
         $subSlug = $secondLevelModel ? Str::kebab(Str::pluralStudly(class_basename($secondLevelModel))) : 'sub-items';
-        $viewPath = resource_path("views/admin/pages/{$viewName}.blade.php");
+       $viewPath = resource_path("views/admin/pages/{$kebabSingular}.blade.php");
+
 
         if (File::exists($viewPath)) {
             $this->error("Blade view already exists: $viewPath");
@@ -60,7 +64,7 @@ else {
         }
 
         File::ensureDirectoryExists(dirname($viewPath));
-        File::put($viewPath, $this->generateBladeView($viewName, $parsedFields, $firstLevelModel, $secondLevelModel, $subSlug));
+        File::put($viewPath, $this->generateBladeView($kebabSingular, $parsedFields, $firstLevelModel, $secondLevelModel, $subSlug,$readableName));
 
         $this->info("✅ Blade view created at: $viewPath");
     }
@@ -71,7 +75,7 @@ else {
         return end($parts) ?? 'programs';
     }
 
-    private function generateBladeView(string $viewName, array $fields, $firstLevelModel, $secondLevelModel, $subSlug): string
+    private function generateBladeView(string $kebabSingular, array $fields, $firstLevelModel, $secondLevelModel, $subSlug,$readableName): string
     {
         $programLabel = Str::headline($firstLevelModel);
         $subProgramLabel = Str::headline($secondLevelModel);
@@ -89,7 +93,7 @@ BLADE;
         return <<<BLADE
 @extends('admin.layouts.app')
 
-@section('title', 'Dashboard | Add ' . ucfirst('$viewName'))
+@section('title', 'Dashboard | Add ' . ucfirst('$kebabSingular'))
 
 @section('script')
 <script>
@@ -135,17 +139,17 @@ BLADE;
 @endif
 
 <div class="mb-2 d-flex justify-content-end fw-bold">
-    <button id="toggleButton" class="btn btn-sm btn-success px-4 fs-5">Create {{ ucfirst('$viewName') }}</button>
+    <button id="toggleButton" class="btn btn-sm btn-success px-4 fs-5">Create {{ ucfirst('$readableName') }}</button>
 </div>
 
 <div id="create-form-section">
     <div class="col">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Add {{ ucfirst('$viewName') }}</h4>
+                <h4 class="card-title mb-0">Add {{ ucfirst('$readableName') }}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin-$viewName.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin-$kebabSingular.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
@@ -188,7 +192,7 @@ BLADE;
     <div class="col">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">All {{ ucfirst('$viewName') }}</h4>
+                <h4 class="card-title">All {{ ucfirst('$readableName') }}</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -209,8 +213,8 @@ BLADE;
                                     $relationshipFields
                                     $fieldCells
                                     <td class="v-center">
-                                        <a href="{{ route('admin-$viewName.edit', \$item->id) }}" class="btn btn-sm btn-success">Edit</a>
-                                        <form action="{{ route('admin-$viewName.destroy', \$item->id) }}" method="POST" style="display:inline-block;">
+                                        <a href="{{ route('admin-$kebabSingular.edit', \$item->id) }}" class="btn btn-sm btn-success">Edit</a>
+                                        <form action="{{ route('admin-$kebabSingular.destroy', \$item->id) }}" method="POST" style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>

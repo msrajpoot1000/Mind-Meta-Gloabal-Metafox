@@ -19,11 +19,13 @@ class MakeSubSubBladeEdit extends Command
         $viewName = $this->argument('viewName');
         $fields = $this->option('fields');
 
-        $modelSlug = Str::before($viewName, '-edit');
-        $topSlug = $this->extractTopSlug($viewName);
+       $rawModel = Str::before($viewName, '-edit');
+        $modelSlug = Str::kebab(Str::singular($rawModel)); // e.g., 'tree-my4'
         $routeName = 'admin-' . $modelSlug . '.update';
-        $viewPath = resource_path("views/admin/pages/{$viewName}.blade.php");
+        $viewPath = resource_path("views/admin/pages/{$modelSlug}-edit.blade.php");
 
+        $topSlug = $this->extractTopSlug($viewName);
+       
         if (File::exists($viewPath)) {
             $this->error("Blade view already exists: $viewPath");
             return;
@@ -256,7 +258,7 @@ HTML;
     <div class="col-md-6">
         <div class="mb-3">
             <label for="programSelect">$programLabel <span class="astrick">*</span></label>
-            <select name="head_ref_id" class="form-control" id="programSelect">
+            <select name="head_ref_id" class="form-control" id="programSelect" requried>
                 <option value="">-- Select $programLabel --</option>
                 @foreach (\$items1 as \$item)
                     <option value="{{ \$item->id }}" {{ \$item->id == \$item1Id ? 'selected' : '' }}>{{ \$item->name }}</option>
@@ -268,7 +270,7 @@ HTML;
     <div class="col-md-6">
         <div class="mb-3">
             <label for="subProgramSelect">$subProgramLabel <span class="astrick">*</span></label>
-            <select name="ref_id" class="form-control" id="subProgramSelect">
+            <select name="ref_id" class="form-control" id="subProgramSelect" required>
                 <option value="">-- Select $subProgramLabel --</option>
             </select>
         </div>

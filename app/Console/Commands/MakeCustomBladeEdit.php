@@ -16,12 +16,18 @@ class MakeCustomBladeEdit extends Command
 
     public function handle()
     {
-        $viewName = $this->argument('viewName');
+        $baseName = $this->argument('viewName'); // e.g., TreeMy
         $fields = $this->option('fields');
 
-        $modelSlug = Str::before($viewName, '-edit');
-        $routeName = 'admin-' . $modelSlug . '.update';
-        $viewPath = resource_path("views/admin/pages/{$viewName}.blade.php");
+        // Convert TreeMy => tree-my
+        $kebabName = Str::kebab($baseName); // tree-my
+
+        // Route name will be plural kebab-case
+        $routeName = 'admin-' . Str::kebab($baseName); // admin-tree-mies
+
+        // Final file path: resources/views/admin/pages/tree-my-edit.blade.php
+        $viewFileName = $kebabName . '-edit.blade.php';
+        $viewPath = resource_path("views/admin/pages/{$viewFileName}");
 
         if (File::exists($viewPath)) {
             $this->error("Blade view already exists: $viewPath");
@@ -74,17 +80,17 @@ class MakeCustomBladeEdit extends Command
                 <h4 class="card-title mb-0">Edit Item</h4>
             </div>
             @if (\$errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach (\$errors->all() as \$error)
-                                    <li>{{ \$error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach (\$errors->all() as \$error)
+                            <li>{{ \$error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card-body">
 
-                <form action="{{ route('$routeName', \$item->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('$routeName.update', \$item->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -100,7 +106,6 @@ class MakeCustomBladeEdit extends Command
     </div>
 </div>
 @endsection
-
 BLADE;
 
         File::ensureDirectoryExists(dirname($viewPath));
@@ -109,20 +114,20 @@ BLADE;
         $this->info("Edit Blade view created: $viewPath");
     }
 
-   private function renderField(array $field): string
-{
-    $name = $field['name'];
-    $label = Str::headline($name);
-    $inputClass = "@error('$name') is-invalid @enderror";
-    $errorBlock = "@error('$name')<div class=\"invalid-feedback\">{{ \$message }}</div>@enderror";
-    $requiredSpan = $field['required'] ? '<span class="text-danger">*</span>' : '';
-    $default = $field['default'] ?? '';
+    private function renderField(array $field): string
+    {
+        $name = $field['name'];
+        $label = Str::headline($name);
+        $inputClass = "@error('$name') is-invalid @enderror";
+        $errorBlock = "@error('$name')<div class=\"invalid-feedback\">{{ \$message }}</div>@enderror";
+        $requiredSpan = $field['required'] ? '<span class="text-danger">*</span>' : '';
+        $default = $field['default'] ?? '';
 
-    if ($field['type'] === 'input' && $field['inputType'] === 'file') {
-        $this->fileCounter++;
-        $previewId = "photo_preview_$name";
+        if ($field['type'] === 'input' && $field['inputType'] === 'file') {
+            $this->fileCounter++;
+            $previewId = "photo_preview_$name";
 
-        return <<<HTML
+            return <<<HTML
 <div class="row">
     <div class="col-md-6">
         <div class="mb-3">
@@ -134,44 +139,39 @@ BLADE;
 
     <div class="col-md-6 d-flex align-items-center justify-content-center">
         <img id="$previewId" src="{{ asset(\$item->$name) }}" alt="No Image" style="max-width: 5rem; border: 1px solid #ccc; padding: 5px;">
-<input type="hidden" name="status_{$name}" id="status_{$name}" value="{{ \$item->$name ? 1 : 0 }}">
+        <input type="hidden" name="status_{$name}" id="status_{$name}" value="{{ \$item->$name ? 1 : 0 }}">
         <button type="button" id="statusPhotoBtn_{$name}" class="btn btn-danger btn-sm m-2">
             <i class="fas fa-trash"></i> Delete Image
         </button>
     </div>
 </div>
 HTML;
-    }
+        }
 
-    
-
-    if ($field['type'] === 'input') {
-        return <<<HTML
+        if ($field['type'] === 'input') {
+            return <<<HTML
 <div class="mb-3">
     <label for="$name" class="form-label">$label $requiredSpan</label>
     <input type="{$field['inputType']}" name="$name" id="$name" class="form-control $inputClass" value="{{ old('$name', \$item->$name ?? '$default') }}">
     $errorBlock
 </div>
 HTML;
-    }
+        }
 
-    if ($field['type'] === 'textarea') {
-        // Use the name itself (e.g., description1) as the ID
-        $textareaId = $name;
+        if ($field['type'] === 'textarea') {
+            $textareaId = $name;
 
-        return <<<HTML
+            return <<<HTML
 <div class="mb-3">
     <label for="$textareaId" class="form-label">$label $requiredSpan</label>
     <textarea name="$name" id="$textareaId" class="form-control $inputClass" rows="4">{{ old('$name', \$item->$name ?? '') }}</textarea>
     $errorBlock
 </div>
 HTML;
-    }
+        }
 
-    if ($field['type'] === 'select') {
-        $defaultOption = $default !== '' ? $default : '1';
-
-        return <<<HTML
+        if ($field['type'] === 'select') {
+            return <<<HTML
 <div class="mb-3">
     <label for="$name" class="form-label">$label $requiredSpan</label>
     <select name="$name" id="$name" class="form-select $inputClass">
@@ -181,8 +181,8 @@ HTML;
     $errorBlock
 </div>
 HTML;
-    }
+        }
 
-    return "<!-- Unknown field type: {$field['type']} -->";
-}
+        return "<!-- Unknown field type: {$field['type']} -->";
+    }
 }

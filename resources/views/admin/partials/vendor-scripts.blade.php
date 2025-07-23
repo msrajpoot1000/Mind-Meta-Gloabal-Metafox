@@ -24,6 +24,7 @@
 {{-- Custom Script  --}}
 <script src="{{ URL::asset('build/js/custom-script.js') }}"></script>
 
+<script src="{{ URL::asset('default/js/default-script.js') }}"></script>
 
 
 <script>

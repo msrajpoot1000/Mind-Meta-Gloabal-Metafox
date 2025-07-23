@@ -28,6 +28,12 @@
 
 
 /* intially hide form in a page  */
-#create-form-section{
-   display: none; 
+#create-form-section {
+    display: none;
+}
+
+
+.v-center .btn-success, .v-center .btn-danger {
+    margin-bottom: 0.5rem;
+    /* width: 100%; */
 }

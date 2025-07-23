@@ -20,6 +20,7 @@ class MakeSubCatBlade extends Command
     {
         $viewName = $this->argument('viewName');
         $fields = $this->option('fields');
+        $readableName = Str::headline($viewName);
 
         $parsedFields = [];
 
@@ -81,21 +82,23 @@ class MakeSubCatBlade extends Command
 }
 
 
-        $viewPath = resource_path("views/admin/pages/{$viewName}.blade.php");
+       $kebabName = Str::kebab($viewName); // TreeMy2 → tree-my2
+       $viewPath = resource_path("views/admin/pages/{$kebabName}.blade.php");
+
         if (File::exists($viewPath)) {
             $this->error("View already exists: {$viewPath}");
             return;
         }
 
-        $content = $this->generateBladeView($viewName, $parsedFields);
+        $content = $this->generateBladeView($kebabName, $parsedFields,$readableName);
         File::ensureDirectoryExists(dirname($viewPath));
         File::put($viewPath, $content);
         $this->info("Created: {$viewPath}");
     }
 
-    private function generateBladeView($viewName, $fields): string
+    private function generateBladeView($kebabName, $fields,$readableName): string
     {
-        $labelText = $this->belongsToLabel ?: $this->getCategoryLabel($viewName);
+        $labelText = $this->belongsToLabel ?: $this->getCategoryLabel($kebabName);
         $dynamicHtml = collect($fields)->map(fn($f) => $this->renderField($f))->implode("\n\n");
 
         $refField = <<<HTML
@@ -103,7 +106,7 @@ class MakeSubCatBlade extends Command
   <div class="col-md-6">
     <div class="mb-3">
       <label>{$labelText} <span class="text-danger">*</span></label>
-      <select name="ref_id" class="form-control">
+      <select name="ref_id" class="form-control" required>
         <option value="">-- Select --</option>
         @foreach(\$items1 as \$item)
           <option value="{{ \$item->id }}">{{ \$item->name }}</option>
@@ -125,7 +128,7 @@ HTML;
         return <<<BLADE
 @extends('admin.layouts.app')
 
-@section('title', 'Dashboard | Add ' . ucfirst('$viewName'))
+@section('title', 'Dashboard | Add ' . ucfirst('$kebabName'))
 
 @section('content')
 @if (\$errors->any())
@@ -139,14 +142,14 @@ HTML;
 @endif
 
 <div class="mb-2 text-end">
-  <button id="toggleButton" class="btn btn-sm btn-success">Create {{ ucfirst('$viewName') }}</button>
+  <button id="toggleButton" class="btn btn-sm btn-success">Create {{ ucfirst('$readableName') }}</button>
 </div>
 
 <div id="create-form-section">
   <div class="card">
-    <div class="card-header"><h4>Add {{ ucfirst('$viewName') }}</h4></div>
+    <div class="card-header"><h4>Add {{ ucfirst('$readableName') }}</h4></div>
     <div class="card-body">
-      <form action="{{ route('admin-$viewName.store') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('admin-$kebabName.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         {$refField}
@@ -162,7 +165,7 @@ HTML;
 </div>
 
 <div class="mt-4 card">
-  <div class="card-header"><h4>All {{ ucfirst('$viewName') }}</h4></div>
+  <div class="card-header"><h4>All {{ ucfirst('$readableName') }}</h4></div>
   <div class="card-body table-responsive">
     <table class="table table-hover">
       <thead>
@@ -178,8 +181,8 @@ HTML;
             <td class="v-center">{{ \$loop->iteration }}</td>
             {$tableCells}
             <td class="v-center">
-              <a href="{{ route('admin-$viewName.edit', \$item->id) }}" class="btn btn-sm btn-success">Edit</a>
-              <form action="{{ route('admin-$viewName.destroy', \$item->id) }}" method="POST" class="d-inline">
+              <a href="{{ route('admin-$kebabName.edit', \$item->id) }}" class="btn btn-sm btn-success">Edit</a>
+              <form action="{{ route('admin-$kebabName.destroy', \$item->id) }}" method="POST" class="d-inline">
                 @csrf @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
               </form>
@@ -232,16 +235,18 @@ HTML;
 HTML;
         }
 
-        if ($f['type'] === 'textarea') {
-            $this->textareaCounter++;
-            return <<<HTML
+       if ($f['type'] === 'textarea') {
+    $this->textareaCounter++;
+    $textareaId = 'description' . $this->textareaCounter;
+    return <<<HTML
 <div class="mb-3">
-  <label for="$name" class="form-label">$label $requiredSpan</label>
-  <textarea name="$name" id="$name" class="form-control $inputClass" rows="4">{{ old('$name') }}</textarea>
+  <label for="$textareaId" class="form-label">$label $requiredSpan</label>
+  <textarea name="$name" id="$textareaId" class="form-control $inputClass" rows="4">{{ old('$name') }}</textarea>
   $errorBlock
 </div>
 HTML;
-        }
+}
+
 
         if ($f['type'] === 'select') {
             return <<<HTML

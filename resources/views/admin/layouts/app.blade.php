@@ -28,18 +28,18 @@
     @if (!empty($company->favicon))
         @switch($extension)
             @case('svg')
-                <link rel="icon" href="{{ $faviconPath }}" type="image/svg+xml">
+                <link rel="icon" href="{{ asset($faviconPath) }}" type="image/svg+xml">
             @break
 
             @case('png')
-                <link rel="icon" href="{{ $faviconPath }}" type="image/png">
+                <link rel="icon" href="{{ asset($faviconPath) }}" type="image/png">
             @break
 
             @default
-                <link rel="icon" href="{{ $faviconPath }}" type="image/x-icon">
+                <link rel="icon" href="{{ asset($faviconPath) }}" type="image/x-icon">
         @endswitch
     @else
-        <link rel="icon" href="{{ $faviconPath }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset($faviconPath) }}" type="image/x-icon">
     @endif
 
 

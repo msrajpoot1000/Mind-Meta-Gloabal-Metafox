@@ -15,8 +15,13 @@ class MakeSubCatController extends Command
     {
         $baseName = $this->argument('name');
         $controllerName = $baseName . 'Controller';
+        $viewName = Str::kebab(Str::singular($baseName));
+
+        $kebabSingular = Str::kebab(Str::singular($baseName)); // ✅ singular kebab-case
+
         $modelName = $baseName;
         $snakePlural = Str::plural(Str::snake($modelName));
+        
         $kebabPlural = Str::kebab(Str::plural($modelName)); // sub-categories
 
         $fieldsInput = $this->option('fields');
@@ -41,7 +46,7 @@ class MakeSubCatController extends Command
             return;
         }
 
-        $stub = $this->getControllerStub($fields, $modelName, $kebabPlural, $snakePlural);
+        $stub = $this->getControllerStub($fields, $modelName, $kebabPlural, $snakePlural,$viewName);
         File::put($controllerPath, $stub);
         $this->info("✅ Controller {$controllerName} created.");
 
@@ -63,7 +68,7 @@ class MakeSubCatController extends Command
         $this->info("✅ Seeder {$modelName}Seeder created.");
 
         // Route
-        $this->appendRoutes($controllerName, $kebabPlural);
+        $this->appendRoutes($controllerName, $kebabSingular);
     }
 
   protected function injectMigrationFields($snakePlural, $fields)
@@ -158,23 +163,24 @@ MODEL;
         File::put($modelPath, $content);
     }
 
-    protected function appendRoutes($controllerName, $kebabPlural)
-    {
-        $routePath = base_path('routes/web.php');
-        $stub = <<<ROUTE
+    protected function appendRoutes($controllerName, $kebabSingular)
+{
+    $routePath = base_path('routes/web.php');
+    $stub = <<<ROUTE
 
 // {$controllerName}
 use App\Http\Controllers\\{$controllerName};
-Route::get('/{$kebabPlural}', [{$controllerName}::class, 'indexF'])->name('user.pages.{$kebabPlural}');
-Route::resource('admin-{$kebabPlural}', {$controllerName}::class)->middleware(['auth', 'verified']);
+Route::get('/{$kebabSingular}', [{$controllerName}::class, 'indexF'])->name('user.pages.{$kebabSingular}');
+Route::resource('/admin-{$kebabSingular}', {$controllerName}::class)->middleware(['auth', 'verified']);
 
 ROUTE;
 
-        File::append($routePath, $stub);
-        $this->info("✅ Routes added to web.php.");
-    }
+    File::append($routePath, $stub);
+    $this->info("✅ Routes added to web.php.");
+}
 
-    protected function getControllerStub($fields, $modelName, $kebabPlural, $snakePlural)
+
+    protected function getControllerStub($fields, $modelName, $kebabPlural, $snakePlural,$viewName)
     {
        $storeRules = [];
         $updateRules = [];
@@ -360,9 +366,9 @@ PHP;
         }
 PHP;
 
-        $index = $relatedModel ? "\$items1 = {$relatedModel}::get();\n        \$items2 = {$modelName}::with('{$relationMethod}')->latest()->get();\n        return view('admin.pages.{$kebabPlural}', compact('items1', 'items2'));" : "\$items2 = {$modelName}::latest()->get();\n        return view('admin.pages.{$kebabPlural}', compact('items2'));" ;
+        $index = $relatedModel ? "\$items1 = {$relatedModel}::get();\n        \$items2 = {$modelName}::with('{$relationMethod}')->latest()->get();\n        return view('admin.pages.{$viewName}', compact('items1', 'items2'));" : "\$items2 = {$modelName}::latest()->get();\n        return view('admin.pages.{$kebabPlural}', compact('items2'));" ;
 
-        $edit = $relatedModel ? "\$items1 = {$relatedModel}::get();\n        \$item2 = {$modelName}::findOrFail(\$id);\n        return view('admin.pages.{$kebabPlural}-edit', compact('items1', 'item2'));" : "\$items2 = {$modelName}::findOrFail(\$id);\n        return view('admin.pages.{$kebabPlural}-edit', compact('items2'));" ;
+        $edit = $relatedModel ? "\$items1 = {$relatedModel}::get();\n        \$item2 = {$modelName}::findOrFail(\$id);\n        return view('admin.pages.{$viewName}-edit', compact('items1', 'item2'));" : "\$items2 = {$modelName}::findOrFail(\$id);\n        return view('admin.pages.{$kebabPlural}-edit', compact('items2'));" ;
 
         return <<<PHP
 <?php
@@ -386,7 +392,7 @@ class {$modelName}Controller extends Controller
     {$uploadStore}
 
     {$modelName}::create(\$data);
-    return redirect()->route('admin-{$kebabPlural}.index')->with('success', '{$modelName} created successfully.');
+    return redirect()->route('admin-{$viewName}.index')->with('success', '{$modelName} created successfully.');
 }
 
 
@@ -405,7 +411,7 @@ class {$modelName}Controller extends Controller
     {$uploadUpdate}
 
     \$item->update(\$data);
-    return redirect()->route('admin-{$kebabPlural}.index')->with('success', '{$modelName} updated successfully.');
+    return redirect()->route('admin-{$viewName}.index')->with('success', '{$modelName} updated successfully.');
 }
 
 
@@ -415,13 +421,13 @@ class {$modelName}Controller extends Controller
         \$item = {$modelName}::findOrFail(\$id);
         {$destroyImageDelete}
         \$item->delete();
-        return redirect()->route('admin-{$kebabPlural}.index')->with('success', '{$modelName} deleted successfully.');
+        return redirect()->route('admin-{$viewName}.index')->with('success', '{$modelName} deleted successfully.');
     }
 
     
     public function indexF()
     {
-        return view('user.pages.{$kebabPlural}');
+        return view('user.pages.{$viewName}');
     }
 }
 PHP;

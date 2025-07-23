@@ -33,13 +33,23 @@
         .navbar.validnavs.navbar-default.scrolled .headerContact .icon i {
             color: black !important;
         }
+
+        .country-code {
+            border: 1px solid rgb(214, 214, 214);
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .country-code option {
+            padding: 0.5rem;
+        }
     </style>
 @endsection
 @section('content')
 
 
     <!-- banner
-                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/shape/contact.jpg);">
         <div class="breadcrum-shape">
@@ -60,8 +70,8 @@
 
 
 
-    <!-- Start Contact Us
-                                        ============================================= -->
+    {{-- <!-- Start Contact Us --}}
+
     <div class="contact-style-one-area overflow-hidden default-padding">
 
         <div class="contact-shape">
@@ -70,6 +80,20 @@
 
         <div class="container">
             <div class="row align-center">
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
 
                 <div class="contact-stye-one col-lg-5 mb-md-50 mb-xs-20">
 
@@ -113,51 +137,91 @@
                     </div>
                 </div>
 
+
+
+
                 <div class="contact-stye-one col-lg-7 pl-60 pl-md-15 pl-xs-15">
                     <div class="contact-form-style-one">
                         <h5 class="sub-title">Have Questions?</h5>
                         <h2 class="heading">Send us a Massage</h2>
-                        <form action="assets/mail/contact.php" method="POST" class="contact-form contact-form">
+
+
+
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <input class="form-control" id="name" name="name" placeholder="Name"
-                                            type="text">
-                                        <span class="alert-error"></span>
+                                            type="text" required value="{{ old('name') }}">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input class="form-control" id="email" name="email" placeholder="Email *"
+                                            type="email" required value="{{ old('email') }}">
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row country-code-head-head d-flex align-items-center">
+
+                                <div class="col-lg-6">
+                                    <select class="country-code country-code1" name="country_code" style="width:100%"></select>
+                                    @error('country_code2')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 ">
+                                    <div class="form-group country-code-head">
+                                        <input type="text" id="countrySearch1" placeholder="serach country"
+                                            style="width:100%" />
+
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input class="form-control" id="email" name="email" placeholder="Email*"
-                                            type="email">
-                                        <span class="alert-error"></span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-9">
                                     <div class="form-group">
                                         <input class="form-control" id="phone" name="phone" placeholder="Phone"
-                                            type="text">
-                                        <span class="alert-error"></span>
+                                            type="text" required value="{{ old('phone') }}"
+                                            oninput="this.value = this.value.replace(/[^0-9 ]/g, '')">
+                                        @error('phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group comments">
-                                        <textarea class="form-control" id="comments" name="comments" placeholder="Tell Us About Project *"></textarea>
+                                        <textarea class="form-control" id="comments" name="message" placeholder="Tell Us About Project *" required>{{ old('comments') }}</textarea>
+                                        @error('comments')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <button type="submit" name="submit" id="submit">
+                                    <button type="submit">
                                         <i class="fa fa-paper-plane"></i> Get in Touch
                                     </button>
                                 </div>
                             </div>
-                            <!-- Alert Message -->
+
                             <div class="col-lg-12 alert-notification">
                                 <div id="message" class="alert-msg"></div>
                             </div>
@@ -171,16 +235,6 @@
         </div>
     </div>
     <!-- End Contact -->
-
-    {{-- <!-- Start Map
-                ============================================= -->
-    <div class="maps-area bg-gray overflow-hidden">
-        <div class="google-maps">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48388.929990966964!2d-74.00332!3d40.711233!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1653598669477!5m2!1sen!2sus"></iframe>
-        </div>
-    </div>
-    <!-- End Map --> --}}
 
 
     @include('user.partials.register-for-corporate-tax-section')

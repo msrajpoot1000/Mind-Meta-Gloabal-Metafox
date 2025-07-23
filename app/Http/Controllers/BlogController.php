@@ -1,169 +1,136 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Blog;
-
 use Illuminate\Http\Request;
-use App\Models\Product;
 
-use App\Models\Productcategory;
 class BlogController extends Controller
 {
 
-    public function blogDetails($id)
-    {
-        // dd($id);
-           // Find blog by ID
-           $blog = Blog::findOrFail($id); // Will throw 404 if not found
+    public function blogDetail($id){
 
-           // Return the view with blog data
-           return view('user.pages.blog-details', compact('blog'));
+     $blog = Blog::findOrFail($id);
+     return view('user.pages.blog-detail',compact('blog'));
+
     }
+
+
 
     public function indexF()
-    {   
-        return view('user.pages.blog');
+    {
+           $blogs = Blog::latest()->get();
+        return view('user.pages.blog',compact('blogs'));
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
-       return view('admin.pages.blog', compact('blogs'));
-        
+        $items = Blog::latest()->get();
+  return view('admin.pages.blog', compact('items'));
+
+
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required',
-        'blog_date' => 'required|date',
-        'description' => 'required',
-        'blog_image' => 'nullable|image|max:2048',
-    ]);
-
-    $data = $request->only(['title', 'blog_date', 'description']);
-
-    if ($request->hasFile('blog_image')) {
-        $folder = 'upload/blog';
-        $path = public_path($folder);
-
-        // Create folder if not exists
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
+    {
+        $data = $request->validate([
+            'blog_image' => 'image|mimes:jpg,jpeg,png|max:2048|nullable',
+        'blog_title' => 'required|string',
+        'blog_description' => 'nullable|string',
+        'is_active' => 'required|boolean'
+        ]);
+        
+        if ($request->hasFile('blog_image')) {
+            $folder = 'upload/blogs';
+            $path = public_path($folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $file = $request->file('blog_image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $filename);
+            $data['blog_image'] = $folder . '/' . $filename;
         }
 
-        $file = $request->file('blog_image');
-        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-
-        // Move file to public/upload/blog
-        $file->move($path, $filename);
-
-        // Store relative path in DB
-        $data['blog_image'] = $folder . '/' . $filename;
+        Blog::create($data);
+        return redirect()->route('admin-blog.index')->with('success', 'Blog created successfully.');
     }
 
-    Blog::create($data);
-
-    return redirect()->route('admin-blog.index')->with('success', 'Blog created successfully!');
-}
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
-{
-    // dd($id);
-    // Fetch the blog by ID or fail with 404 if not found
-    $blog = Blog::findOrFail($id);
-
-    // Pass the blog to the edit view
-    return view('admin.pages.blog-edit', compact('blog'));
-}
-
-
-    /**
-     * Update the specified resource in storage.
-     */
-    
-public function update(Request $request, $id)
-{
-    $blog = Blog::findOrFail($id);
-
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'blog_date' => 'required|date',
-        'description' => 'required|string',
-        'blog_image' => 'nullable|image|max:2048', // 2MB max
-    ]);
-
-    $data = $request->only(['title', 'blog_date', 'description']);
-
-    // Handle new image upload
-    if ($request->hasFile('blog_image')) {
-        $folder = 'upload/blog';
-        $path = public_path($folder);
-
-        // Delete old image if exists
-        if ($blog->blog_image && file_exists(public_path($blog->blog_image))) {
-            unlink(public_path($blog->blog_image));
-        }
-
-        // Create folder if not exists
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
-        }
-
-        // Save new image
-        $file = $request->file('blog_image');
-        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-        $file->move($path, $filename);
-
-        $data['blog_image'] = $folder . '/' . $filename;
-    }
-
-    // Update blog
-    $blog->update($data);
-
-    return redirect()->route('admin-blog.index')->with('success', 'Blog updated successfully!');
-}
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
     {
-        $blog = Blog::findOrFail($id);
+        $item = Blog::findOrFail($id);
+   return view("admin.pages.blog-edit", compact('item'));
 
-        // Delete image file if it exists
-        if ($blog->blog_image && file_exists(public_path($blog->blog_image))) {
-            unlink(public_path($blog->blog_image));
-        }
-    
-        // Delete blog entry from the database
-        $blog->delete();
-    
-        return redirect()->route('admin-blog.index')->with('success', 'Blog deleted successfully!');
+
+
     }
+
+    public function update(Request $request, string $id)
+    {
+        $item = Blog::findOrFail($id);
+
+        $request->validate([
+            'status_blog_image' => 'nullable|in:0,1',
+        'blog_title' => 'required|string',
+        'blog_description' => 'nullable|string',
+        'is_active' => 'required|boolean'
+        ]);
+
+        $data = $request->only(['blog_title', 'blog_description', 'is_active']);
+
+                $photoFields = ['blog_image'];
+
+        foreach ($photoFields as $field) {
+            $statusField = 'status_' . $field;
+
+            if ($request->input($statusField)) {
+                if ($request->hasFile($field)) {
+                    if (!empty($item->$field) && file_exists(public_path($item->$field))) {
+                        unlink(public_path($item->$field));
+                    }
+
+                    $folder = 'upload/blogs';
+                    $path = public_path($folder);
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+
+                    $file = $request->file($field);
+                    $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->move($path, $filename);
+
+                    $data[$field] = $folder . '/' . $filename;
+                } else {
+                    $data[$field] = $item->$field;
+                }
+            } else {
+                if (!empty($item->$field) && file_exists(public_path($item->$field))) {
+                    unlink(public_path($item->$field));
+                }
+
+                $data[$field] = null;
+            }
+        }
+
+        $item->update($data);
+
+        return redirect()->route('admin-blog.index')->with('success', 'Blog updated successfully.');
+    }
+
+   public function destroy(string $id)
+{
+    $item = Blog::findOrFail($id);
+
+        if (!empty($item->blog_image) && file_exists(public_path($item->blog_image))) {
+            unlink(public_path($item->blog_image));
+        }
+
+    $item->delete();
+
+    return redirect()->route('admin-blog.index')->with('success', 'Blog deleted successfully.');
+}
+
 }

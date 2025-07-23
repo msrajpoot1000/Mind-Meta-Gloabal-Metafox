@@ -64,22 +64,107 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="logo" class="form-label">Company Logo</label>
-                            <input type="file" class="form-control @error('logo') is-invalid @enderror" name="logo">
-                            @error('logo')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="logo" class="form-label">Website Logo / Business Logo <span
+                                            class="text-danger">*</span></label>
+                                    <input type="file"
+                                        class="form-control preview-image-input @error('logo') is-invalid @enderror"
+                                        name="logo" id="logo" data-preview-id="photo_preview_logo" accept="image/*">
+                                    @error('logo')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                                <img id="photo_preview_logo" src="{{ asset($companyinfos->logo) }}" alt="No Image"
+                                    style="max-width: 5rem; border: 1px solid #ccc; padding: 5px;">
+                                <input type="hidden" name="status_logo" id="status_logo"
+                                    value="{{ $companyinfos->logo ? 1 : 0 }}">
+                                <button type="button" id="statusPhotoBtn_logo" class="btn btn-danger btn-sm m-2">
+                                    <i class="fas fa-trash"></i> Delete Image
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="favicon" class="form-label">Company Favicon Icon (png/svg/ico)</label>
-                            <input type="file" class="form-control @error('favicon') is-invalid @enderror" name="favicon"
-                                accept=".png,.svg,.ico">
-                            @error('favicon')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="favicon" class="form-label">Company Favicon Icon (png/svg/ico) <span
+                                            class="text-danger">*</span></label>
+                                    <input type="file"
+                                        class="form-control preview-image-input @error('favicon') is-invalid @enderror"
+                                        name="favicon" id="favicon" data-preview-id="photo_preview_favicon"
+                                        accept="image/*">
+                                    @error('favicon')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                                <img id="photo_preview_favicon" src="{{ asset($companyinfos->favicon) }}" alt="No Image"
+                                    style="max-width: 5rem; border: 1px solid #ccc; padding: 5px;">
+                                <input type="hidden" name="status_favicon" id="status_favicon"
+                                    value="{{ $companyinfos->favicon ? 1 : 0 }}">
+                                <button type="button" id="statusPhotoBtn_favicon" class="btn btn-danger btn-sm m-2">
+                                    <i class="fas fa-trash"></i> Delete Image
+                                </button>
+                            </div>
                         </div>
+
+
+                        {{-- tax guide link  --}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="tax_guide_link" class="form-label">Tax Guide Link</label>
+                                    <input type="tax_guide_link"
+                                        class="form-control @error('tax_guide_link') is-invalid @enderror"
+                                        name="tax_guide_link" placeholder="Enter tax guide_link"
+                                        value="{{ old('tax_guide_link', $companyinfos->tax_guide_link) }}" required>
+                                    @error('tax_guide_link')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="about_pdf" class="form-label">About PDF <span
+                                            class="text-danger">*</span></label>
+                                    <input type="file"
+                                        class="form-control preview-image-input @error('about_pdf') is-invalid @enderror"
+                                        name="about_pdf" id="about_pdf" data-preview-id="photo_preview_about_pdf">
+                                    @error('about_pdf')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 d-flex align-items-center justify-content-center">
+
+                                @if ($companyinfos->about_pdf)
+                                    <a href="{{ url($companyinfos->about_pdf) }}" class="btn btn-primary btn-sm"
+                                        download>
+                                        <i class="fas fa-file-download"></i> Download PDF
+                                    </a>
+
+                                    <input type="hidden" name="status_about_pdf" id="status_about_pdf" value="1">
+                                @else
+                                    <span>No PDF Uploaded</span>
+                                    <input type="hidden" name="status_about_pdf" id="status_about_pdf" value="0">
+                                @endif
+                            </div>
+
+                        </div>
+
 
                         <div class="row">
                             <div class="col-md-6">
@@ -99,7 +184,7 @@
                                     <label for="phone" class="form-label">Phone No.</label>
                                     <input type="text" class="form-control @error('phone') is-invalid @enderror"
                                         name="phone" placeholder="Enter Phone No."
-                                        value="{{ old('phone', $companyinfos->phone) }}" maxlength="20" 
+                                        value="{{ old('phone', $companyinfos->phone) }}" maxlength="20"
                                         oninput="this.value = this.value.replace(/[^0-9 +-]/g, '')">
                                     @error('phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -114,7 +199,7 @@
                                     <label for="phone2" class="form-label">2 Phone No.</label>
                                     <input type="text" class="form-control @error('phone2') is-invalid @enderror"
                                         name="phone2" placeholder="Enter Phone No."
-                                        value="{{ old('phone2', $companyinfos->phone2) }}" maxlength="20" 
+                                        value="{{ old('phone2', $companyinfos->phone2) }}" maxlength="20"
                                         oninput="this.value = this.value.replace(/[^0-9 +\-]/g, '')">
 
                                     @error('phone2')

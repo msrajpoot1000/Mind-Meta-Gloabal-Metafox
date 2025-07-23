@@ -18,18 +18,28 @@ class ContactController extends Controller
 
     public function storeContact(Request $request)
     {
-        // dd($request);
+       
         // Validation
         $request->validate([
             'name'    => 'required|string|max:255',
             'email'   => 'required|email|max:255',
             'phone'   => 'nullable|string|max:20',
-            'subject' => 'required|string|max:255',
+            'country_code' => 'required|string|max:20',
+            'subject' => 'nullable|string|max:255',
             'message' => 'required|string',
         ]);
+        // dd($request->country_code);
 
-        // Save to database
-        Contact::create($request->all());
+
+        Contact::create([
+    'name'         => $request->name,
+    'email'        => $request->email,
+    'phone'        => $request->phone,
+    'country_code' => $request->country_code, // map this correctly
+    'subject'      => $request->subject,
+    'message'      => $request->message,
+]);
+
 
         return back()->with('success', 'Message sent successfully!');
     }

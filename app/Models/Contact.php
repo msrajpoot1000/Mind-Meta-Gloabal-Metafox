@@ -12,6 +12,7 @@ class Contact extends Model
         'name', 
         'email', 
         'phone',
+        'country_code',
         'subject', 
         'message'
    ];

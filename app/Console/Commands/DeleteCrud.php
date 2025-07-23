@@ -16,7 +16,8 @@ class DeleteCrud extends Command
     {
         $name = Str::studly($this->argument('name'));
         $snakePlural = Str::plural(Str::snake($name));
-        $kebabPlural = Str::kebab(Str::plural($name)); // e.g., SubCategory → sub-categories
+        $kebabPlural = Str::kebab($name);
+         // e.g., SubCategory → sub-categories
 
         // 1. Delete Controller
         $controllerPath = app_path("Http/Controllers/{$name}Controller.php");

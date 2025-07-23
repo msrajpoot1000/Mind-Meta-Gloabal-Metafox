@@ -1,0 +1,17 @@
+/* to put the li beferor tick in description form backend  */
+
+
+/* .putTickBeforeLi {
+    border: 1px solid red;
+} */
+
+
+
+.round-tick-icon {
+    color: white;
+    font-size: 0.8rem;
+    background-color: #022b6d;
+    padding: 0.2rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}

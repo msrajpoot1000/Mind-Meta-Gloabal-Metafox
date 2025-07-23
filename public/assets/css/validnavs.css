@@ -1298,7 +1298,7 @@ nav.navbar.validnavs.brand-center {
 		display: block;
 		font-size: 16px;
 		margin-bottom: 0;
-		padding: 7px 15px !important;
+		/* padding: 7px 15px !important; */
 		text-align: left;
 		text-transform: capitalize;
 		width: 100%;
@@ -1755,7 +1755,7 @@ nav.navbar.validnavs.brand-center {
 	}
 
 	nav.validnavs.navbar-sidebar ul.nav li.dropdown ul.dropdown-menu li a {
-		padding: 7px 15px;
+		/* padding: 7px 15px; */
 		color: var(--dark);
 		border: none;
 	}
@@ -3018,14 +3018,14 @@ nav.navbar.validnavs .navbar-collapse.collapse button i {
 
 @media only screen and (min-width: 1200px) and (max-width: 1350px) {
 	.navbar.validnavs.navbar-default .navbar-nav li a {
-		padding: 30px 10px !important;
+		/* padding: 30px 10px !important; */
 		font-size: 14px;
 	}
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1199px) {
 	.navbar.validnavs.navbar-default .navbar-nav li a {
-		padding: 30px 8px !important;
+		/* padding: 30px 8px !important; */
 		font-size: 14px;
 	}
 }

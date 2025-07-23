@@ -1,11 +1,18 @@
+@php
+    use Illuminate\Support\Facades\DB;
+    $company = DB::table('companyinfos')->first(); // ✅ returns only the first row (an object)
+@endphp
+
 <!--register for corpoerate section -->
-<div class="request-call-back-area text-light default-padding"style="background-image: url(assets/img/tax.jpg);">
+
+<div class="request-call-back-area text-light default-padding"
+    style="background-image: url('{{ asset('assets/img/tax.jpg') }}');">
     <div class="container">
         <div class="row align-center">
             <div class="col-lg-6">
                 <h2 class="title">Register for Corporate Tax </h2>
                 <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation" target="_blank"
-                    href="https://tax.gov.ae/Datafolder/Files/Guides/CT/CT%20General%20Guide%20-%20EN%20-%2010%2009%202023.pdf">See
+                    href="{{$company->tax_guide_link}}">See
                     Tax Guide</a>
             </div>
             <div class="col-lg-6 text-end">

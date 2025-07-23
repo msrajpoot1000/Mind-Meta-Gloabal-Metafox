@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class HomeSliderSeeder extends Seeder
 {
@@ -13,26 +14,17 @@ class HomeSliderSeeder extends Seeder
      */
     public function run(): void
     {
+        //
+
         DB::table('home_sliders')->insert([
             [
-                'title' => 'title',
-                'description' => 'description',
-                'image' => 'image',
-                'status' => 1,
+                'banner_image' => 'upload/home_sliders/sample.jpg',
+                'banner_heading' => 'Sample banner_heading',
+                'banner_sub_heading' => 'Sample banner_sub_heading',
+                'is_active' => true,
                 'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'title2',
-                'description' => 'description',
-                'image' => 'image',
-                'status' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            
+                'updated_at' => now()
+            ]
         ]);
- 
-        
     }
 }

@@ -1,173 +1,125 @@
 <?php
+
 namespace App\Http\Controllers;
-use App\Models\Blog;
-use App\Models\Testimonial;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\HomeSlider;
+use Illuminate\Http\Request;
 
-use App\Models\Productcategory;
 class HomeSliderController extends Controller
 {
-
-    public function blogDetails($id)
-    {
-        // dd($id);
-           // Find blog by ID
-           $blog = Blog::findOrFail($id); // Will throw 404 if not found
-
-           // Return the view with blog data
-           return view('user.pages.blog-details', compact('blog'));
-    }
-
     public function indexF()
-    {   
-        return view('user.pages.testimonial');
+    {
+        return view('user.pages.home_sliders');
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $homeSliders = HomeSlider::orderBy('created_at', 'desc')->get();
-       return view('admin.pages.home-slider', compact('homeSliders'));
+        $items = HomeSlider::latest()->get();
+  return view('admin.pages.home-slider', compact('items'));
+
+
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'title'     => 'required|string|max:255',
-            'description'     => 'required|string',
-            'image'           => 'nullable|image|max:2048',
-            'status'          => 'nullable|boolean',
+        $data = $request->validate([
+        'banner_image' => 'image|mimes:jpg,jpeg,png|max:10240|nullable',
+        'banner_heading' => 'required|string',
+        'banner_sub_heading' => 'nullable|string',
+        'is_active' => 'required|boolean'
         ]);
-    
-        $data = $request->only([
-            'title',
-            'description',
-            'status',
-        ]);
-    
-        if ($request->hasFile('image')) {
-            $folder = 'upload/HomeSlider';
+        
+        if ($request->hasFile('banner_image')) {
+            $folder = 'upload/home_sliders';
             $path = public_path($folder);
-    
             if (!file_exists($path)) {
                 mkdir($path, 0777, true);
             }
-    
-            $file = $request->file('image');
+            $file = $request->file('banner_image');
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move($path, $filename);
-    
-            $data['image'] = $folder . '/' . $filename;
+            $data['banner_image'] = $folder . '/' . $filename;
         }
-    
+
         HomeSlider::create($data);
-    
-        return redirect()->route('admin-home-slider.index')->with('success', 'Item added successfully!');
-    }
-    
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()->route('admin-home-slider.index')->with('success', 'HomeSlider created successfully.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
-{
-    // Fetch the blog by ID or fail with 404 if not found
-    $homeSliders = HomeSlider::findOrFail($id);
-    // $blog = Blog::findOrFail($id);
-    return view('admin.pages.home-slider-edit', compact('homeSliders'));
-}
+    {
+        $item = HomeSlider::findOrFail($id);
+   return view("admin.pages.home-slider-edit", compact('item'));
 
 
-    /**
-     * Update the specified resource in storage.
-     */
-    
-     public function update(Request $request, $id)
-     {
-        $homeSlider = HomeSlider::findOrFail($id);
+
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $item = HomeSlider::findOrFail($id);
 
         $request->validate([
-            'title'     => 'required|string|max:255',
-            'description'     => 'required|string',
-            'image'           => 'nullable|image|max:2048',
-            'status'          => 'nullable|boolean',
+            'status_banner_image' => 'nullable|in:0,1',
+        'banner_heading' => 'required|string',
+        'banner_sub_heading' => 'nullable|string',
+        'is_active' => 'required|boolean'
         ]);
-    
-        $data = $request->only([
-            'title',
-            'description',
-            'status',
-        ]);
-     
-         // Handle new photo upload
-         if ($request->hasFile('image')) {
-             $folder = 'upload/HomeSlider';
-             $path = public_path($folder);
-     
-             // Delete old photo if it exists
-             if ($homeSlider->image && file_exists(public_path($homeSlider->photo))) {
-                 unlink(public_path($homeSlider->image));
-             }
-     
-             // Create folder if not exists
-             if (!file_exists($path)) {
-                 mkdir($path, 0777, true);
-             }
-     
-             // Save new photo
-             $file = $request->file('image');
-             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-             $file->move($path, $filename);
-     
-             $data['image'] = $folder . '/' . $filename;
-         }
-     
-         // Update HomeSlider
-         $homeSlider->update($data);
-     
-         return redirect()->route('admin-home-slider.index')->with('success', 'Item updated successfully!');
-     }
-     
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $homeSlider = homeSlider::findOrFail($id);
+        $data = $request->only(['banner_heading', 'banner_sub_heading', 'is_active']);
 
-        // Delete image file if it exists
-        if ($homeSlider->photo && file_exists(public_path($homeSlider->photo))) {
-            unlink(public_path($homeSlider->photo));
+                $photoFields = ['banner_image'];
+
+        foreach ($photoFields as $field) {
+            $statusField = 'status_' . $field;
+
+            if ($request->input($statusField)) {
+                if ($request->hasFile($field)) {
+                    if (!empty($item->$field) && file_exists(public_path($item->$field))) {
+                        unlink(public_path($item->$field));
+                    }
+
+                    $folder = 'upload/home_sliders';
+                    $path = public_path($folder);
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+
+                    $file = $request->file($field);
+                    $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->move($path, $filename);
+
+                    $data[$field] = $folder . '/' . $filename;
+                } else {
+                    $data[$field] = $item->$field;
+                }
+            } else {
+                if (!empty($item->$field) && file_exists(public_path($item->$field))) {
+                    unlink(public_path($item->$field));
+                }
+
+                $data[$field] = null;
+            }
         }
-    
-        // Delete blog entry from the database
-        $homeSlider->delete();
-    
-        return redirect()->route('admin-home-slider.index')->with('success', 'Blog deleted successfully!');
+
+        $item->update($data);
+
+        return redirect()->route('admin-home-slider.index')->with('success', 'HomeSlider updated successfully.');
     }
+
+   public function destroy(string $id)
+{
+    $item = HomeSlider::findOrFail($id);
+
+        if (!empty($item->banner_image) && file_exists(public_path($item->banner_image))) {
+            unlink(public_path($item->banner_image));
+        }
+
+    $item->delete();
+
+    return redirect()->route('admin-home-slider.index')->with('success', 'HomeSlider deleted successfully.');
+}
+
 }

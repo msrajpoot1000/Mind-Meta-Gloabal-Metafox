@@ -99,7 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
 // to mange image for delete
 //  Image Preview on File Select
 document.addEventListener("DOMContentLoaded", function () {
@@ -107,8 +106,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const inputName = input.name;
         const previewId = input.dataset.previewId;
         const preview = document.getElementById(previewId);
-        const statusInput = document.querySelector(`input[name="status_${inputName}"]`);
-        const deleteBtn = document.getElementById(`statusPhotoBtn_${inputName}`);
+        const statusInput = document.querySelector(
+            `input[name="status_${inputName}"]`
+        );
+        const deleteBtn = document.getElementById(
+            `statusPhotoBtn_${inputName}`
+        );
 
         if (!preview) return;
 
@@ -174,29 +177,43 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
-
 // hide button if no image exits
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("img[id^='photo_preview_']").forEach(function (img) {
-        const name = img.id.replace("photo_preview_", "");
-        const deleteBtn = document.getElementById(`statusPhotoBtn_${name}`);
+    document
+        .querySelectorAll("img[id^='photo_preview_']")
+        .forEach(function (img) {
+            const name = img.id.replace("photo_preview_", "");
+            const deleteBtn = document.getElementById(`statusPhotoBtn_${name}`);
 
-        if (!deleteBtn) return;
+            if (!deleteBtn) return;
 
-        function checkImage() {
-            if (img.complete && img.naturalWidth > 0) {
-                deleteBtn.style.display = "inline-block";
-            } else {
-                deleteBtn.style.display = "none";
+            function checkImage() {
+                if (img.complete && img.naturalWidth > 0) {
+                    deleteBtn.style.display = "inline-block";
+                } else {
+                    deleteBtn.style.display = "none";
+                }
             }
-        }
 
-        if (img.complete) {
-            checkImage();
-        } else {
-            img.onload = checkImage;
-            img.onerror = checkImage;
-        }
-    });
+            if (img.complete) {
+                checkImage();
+            } else {
+                img.onload = checkImage;
+                img.onerror = checkImage;
+            }
+        });
+});
+
+// to set the default height of td in table
+document.querySelectorAll("td").forEach((td) => {
+    if (
+        !td.querySelector("textarea") &&
+        !td.querySelector("img") &&
+        !td.querySelector("button") &&
+        !td.querySelector("a")
+    ) {
+        const words = td.textContent.trim().split(/\s+/).slice(0, 2);
+        td.textContent = words.join(" ") + (words.length < 2 ? "" : "...");
+    }
 });
 
