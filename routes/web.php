@@ -19,6 +19,7 @@ Route::get('/about', [IndexController::class, 'about'])->name('user.pages.aboutu
 
 Route::get('/dumy', [IndexController::class, 'dumy'])->name('user.pages.dumy');
 
+Route::get('/fin-service', [IndexController::class, 'finService'])->name('user.pages.finService');
 
 
 
@@ -182,3 +183,6 @@ use App\Http\Controllers\BlogController;
 Route::get('/blog', [BlogController::class, 'indexF'])->name('user.pages.blog');
 Route::get('/blog-detail/{id}', [BlogController::class, 'blogDetail'])->name('user.pages.blogDetail');
 Route::resource('admin-blog', BlogController::class)->middleware(['auth', 'verified']);
+
+
+

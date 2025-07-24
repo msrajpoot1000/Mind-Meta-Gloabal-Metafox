@@ -12,7 +12,7 @@
             color: black;
         }
 
-        
+
 
         .navbar.validnavs.navbar-default .navbar-nav li a {
             color: white;
@@ -43,15 +43,6 @@
         .hero-heading,
         .hero-description {
             color: white;
-        }
-
-        .typeOfCol {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .typeOfCol .info {
-            flex-grow: 1;
         }
     </style>
 @endsection
@@ -149,8 +140,8 @@
     </div>
 
 
-    <!-- Type of
-                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+    <!-- License
+                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="home-blog-area default-padding bottom-less bg-gray">
         <div class="container">
             <div class="row">
@@ -170,8 +161,8 @@
                 <div class="row">
                     <!-- Single Item -->
                     @foreach ($comRegLicenseSec as $item)
-                        <div class="col-xl-3 col-md-6 mb-30 wow fadeInUp typeOfCol" data-wow-delay="300ms">
-                            <div class="blog-style-one">
+                        <div class="col-xl-3 col-md-6 mb-30 wow fadeInUp typeOfCol d-flex" data-wow-delay="300ms">
+                            <div class="blog-style-one flex-column">
                                 <div class="thumb">
                                     <a href="#"><img src="{{ asset($item->license_image) }}" alt="Thumb" /></a>
                                 </div>
@@ -193,7 +184,7 @@
 
 
     <!-- Business Legal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
         <div class="container">
             <div class="row align-center">
@@ -244,7 +235,7 @@
 
 
     <!-- Start Servics Style One
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="services-style-one-area default-padding bg-gray">
         <div class="triangle-shape">
             {{-- <img src="{{ asset('assets/img/shape/10.png') }}" alt="Shape" /> --}}
@@ -326,7 +317,7 @@
 
 
     <!-- about
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="mission-vision-style-one-area overflow-hidden default-padding">
 
         <div class="container">
@@ -407,7 +398,7 @@
 
     {{-- updated faq  --}}
     <!-- Start Faq
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="faq-style-one-area relative"
         style="background-image: url('{{ asset('assets/img/shape/banner-4.png') }}');">
         <div class="container">

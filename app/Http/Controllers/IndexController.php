@@ -118,4 +118,10 @@ public function comRegPage($id)
     ));
 }
 
+
+
+public function finService(){
+    $ourPartners = OurPartners::latest()->get();
+    return view('user.pages.fin-service',compact('ourPartners'));
+}
 }

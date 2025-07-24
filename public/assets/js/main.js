@@ -364,6 +364,26 @@
             },
         });
 
+         const testimonialTwo2 = new Swiper(".testimonial-style-two-carousel2", {
+             // Optional parameters
+             loop: true,
+             freeMode: true,
+             grabCursor: true,
+             slidesPerView: 1,
+             centeredSlides: true,
+             spaceBetween: 50,
+             autoplay: true,
+             pagination: {
+                 el: ".swiper-pagination",
+                 clickable: true,
+             },
+             breakpoints: {
+                 1200: {
+                     slidesPerView: 2.5,
+                 },
+             },
+         });
+
         /* ==================================================
             # Clients Carousel
          ===============================================*/

@@ -56,22 +56,46 @@
 </script>
 
 
+<script src="https://cdn.ckeditor.com/4.22.1/standard-all/ckeditor.js"></script>
 
-{{-- // CKEditor --}}
-<script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>;
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Select all elements with IDs that start with 'description'
         const descriptionFields = document.querySelectorAll('[id^="description"]');
 
         descriptionFields.forEach((element) => {
-            ClassicEditor.create(element)
-                .catch((error) => {
-                    console.error(`Error initializing CKEditor on #${element.id}:`, error);
-                });
+            CKEDITOR.replace(element.id, {
+                extraPlugins: 'colorbutton,font',
+
+
+                colorButton_colors: '000000,FF0000,00FF00,0000FF,F1C40F,9B59B6,34495E,1ABC9C,FFFFFF',
+                colorButton_enableMore: true, // shows “More Colors...” popup
+
+                toolbar: [{
+                        name: 'basicstyles',
+                        items: ['Bold', 'Italic', 'Underline', 'Font', 'FontSize']
+                    },
+                    {
+                        name: 'colors',
+                        items: ['TextColor', 'BGColor']
+                    },
+                    {
+                        name: 'paragraph',
+                        items: ['NumberedList', 'BulletedList']
+                    },
+                    {
+                        name: 'tools',
+                        items: ['Maximize']
+                    }
+                ],
+                height: 200
+            });
+
         });
     });
 </script>
+
+
+
 
 <script>
     window.validationErrors = {!! json_encode($errors->all()) !!};
