@@ -40,9 +40,9 @@
 @section('content')
     <!-- banner                                                                                                                                                                                                                                                                                  ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
-        style="background-image: url(assets/img/shape/contact.jpg);">
+        style="background-image: url('{{ asset('assets/img/blog2.jpg') }}')">
         <div class="breadcrum-shape">
-            {{-- <img src="assets/img/shape/cont.jpg" alt="Image Not Found" style="width: 100%;opacity:0.5"> --}}
+            <img src="{{ asset('assets/img/blog2.jpg') }}" alt="Image Not Found" style="width: 100%;opacity:0.5">
         </div>
         <div class="container">
             <div class="row">
@@ -59,7 +59,7 @@
 
 
     <!-- Start Blog
-                                        ============================================= -->
+                                                    ============================================= -->
     <div class="blog-area blog-grid default-padding">
         <div class="container">
             <div class="blog-item-box">
@@ -69,7 +69,8 @@
                         <div class="col-xl-4 col-md-6 single-item">
                             <div class="blog-style-one">
                                 <div class="thumb">
-                                    <a href="#"><img src="{{ asset($blog->blog_image) }}" alt="Thumb"></a>
+                                    <a href="{{ route('user.pages.blogDetail', $blog->id) }}"><img
+                                            src="{{ asset($blog->blog_image) }}" alt="Thumb"></a>
                                 </div>
                                 <div class="info">
                                     <div class="blog-meta">

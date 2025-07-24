@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
  
 
 // User Contact
+Route::post('/contact-us', [ContactController::class, 'subscribe'])->name('user.pages.subscribe');
+
 Route::get('/contact', [ContactController::class, 'contactF'])->name('user.pages.contact');
 Route::post('/contact-store', [ContactController::class, 'storeContact'])->name('contact.store');
 // Admin Contact

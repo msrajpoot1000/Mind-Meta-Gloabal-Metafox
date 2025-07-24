@@ -69,7 +69,7 @@
 
 
     <!-- Start Breadcrumb
-                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/about_banner.jpg);">
         <div class="breadcrum-shape">
@@ -165,10 +165,10 @@
     {{-- our partners  --}}
 
     <!-- Start Partner Area
-                                                                                                                                                                                ============================================= -->
+                                                                                                                                                                                    ============================================= -->
 
     <!-- Logo Section -->
-    <section class="partner-logo-section bg-light " style="padding-top: 2rem;">
+    {{-- <section class="partner-logo-section bg-light " style="padding-top: 2rem;">
         <h2 class="title text-center" style="margin-top: 4rem;">Our Partners</h2>
         <div class="container " style="margin-top: 4rem; margin-bottom: 4rem;">
 
@@ -218,8 +218,44 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
 
+
+    {{-- partners secrtion  --}}
+    <div class="project-details-area default-padding">
+        <div class="container">
+            <div class="row align-center">
+                <div class="about-style-one col-xl-12 col-lg-11">
+                    <!--<div class="h4 sub-heading">Feel Valued & Rewarded</div>-->
+                    <h2 class="title mb-25">Our Affiliations With Government Bodies​</h2>
+                    <p>
+                        Our recognized association with government authorities helps us access resources and support from
+                        them. You can trust us to be adhering to government rules and standards. We’ll be your credible
+                        partners as you set up your firm in Dubai.
+                    </p>
+                    <div class="project-details-items">
+
+
+                        <div class="container " style="margin-top: 4rem; margin-bottom: 4rem;">
+
+
+                            <div class="row g-3">
+                                @foreach ($ourPartners as $item)
+                                    <div class="col-6 col-md-3 ">
+                                        <div class="img-head  d-flex justify-content-center p-3 ">
+                                            <img src="{{ asset($item->partner_image) }}"
+                                                style="width: 100%;height:100%;object-fit:contain;aspect-ratio:1/0.5"
+                                                alt="Logo 1">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- End Partner Area -->

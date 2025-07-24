@@ -38,11 +38,12 @@
             font-weight: 600;
         }
 
+
         .company form input {
             background: transparent !important;
             border: none;
             box-shadow: inherit !important;
-            color: var(--white) !important;
+            /* color: var(--white) !important; */
             min-height: 56px;
             padding: 15px;
         }
@@ -51,6 +52,8 @@
             border: 2px solid black;
             position: relative;
         }
+
+
 
         ol.custom-list {
             list-style-position: inside;
@@ -154,6 +157,10 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
+
+        .f-item {
+            color: black !important;
+        }
     </style>
 @endsection
 
@@ -162,7 +169,7 @@
 @section('content')
 
     <!-- Start Banner Area
-                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="banner-area banner-style-one shadow navigation-custom-large zoom-effect overflow-hidden text-light">
         <!-- Slider main container -->
         <div class="banner-fade">
@@ -209,7 +216,7 @@
     </div>
     <!-- End Main -->
     <!-- Start Our Features
-                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="feature-style-one-area half-angle-shape overflow-hidden default-padding">
         <div class="container">
             <div class="row align-center">
@@ -230,11 +237,15 @@
                 <div class="col-lg-6 offset-lg-1 pl-60 pl-md-15 pl-xs-10 mt-md-50 mt-xs-50">
 
                     <div class="f-item company">
-                        <form action="#">
+                        <form method="POST" action="{{ route('user.pages.subscribe') }}">
+                            @csrf
                             <input type="text" placeholder="Type your desired company name here" class="form-control"
-                                name="your_company">
-                            <button type="submit"> Subscribe</button>
+                                name="email">
+                            <button type="submit">Subscribe</button>
                         </form>
+
+
+
                     </div>
 
                 </div>
@@ -244,7 +255,7 @@
     <!-- End Our Features -->
 
     <!-- Start Aobut
-                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding"
         style="background-image: url(assets/img/shape/29.png);">
         <div class="container">
@@ -299,7 +310,7 @@
     <!-- End About -->
 
     <!-- Start Services
-                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-two-area default-padding bottom-less bg-cover bg-gray"
         style="background-image: url(assets/img/shape/27.png);">
         <div class="container">
@@ -417,7 +428,7 @@
     </div>
     <!-- End Services -->
     <!-- Start Pricing
-                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="pricing-style-one-area secondary default-padding bottom-less">
 
         <div class="container">
@@ -581,7 +592,7 @@
     <!-- End Pricng -->
 
     <!-- Start About
-                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-one-area default-padding">
         <div class="shape-animated-left">
             <img src="assets/img/shape/anim-1.png" alt="Image Not Found">
@@ -633,7 +644,7 @@
     <!-- End About -->
 
     <!-- Start Servics Style One
-                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-one-area default-padding bg-gray">
         <div class="triangle-shape">
             <img src="assets/img/shape/10.png" alt="Shape">
@@ -955,6 +966,7 @@
     <!-- End Services Style One -->
 
 
+    {{-- partners secrtion  --}}
     <div class="project-details-area default-padding">
         <div class="container">
             <div class="row align-center">
@@ -1107,7 +1119,8 @@
                             <div class="col-xl-4 col-md-6 single-item">
                                 <div class="blog-style-one">
                                     <div class="thumb">
-                                        <a href="#"><img src="{{ asset($blog->blog_image) }}" alt="Thumb"></a>
+                                        <a href="{{ route('user.pages.blogDetail', $blog->id) }}"><img
+                                                src="{{ asset($blog->blog_image) }}" alt="Thumb"></a>
                                     </div>
                                     <div class="info">
                                         <div class="blog-meta">
@@ -1122,7 +1135,8 @@
                                             </ul>
                                         </div>
                                         <h3>
-                                            <a href="blog-single-with-sidebar.html">{{ $blog->blog_title }}</a>
+                                            <a
+                                                href="{{ route('user.pages.blogDetail', $blog->id) }}">{{ $blog->blog_title }}</a>
                                         </h3>
                                         <a href="{{ route('user.pages.blogDetail', $blog->id) }}" class="btn-simple"><i
                                                 class="fas fa-angle-right"></i> Read
@@ -1147,8 +1161,8 @@
 
 
     <!-- Start Faq Area
-                                         
-                                    ============================================= -->
+                                                                                                                         
+                                                                                                                    ============================================= -->
 
     @if ($faqs->count())
         <div class="faq-area bg-gray default-padding">

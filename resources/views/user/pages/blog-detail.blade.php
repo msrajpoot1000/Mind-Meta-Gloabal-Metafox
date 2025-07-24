@@ -58,22 +58,49 @@
     </div>
 
 
-    <!-- Start Blog
-                                                                            ============================================= -->
-    <div class="blog-area blog-grid default-padding">
-        <div class="container">
-            <div class="blog-item-box">
-                <img src="{{ asset($blog->blog_image) }}" />
-                <h1>{{ $blog->blog_title }}</h1>
-                <div class="putTickBeforeLi">
-                    {!! $blog->blog_description !!}
+    {{-- <!-- Start Blog --}}
+
+    <div class="container default-padding">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog-area blog-grid ">
+                    <div class="container">
+                        <div class="blog-item-box">
+                            <img src="{{ asset($blog->blog_image) }}" style="margin-bottom:2rem" />
+                            <h1>{{ $blog->blog_title }}</h1>
+                            <div class="putTickBeforeLi">
+                                {!! $blog->blog_description !!}
+                            </div>
+                        </div>
+                        <!-- End Blog -->
+                    </div>
 
                 </div>
             </div>
-            <!-- End Blog -->
+            <div class="col-lg-4">
+                <div class="sidebar-item recent-post">
+                    <h4 class="title">Recent Post</h4>
+                    <ul>
+                        @foreach ($blogs as $item)
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <a href="{{ route('user.pages.blogDetail', $item->id) }}">
+                                        <img src="{{ asset($item->blog_image) }}" alt="thumb" style="width: 100px">
+                                    </a>
+                                </div>
+                                <div class="col-lg-8">
+                                    <a href="{{ route('user.pages.blogDetail', $item->id) }}">{{ $item->blog_title }}</a>
+                                    <p class="post-date">{{ $item->updated_at->format('F j, Y') }}
+                                    </p>
+                                </div>
+                            </div>
+                            </a>
+                        @endforeach
 
+                    </ul>
+                </div>
+            </div>
         </div>
-
     </div>
 
 

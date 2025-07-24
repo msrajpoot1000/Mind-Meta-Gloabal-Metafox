@@ -91,12 +91,13 @@
                             {{-- <li><a href="{{ route('user.pages.terms-conditions') }}"><i
                                         class="fas fa-chevron-right mr-4"></i> Terms &
                                     Conditions</a></li> --}}
-                            <li><a href="{{ route('user.pages.contact') }}"><i class="fas fa-chevron-right mr-4"></i>
+                            <li><a href="{{ route('user.pages.contact', '') }}"><i
+                                        class="fas fa-chevron-right mr-4"></i>
                                     Contact Us</a></li>
-                            <li><a href="career.html"><i class="fas fa-chevron-right mr-4"></i> Career</a></li>
-                            <li><a href="pricing.html"><i class="fas fa-chevron-right mr-4"></i> Plans & Pricing</a>
+                            {{-- <li><a href="career.html"><i class="fas fa-chevron-right mr-4"></i> Career</a></li> --}}
+                            {{-- <li><a href="pricing.html"><i class="fas fa-chevron-right mr-4"></i> Plans & Pricing</a> --}}
                             </li>
-                            <li><a href="faq.html"><i class="fas fa-chevron-right mr-4"></i> Help Center</a></li>
+                            {{-- <li><a href="faq.html"><i class="fas fa-chevron-right mr-4"></i> Help Center</a></li> --}}
 
                         </ul>
 
@@ -106,28 +107,19 @@
                     <div class="f-item link">
                         <h4 class="widget-title">Useful Links</h4>
                         <ul>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Manage
-                                    Investment</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Business
-                                    Planning</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Financial
-                                    Advices</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Tax
-                                    Strategy</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Insurance
-                                    Strategy</a></li>
-                            <li><a href="blog-details.html"><i class="fas fa-chevron-right mr-4"></i> Business Setup
+                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Business Setup
                                     Blog</a></li>
-                            <li><a href="mainland-company-formation.html"><i class="fas fa-chevron-right mr-4"></i>
-                                    Mainland Company Formation</a></li>
-                            <li><a href="freezone-company-formation.html"><i class="fas fa-chevron-right mr-4"></i>
-                                    Freezone Company Formation</a></li>
-                            <li><a href="start-business-dubai.html"><i class="fas fa-chevron-right mr-4"></i> How to
-                                    Start a Business in Dubai</a></li>
-                            <li><a href="corporate-pro-services.html"><i class="fas fa-chevron-right mr-4"></i>
-                                    Corporate PRO Services</a></li>
-                            <li><a href="coworking-spaces.html"><i class="fas fa-chevron-right mr-4"></i> Coworking
+                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Mainland
+                                    Company Formation</a></li>
+                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Freezone
+                                    Company Formation</a></li>
+                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> How to start a
+                                    business in Dubai</a></li>
+                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Corporate PRO
+                                    Services</a></li>
+                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Coworking
                                     Spaces</a></li>
+
 
                         </ul>
 

@@ -257,6 +257,15 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="description8" class="form-label">Extra Section </label>
+                            <textarea name="extra_section" id="description8" class="form-control @error('extra_section') is-invalid @enderror"
+                                rows="4">{{ old('extra_section', $item2->extra_section ?? '') }}</textarea>
+                            @error('extra_section')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
 
 
                         {{-- License Section --}}

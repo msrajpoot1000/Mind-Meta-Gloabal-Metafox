@@ -66,11 +66,12 @@ class IndexController extends Controller
   
     public function about()
     {   
+          $ourPartners = OurPartners::latest()->get();
         $testimonials = Testimonial::latest()->get();
          $company = Companyinfo::first();
         
        
-        return view('user.pages.about' , compact('testimonials','company'));
+        return view('user.pages.about' , compact('testimonials','company','ourPartners'));
     }
 
     

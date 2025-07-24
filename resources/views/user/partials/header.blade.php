@@ -96,7 +96,7 @@
                                         <ul>
                                             @foreach ($comReg->comRegPages->where('ref_id', $comReg->id) as $page)
                                                 <li class="ml-2">
-                                                    <a href="{{ route('user.pages.comRegPage',  $page->id) }}"
+                                                    <a href="{{ route('user.pages.comRegPage', $page->id) }}"
                                                         style="font-size:0.9rem;padding:0px;margin:0px"
                                                         class="d-flex align-items-center">
                                                         <i class="fas fa-chevron-right "
@@ -204,10 +204,23 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown"><a href="{{ route('user.pages.aboutus') }}">About Us</a>
+
+                    <li><a href="{{ route('user.pages.contact', '') }}">Contact Us</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown">Others</a>
+                        <ul class="dropdown-menu" style="padding:0.5rem">
+                            <li><a href="{{ route('user.pages.aboutus') }}" style="padding:0px"><i
+                                        class="fas fa-chevron-right "
+                                        style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>About
+                                    Us</a></li>
+                            <li>
+                            <li><a href="{{ route('user.pages.blog') }}" style="padding:0px"><i class="fas fa-chevron-right "
+                                        style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>Blogs</a>
+                            </li>
+                            <li>
+                        </ul>
                     </li>
-                    <li><a href="{{ route('user.pages.contact') }}">Contact Us</a></li>
-                    
                 </ul>
             </div><!-- /.navbar-collapse -->
 

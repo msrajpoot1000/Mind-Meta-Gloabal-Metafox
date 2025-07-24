@@ -29,6 +29,7 @@ return new class extends Migration
             $table->text('step_section_description')->nullable();
             $table->string('why_section_heading')->nullable();
             $table->text('why_section_description')->nullable();
+            $table->text('extra_section')->nullable();
              $table->json('license_ids')->nullable();
               $table->json('business_legal_ids')->nullable();
                $table->json('require_doc_ids')->nullable(); 

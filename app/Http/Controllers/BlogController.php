@@ -9,9 +9,9 @@ class BlogController extends Controller
 {
 
     public function blogDetail($id){
-
+   $blogs = Blog::latest()->take(10)->get();
      $blog = Blog::findOrFail($id);
-     return view('user.pages.blog-detail',compact('blog'));
+     return view('user.pages.blog-detail',compact('blog','blogs'));
 
     }
 

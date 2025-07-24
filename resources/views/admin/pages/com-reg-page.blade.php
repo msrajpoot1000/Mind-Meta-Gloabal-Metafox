@@ -118,8 +118,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="overview_heading" class="form-label">Overview Heading <span
-                                class="text-danger">*</span></label>
+                        <label for="overview_heading" class="form-label">Overview Heading </label>
                         <input type="text" name="overview_heading" id="overview_heading"
                             class="form-control @error('overview_heading') is-invalid @enderror"
                             value="{{ old('overview_heading') }}">
@@ -138,8 +137,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="type_section_heading" class="form-label">Type Section Heading <span
-                                class="text-danger">*</span></label>
+                        <label for="type_section_heading" class="form-label">License</label>
                         <input type="text" name="type_section_heading" id="type_section_heading"
                             class="form-control @error('type_section_heading') is-invalid @enderror"
                             value="{{ old('type_section_heading') }}">
@@ -168,8 +166,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="step_section_heading" class="form-label">Step Section Heading <span
-                                class="text-danger">*</span></label>
+                        <label for="step_section_heading" class="form-label">Step Section Heading </label>
                         <input type="text" name="step_section_heading" id="step_section_heading"
                             class="form-control @error('step_section_heading') is-invalid @enderror"
                             value="{{ old('step_section_heading') }}">
@@ -188,8 +185,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="why_section_heading" class="form-label">Why Section Heading <span
-                                class="text-danger">*</span></label>
+                        <label for="why_section_heading" class="form-label">Why Section Heading </label>
                         <input type="text" name="why_section_heading" id="why_section_heading"
                             class="form-control @error('why_section_heading') is-invalid @enderror"
                             value="{{ old('why_section_heading') }}">
@@ -203,6 +199,16 @@
                         <textarea name="why_section_description" id="description7"
                             class="form-control @error('why_section_description') is-invalid @enderror" rows="4">{{ old('why_section_description') }}</textarea>
                         @error('why_section_description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="description8" class="form-label">Extra Section Description </label>
+                        <textarea name="extra_section" id="description8" class="form-control @error('extra_section') is-invalid @enderror"
+                            rows="4">{{ old('extra_section') }}</textarea>
+                        @error('extra_section')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -368,8 +374,8 @@
 
 
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="">
+                <button type="submit" class="btn btn-primary ml-2" style="margin-left:2rem;margin-bottom:2rem;">Submit</button>
             </div>
             </form>
         </div>

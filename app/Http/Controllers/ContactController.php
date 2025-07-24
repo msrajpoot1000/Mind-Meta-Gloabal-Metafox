@@ -16,6 +16,14 @@ class ContactController extends Controller
         return view('user.pages.contact', compact('company'));
     }
 
+public function subscribe(Request $request)
+{
+    $email = $request->input('email');
+        // dd($email);
+         $company = Companyinfo::first();
+        return view('user.pages.contact', compact('company','email'));
+    }
+
     public function storeContact(Request $request)
     {
        
