@@ -174,7 +174,8 @@
                             <div class="col-xl-3 col-md-6 mb-30 wow fadeInUp typeOfCol d-flex" data-wow-delay="300ms">
                                 <div class="blog-style-one flex-column">
                                     <div class="thumb">
-                                        <a href="#"><img src="{{ asset($item->license_image) }}" alt="Thumb" /></a>
+                                        <a href="#"><img src="{{ asset($item->license_image) }}" alt="Thumb"
+                                                style="width:100%" /></a>
                                     </div>
                                     <div class="info">
                                         <h4>
@@ -195,7 +196,7 @@
 
 
     <!-- Business Legal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     @if ($comRegPage->business_legal_description)
         <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
             <div class="container">
@@ -333,7 +334,7 @@
 
 
     <!-- about
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
 
     @if ($comRegPage->why_section_heading && $comRegWhySec->count())
         <div class="mission-vision-style-one-area overflow-hidden default-padding">
