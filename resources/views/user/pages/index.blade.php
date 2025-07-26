@@ -161,7 +161,58 @@
         .f-item {
             color: black !important;
         }
+
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .step-item {
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .step-item:hover,
+        .step-item.active {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .serviceJi {
+            background-color: white !important;
+        }
     </style>
+@endsection
+
+@section('script')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const stepItems = document.querySelectorAll(".step-item");
+            const stepContents = document.querySelectorAll(".step-content");
+
+            stepItems.forEach(item => {
+                item.addEventListener("mouseover", function() {
+                    const step = this.dataset.step;
+
+                    // Remove 'active' from all
+                    stepItems.forEach(el => el.classList.remove("active"));
+                    stepContents.forEach(el => el.classList.remove("active"));
+
+                    // Add 'active' to hovered item
+                    this.classList.add("active");
+                    document.querySelector(`.step-content[data-step='${step}']`)?.classList.add(
+                        "active");
+                });
+            });
+        });
+    </script>
+
 @endsection
 
 
@@ -169,7 +220,7 @@
 @section('content')
 
     <!-- Start Banner Area
-                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="banner-area banner-style-one shadow navigation-custom-large zoom-effect overflow-hidden text-light">
         <!-- Slider main container -->
         <div class="banner-fade">
@@ -216,7 +267,7 @@
     </div>
     <!-- End Main -->
     <!-- Start Our Features
-                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="feature-style-one-area half-angle-shape overflow-hidden default-padding">
         <div class="container">
             <div class="row align-center">
@@ -255,7 +306,7 @@
     <!-- End Our Features -->
 
     <!-- Start Aobut
-                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding"
         style="background-image: url(assets/img/shape/29.png);">
         <div class="container">
@@ -271,36 +322,36 @@
                         <div class="devider"></div>
                     </div>
                 </div>
-
-                <div class="col-lg-5 about-style-two">
-                    <div class="thumb">
-                        <div class="list-container">
-                            <ol class="custom-list">
-                                <li>1. Select The Right Jurisdiction</li>
-                                <li>2. Prepare Your Documents</li>
-                                <li>3. Get Your Business License</li>
-                                <li>4. Process Your Visa</li>
-                                <li>5. Opening A Bank Account</li>
-                            </ol>
-
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-lg-5 about-style-two">
+                        <div class="thumb">
+                            <div class="list-container">
+                                <ol class="custom-list">
+                                    @foreach ($inCorporationServices as $item)
+                                        <li class="step-item {{ $loop->first ? 'active' : '' }}"
+                                            data-step="{{ $item->id }}">
+                                            {{ $loop->iteration }} {{ $item->name }}
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="about-style-two col-lg-6 offset-lg-1">
-
-                    <div class="default-features mt-30">
-                        <div class="default-feature-item">
-                            <a href="#">
-                                <i class="flaticon-investment-3"></i>
-                                <h4>Select The Right Jurisdiction</h4>
-                                <p>Choosing the right jurisdiction for registering a company is the most important step of
-                                    the whole business setup process. There are 3 main jurisdictions: Mainland, Free zone
-                                    and Offshore. Let Meta Mind Global help you choose the right authority for your business
-                                    setup in Dubai based on your business’s requirements.</p>
-                            </a>
+                    <!-- Right Column -->
+                    <div class="about-style-two col-lg-6 offset-lg-1 shadow-sm"
+                        style="background-color: white;border-radius:10px;border:1px solid rgb(182, 180, 180)">
+                        <div class="default-features mt-30">
+                            @foreach ($inCorporationServices as $item)
+                                <div class="default-feature-item step-content {{ $loop->first ? 'active' : '' }}"
+                                    data-step="{{ $item->id }}">
+                                    <i class="flaticon-investment-3"></i>
+                                    <h4>{{ $item->name }}</h4>
+                                    <p class="mt-2">{!! $item->description !!}</p>
+                                </div>
+                            @endforeach
                         </div>
-
                     </div>
                 </div>
 
@@ -310,7 +361,7 @@
     <!-- End About -->
 
     <!-- Start Services
-                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-two-area default-padding bottom-less bg-cover bg-gray"
         style="background-image: url(assets/img/shape/27.png);">
         <div class="container">
@@ -327,110 +378,45 @@
         <div class="container">
             <div class="row">
 
-                <!-- Single Item -->
-                <div class="col-xl-4 col-md-6 mb-30">
-                    <div class="services-style-two active h-100">
-                        <div class="thumb">
-                            <img src="assets/img/service/mainland.png" alt="Thumb">
-                            <div class="title">
-                                <a href="#">
-                                    <i class="flaticon-budget"></i>
-                                    <h4> Mainland Company Setup</h4>
-                                </a>
+                @foreach ($firstThreeComRegPage as $item)
+                    <!-- Single Item -->
+                    <div class="col-xl-4 col-md-6 mb-30">
+                        <div class="services-style-two active h-100">
+                            <div class="thumb">
+                                <img src="{{ asset($item->banner_image) }}" alt="Thumb">
+                                <div class="title">
+                                    <a href="#">
+                                        <i class="flaticon-budget"></i>
+                                        <h4>{{ $item->name }} Company Setup</h4>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info">
-                            <p class="para para1" data-lines="3">
-                                Mainland Company Setup
-                                Setting up your company in the UAE Mainland provides the flexibility to operate anywhere in
-                                the Emirates and ensures direct engagement with the government for smoother operations.
-                                Start your business in Dubai Mainland for restriction-free access to local markets and
-                                International trade or Services. One significant benefit is the flexibility to operate
-                                anywhere within the emirate, allowing companies to establish offices in prime locations
-                                without the restrictions imposed by free zone regulations. Additionally, mainland companies
-                                have the freedom to conduct business across the entire UAE, acquisition of more employee
-                                visas, engage in wide range of business activities including those not permitted in free
-                                zones, very important benefit of mainland companies is the absence of a mandatory
-                                requirement for a UAE national as a partner, a recent change that enhances ease of setup.
-                            </p>
-                            <div class="button">
-                                <a class="toggle-btn-read-more" data-target="para1" role="button">Read More</a>
-                                <div class="devider"></div>
+                            <div class="info">
+                                <p class="para para1" data-lines="3">
+                                    {!! $item->banner_description !!}
+
+                                </p>
+                                <div class="button">
+                                    <a class="toggle-btn-read-more" data-target="para1" role="button">Read More</a>
+                                    <div class="devider"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- End Single Item -->
+                    <!-- End Single Item -->
+                @endforeach
 
-                <!-- Single Item -->
-                <div class="col-xl-4 col-md-6 mb-30">
-                    <div class="services-style-two h-100">
-                        <div class="thumb">
-                            <img src="assets/img/service/freezone.png" alt="Thumb">
-                            <div class="title">
-                                <a href="#">
-                                    <i class="flaticon-bar-chart"></i>
-                                    <h4> Free Zone Company Setup</h4>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <p class="para para2" data-lines="3">
 
-                                Registering a company in any UAE Free Zones qualifies you for 100% ownership without
-                                partnering with a UAE national. Free Zones offers multiple benefits to investors looking to
-                                start a business in Dubai, UAE, such as 0% corporate tax(on qualifying activities) and
-                                business-friendly policies, ideal for those engaged in B2B transactions, international
-                                trade, or businesses operating within the confines of the free zone itself. Another key
-                                advantage is the flexibility regarding office space; free zone companies are not obligated
-                                to rent office premises, resulting in considerable cost savings.
-                            </p>
-                            <div class="button">
-                                <a class="toggle-btn-read-more" data-target="para2" role="button">Read More</a>
-                                <div class="devider"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Item -->
 
-                <!-- Single Item -->
-                <div class="col-xl-4 col-md-6 mb-30">
-                    <div class="services-style-two h-100">
-                        <div class="thumb">
-                            <img src="assets/img/service/offshore.png" alt="Thumb">
-                            <div class="title">
-                                <a href="#">
-                                    <i class="flaticon-credit-cards"></i>
-                                    <h4>Offshore Company Setup</h4>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <p class="para para3" data-lines="3">
 
-                                You can register your offshore company and operate it anywhere from overseas. It provides
-                                financial perks, international market access, and a clear regulatory framework to foreign
-                                companies. Note that you can carry out your business activities only outside the UAE. Expand
-                                your business at the global level with an offshore company setup.
-                            </p>
-                            <div class="button">
-                                <a class="toggle-btn-read-more" data-target="para3" role="button">Read More</a>
-                                <div class="devider"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Item -->
 
             </div>
         </div>
     </div>
     <!-- End Services -->
     <!-- Start Pricing
-                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
-    <div class="pricing-style-one-area secondary default-padding bottom-less">
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+    {{-- <div class="pricing-style-one-area secondary default-padding bottom-less">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
@@ -456,9 +442,9 @@
                     incorporation process
                 </p>
             </div>
-        </div>
+        </div> --}}
 
-        <div class="container">
+    {{-- <div class="container">
             <div class="row">
                 <!-- Single Itme -->
                 <div class="col-xl-3 col-md-6 mb-30">
@@ -587,12 +573,12 @@
                 <!-- End Single Itme -->
 
             </div>
-        </div>
-    </div>
+        </div> --}}
+    {{-- </div> --}}
     <!-- End Pricng -->
 
     <!-- Start About
-                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-one-area default-padding">
         <div class="shape-animated-left">
             <img src="assets/img/shape/anim-1.png" alt="Image Not Found">
@@ -613,7 +599,7 @@
                         support services to help you keep your company running smoothly by providing A-Z business solutions
                         under one roof.
                     </p>
-                    <div class="owner-info">
+                    {{-- <div class="owner-info">
                         <div class="left-info">
                             <ul>
                                 <li><i class="fas fa-check-circle"></i>Diverse Industry Experience</li>
@@ -626,7 +612,7 @@
                         <div class="right-info">
 
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="about-style-one col-xl-5 offset-xl-1 col-lg-6 offset-lg-1">
                     <div class="about-thumb">
@@ -644,11 +630,11 @@
     <!-- End About -->
 
     <!-- Start Servics Style One
-                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-one-area default-padding bg-gray">
-        <div class="triangle-shape">
+        {{-- <div class="triangle-shape">
             <img src="assets/img/shape/10.png" alt="Shape">
-        </div>
+        </div> --}}
         <div class="center-shape" style="background-image: url(assets/img/shape/5.png);"></div>
         <div class="container">
             <div class="row align-center">
@@ -661,303 +647,50 @@
                             to deal with multiple business setup companies.</p>
                         <div class="nav nav-tabs service-tab-navs" id="nav-tab" role="tablist">
 
-                            <button class="nav-link active" id="nav-id-1" data-bs-toggle="tab" data-bs-target="#tab1"
-                                type="button" role="tab" aria-controls="tab1" aria-selected="true">
-                                <i class="flaticon-portfolio"></i>
-                                Business Setup
-                            </button>
-                            <button class="nav-link" id="nav-id-2" data-bs-toggle="tab" data-bs-target="#tab2"
-                                type="button" role="tab" aria-controls="tab2" aria-selected="false">
-                                <i class="flaticon-megaphone"></i>
-                                Corporate Services
-                            </button>
-                            <button class="nav-link" id="nav-id-3" data-bs-toggle="tab" data-bs-target="#tab3"
-                                type="button" role="tab" aria-controls="tab3" aria-selected="false">
-                                <i class="flaticon-save-money"></i>
-                                Accounting & Auditing
-                            </button>
-                            <button class="nav-link" id="nav-id-4" data-bs-toggle="tab" data-bs-target="#tab4"
-                                type="button" role="tab" aria-controls="tab4" aria-selected="false">
-                                <i class="flaticon-save-money"></i>
-                                Compliance
-                            </button>
-                            <button class="nav-link" id="nav-id-5" data-bs-toggle="tab" data-bs-target="#tab5"
-                                type="button" role="tab" aria-controls="tab5" aria-selected="false">
-                                <i class="flaticon-save-money"></i>
-                                Coworking Space
-                            </button>
-
+                            @foreach ($services as $service)
+                                <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                    id="nav-id-{{ $loop->iteration }}" data-bs-toggle="tab"
+                                    data-bs-target="#tab{{ $loop->iteration }}" type="button" role="tab"
+                                    aria-controls="tab{{ $loop->iteration }}" aria-selected="false">
+                                    <i class="flaticon-megaphone"></i>
+                                    {{ $service->name }}
+                                </button>
+                            @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-7 pl-50 pl-md-15 pl-xs-15">
                     <div class="tab-content services-tab-content" id="nav-tabContent">
+                        @foreach ($services as $service)
+                            <!-- Tab Single Item -->
+                            <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}"
+                                id="tab{{ $loop->iteration }}" role="tabpanel"
+                                aria-labelledby="nav-id-{{ $loop->iteration }}">
+                                <div class="row ">
+                                    @foreach ($service->servicePages as $page)
+                                        <!-- Single Item -->
+                                        {{-- wow fadeInUp --}}
+                                        <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 pb-4 d-flex">
+                                            <div class="shadow-sm flex-column"
+                                                style="background-color:white;border-radius:10px;padding:2rem;margin-right:0rem">
+                                                <a href="{{ route('user.pages.servicePage', $page->id) }}"
+                                                    class="serviceJi services-style-one ">
+                                                    <i class="flaticon-personal"></i>
+                                                    <h4 class="text-bold">{{ $page->name }}</h4>
+                                                    <p>
+                                                        {!! $page->description !!}
+                                                    </p>
+                                                </a>
+                                            </div>
 
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade show active" id="tab1" role="tabpanel"
-                            aria-labelledby="nav-id-1">
-                            <div class="row">
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 wow fadeInUp">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-personal"></i>
-                                        <h4><a href="services-single.html">Company Registration</a></h4>
-                                        <p>
-                                            Our business setup consultants help you with tailored company registration
-                                            solutions in Dubai that are hassle-free, more affordable, and suitable for your
-                                            startup.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 wow fadeInUp"
-                                    data-wow-delay="300ms">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-career"></i>
-                                        <h4><a href="services-single.html">Trade License Renewals</a></h4>
-                                        <p>
-                                            Acquiring licenses depending on your business activity and getting them renewed
-                                            is no small task. It involves time, attention to detail and a whole lot of
-                                            tedious documentation.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
+                                        </div>
+                                        <!-- End Single Item -->
+                                    @endforeach
 
+                                </div>
                             </div>
-                        </div>
-                        <!-- End Tab Single Item -->
-
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="nav-id-2">
-                            <div class="row">
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-business-trip"></i>
-                                        <h4><a href="services-single.html">Visa Services</a></h4>
-                                        <p>
-                                            We assist entrepreneurs who want to apply their residence visas so that they can
-                                            legally stay in the UAE. Our visa service packages include investor, golden and
-                                            employment visas. Our holistic approach to business setup in UAE can deliver
-                                            determined visa services that ensures the entire process is smooth and hassle
-                                            free.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-online-store"></i>
-                                        <h4><a href="services-single.html">Bank Account Opening Assistance</a></h4>
-                                        <p>
-                                            We have built a strong relation with various banks which help us opening a
-                                            business bank account for our clients with our in-house financial/banking
-                                            experts. To ensure that the bank account opening is convenient and relaxed for
-                                            our clients, we work closely with multiple bank partners.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-funds"></i>
-                                        <h4><a href="services-single.html">PRO Services</a></h4>
-                                        <p>
-                                            Great things in business are never done by one person. A flourishing startup is
-                                            the contribution of many hands expert at their skill, and PRO is one of them.
-                                            Our Public Relation Officers (PRO) will work with you closely in implementing
-                                            all your documentation and government-related procedures before and after
-                                            registering your business in Dubai.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-career"></i>
-                                        <h4><a href="services-single.html">Document Clearing</a></h4>
-                                        <p>
-                                            Document clearing forms the catalyst of any business, whether old or new. Every
-                                            document needs to be authenticated in various formats depending on the type of
-                                            company registration in Dubai.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                            </div>
-                        </div>
-                        <!-- End Tab Single Item -->
-
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="nav-id-3">
-                            <div class="row">
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-budget"></i>
-                                        <h4><a href="services-single.html">Accounting Services</a></h4>
-                                        <p>
-                                            Would you want to take relief from the huge administrative burden and constant
-                                            worry about being compliant with the accounting rules as well as regulations?
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-money-1"></i>
-                                        <h4><a href="services-single.html">Internal Audit Services</a></h4>
-                                        <p>
-                                            Meta Mind Global offers turnkey internal audit services in Dubai for different
-                                            companies that aim to improve corporate operations and provide the best
-                                            consultancy services.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-funds"></i>
-                                        <h4><a href="services-single.html">External Audit Services</a></h4>
-                                        <p>
-                                            Meta Mind Global offers turnkey external audit services in Dubai for different
-                                            companies that aim to improve corporate operations and provide the best
-                                            consultancy services.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-
-                            </div>
-                        </div>
-                        <!-- End Tab Single Item -->
-
-                        <!--<h1>hellog</h1>-->
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="nav-id-4">
-                            <div class="row">
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-business-trip"></i>
-                                        <h4><a href="services-single.html">Corporate Tax</a></h4>
-                                        <p>
-                                            Qualified businesses must register for corporate tax and engage in tax planning,
-                                            which can be complex. Our corporate tax professionals help you with proper
-                                            corporate tax strategy and stay compliant with the UAE’s volatile tax landscape.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-online-store"></i>
-                                        <h4><a href="services-single.html">UBO Disclosure Services</a></h4>
-                                        <p>
-                                            New UBO regulations is required for registered and licensed companies in the
-                                            UAE. We can help you assess the structure of ownership essential to comply.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-funds"></i>
-                                        <h4><a href="services-single.html">AML Services</a></h4>
-                                        <p>
-                                            Meta Mind Global provides a breadth of Anti Money Laundering compliance services
-                                            in Dubai under the domain of AML and CFT compliance. Our AML solutions,
-                                            expertise, risk advisory services, AML checks, aml audits, knowledge, and
-                                            industry experience bring a splash of value to every AML advisory service that
-                                            we render to our clients.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-career"></i>
-                                        <h4><a href="services-single.html">VAT Registration Services</a></h4>
-                                        <p>
-                                            VAT ( Value added TAX), an indirect tax levied on consumption of goods and
-                                            services has been adopted as a system by majority countries globally to create
-                                            one more gateway.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                            </div>
-                        </div>
-                        <!-- End Tab Single Item -->
-
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="nav-id-5">
-                            <div class="row">
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-business-trip"></i>
-                                        <h4><a href="services-single.html">Hot Desk</a></h4>
-                                        <p>
-                                            The most affordable option out of all and perfectly suitable for freelancers and
-                                            self-employed professionals. A hot desk allows you to enjoy the working
-                                            environment without feeling attached to an office.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-online-store"></i>
-                                        <h4><a href="services-single.html">Event Spaces</a></h4>
-                                        <p>
-                                            Host a corporate event without any stress. We offer event spaces and provide the
-                                            facilities required to host a successful event in Dubai. We ensure that your
-                                            guests receive the best treatment and service.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-funds"></i>
-                                        <h4><a href="services-single.html">Private Office</a></h4>
-                                        <p>
-                                            Choose from our innovative range of private offices if you work with a team.
-                                            Rent from us today and enjoy all the benefits and amenities of having your own
-                                            office space in Dubai with Meta Mind Global as per your needs.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <!-- Single Item -->
-                                <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30">
-                                    <div class="services-style-one">
-                                        <i class="flaticon-career"></i>
-                                        <h4><a href="services-single.html">Meeting & Board Rooms</a></h4>
-                                        <p>
-                                            Need a space to hold meetings, conferences, or presentations with your clients
-                                            and team? Invite them to our meeting and board rooms that offer all the
-                                            amenities and facilities of an office meeting or board room.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- End Single Item -->
-                            </div>
-                        </div>
-                        <!-- End Tab Single Item -->
+                            <!-- End Tab Single Item -->
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -966,8 +699,13 @@
     <!-- End Services Style One -->
 
 
+
+
+
+
     {{-- partners secrtion  --}}
-    <div class="project-details-area default-padding">
+    <div class="project-details-area default-padding"
+        style="background-image: url('{{ asset('assets/img/shape/banner-1.png') }}');background-repeat:no-repeat;background-size:100% 100%;">
         <div class="container">
             <div class="row align-center">
                 <div class="about-style-one col-xl-12 col-lg-11">
@@ -1011,7 +749,7 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="site-heading text-light text-center">
                             <h4 class="sub-heading">Success Stories</h4>
-                            <h2 class="title">Join 10,000 Happy Customers</h2>
+                            <h2 class="title">Join 1000 Happy Customers</h2>
                             <p>Don't just take our word for it. Hear from entrepreneurs who have successfully established
                                 their
                                 businesses in Dubai. Learn from their experiences and gain insights into the possibilities
@@ -1046,12 +784,9 @@
                                             </div>
 
                                             <button onclick="toggleFlexReadMore({{ $testimonial->id }})"
-                                                id="readMoreBtn {{ $testimonial->id }}" class="readBtn">Read More</button>
+                                                id="readMoreBtn {{ $testimonial->id }}" class="readBtn">Read
+                                                More</button>
                                         </div>
-
-
-
-
                                         <div class="top-info">
                                             <div class="testimonial-rating">
                                                 @for ($i = 1; $i <= $testimonial->rating; $i++)
@@ -1065,8 +800,8 @@
                                                 <h4>{{ $testimonial->client_name }}</h4>
                                             </div>
                                             <div class="thumb">
-                                                <img src="{{ $testimonial->photo ?? 'assets/img/logo/01.png' }}"
-                                                    alt="Logo">
+                                                <img src="{{ $testimonial->photo1 ?? 'assets/img/logo/01.png' }}"
+                                                    style="width:2.5rem;border-radius:50%" alt="Logo">
                                             </div>
                                         </div>
 
@@ -1161,8 +896,8 @@
 
 
     <!-- Start Faq Area
-                                                                                                                         
-                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
 
     @if ($faqs->count())
         <div class="faq-area bg-gray default-padding">

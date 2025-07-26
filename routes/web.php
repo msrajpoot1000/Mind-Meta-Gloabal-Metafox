@@ -19,11 +19,6 @@ Route::get('/about', [IndexController::class, 'about'])->name('user.pages.aboutu
 
 Route::get('/dumy', [IndexController::class, 'dumy'])->name('user.pages.dumy');
 
-Route::get('/fin-service', [IndexController::class, 'finService'])->name('user.pages.finService');
-
-
-
-
 Route::fallback(function () {
     return response()->view('user.pages.errors.404', [], 404);
 });
@@ -188,3 +183,89 @@ Route::resource('admin-blog', BlogController::class)->middleware(['auth', 'verif
 
 
 
+
+// InCorporationServicesController
+use App\Http\Controllers\InCorporationServicesController;
+Route::get('/in-corporation-services', [InCorporationServicesController::class, 'indexF'])->name('user.pages.in_corporation_services');
+Route::resource('admin-in-corporation-services', InCorporationServicesController::class)->middleware(['auth', 'verified']);
+
+// FinServiceController
+use App\Http\Controllers\FinServiceController;
+Route::get('/fin-service/{id}', [IndexController::class, 'finServicePage'])->name('user.pages.finService');
+
+// Route::get('/fin-service', [FinServiceController::class, 'indexF'])->name('user.pages.fin_service');
+Route::resource('admin-fin-service', FinServiceController::class)->middleware(['auth', 'verified']);
+
+// FinServicePageController
+use App\Http\Controllers\FinServicePageController;
+Route::get('/fin-service-page', [FinServicePageController::class, 'indexF'])->name('user.pages.fin-service-page');
+Route::resource('/admin-fin-service-page', FinServicePageController::class)->middleware(['auth', 'verified']);
+
+// FinServiceBenefitSecController
+use App\Http\Controllers\FinServiceBenefitSecController;
+Route::get('/fin-service-benefit-sec', [FinServiceBenefitSecController::class, 'indexF'])->name('user.pages.fin_service_benefit_sec');
+Route::resource('admin-fin-service-benefit-sec', FinServiceBenefitSecController::class)->middleware(['auth', 'verified']);
+
+// FinServiceWhySecController
+use App\Http\Controllers\FinServiceWhySecController;
+Route::get('/fin-service-why-sec', [FinServiceWhySecController::class, 'indexF'])->name('user.pages.fin_service_why_sec');
+Route::resource('admin-fin-service-why-sec', FinServiceWhySecController::class)->middleware(['auth', 'verified']);
+
+// FinServiceFaqSecController
+use App\Http\Controllers\FinServiceFaqSecController;
+Route::get('/fin-service-faq-sec', [FinServiceFaqSecController::class, 'indexF'])->name('user.pages.fin_service_faq_sec');
+Route::resource('admin-fin-service-faq-sec', FinServiceFaqSecController::class)->middleware(['auth', 'verified']);
+
+
+
+
+
+
+
+// ServiceController
+use App\Http\Controllers\ServiceController;
+Route::get('/service', [ServiceController::class, 'indexF'])->name('user.pages.service');
+Route::resource('admin-service', ServiceController::class)->middleware(['auth', 'verified']);
+
+
+
+// ServiceWhySecController
+use App\Http\Controllers\ServiceWhySecController;
+Route::get('/service-why-sec', [ServiceWhySecController::class, 'indexF'])->name('user.pages.service_why_sec');
+Route::resource('admin-service-why-sec', ServiceWhySecController::class)->middleware(['auth', 'verified']);
+
+// ServiceBenefitSecController
+use App\Http\Controllers\ServiceBenefitSecController;
+Route::get('/service-benefit-sec', [ServiceBenefitSecController::class, 'indexF'])->name('user.pages.service_benefit_sec');
+Route::resource('admin-service-benefit-sec', ServiceBenefitSecController::class)->middleware(['auth', 'verified']);
+
+// ServiceFaqSecController
+use App\Http\Controllers\ServiceFaqSecController;
+Route::get('/service-faq-sec', [ServiceFaqSecController::class, 'indexF'])->name('user.pages.service_faq_sec');
+Route::resource('admin-service-faq-sec', ServiceFaqSecController::class)->middleware(['auth', 'verified']);
+
+// ServiceRequireDocSecController
+use App\Http\Controllers\ServiceRequireDocSecController;
+Route::get('/service-require-doc-sec', [ServiceRequireDocSecController::class, 'indexF'])->name('user.pages.service_require_doc_sec');
+Route::resource('admin-service-require-doc-sec', ServiceRequireDocSecController::class)->middleware(['auth', 'verified']);
+
+// ServicePageController
+use App\Http\Controllers\ServicePageController;
+Route::get('/service-page/{id}', [IndexController::class, 'servicePage'])->name('user.pages.servicePage');
+Route::resource('/admin-service-page', ServicePageController::class)->middleware(['auth', 'verified']);
+
+
+// ServiceLicenseSecController
+use App\Http\Controllers\ServiceLicenseSecController;
+Route::get('/service-license-sec', [ServiceLicenseSecController::class, 'indexF'])->name('user.pages.service_license_sec');
+Route::resource('admin-service-license-sec', ServiceLicenseSecController::class)->middleware(['auth', 'verified']);
+
+// ServiceStepSecController
+use App\Http\Controllers\ServiceStepSecController;
+Route::get('/service-step-sec', [ServiceStepSecController::class, 'indexF'])->name('user.pages.service_step_sec');
+Route::resource('admin-service-step-sec', ServiceStepSecController::class)->middleware(['auth', 'verified']);
+
+// ServiceBusinessLegalSecController
+use App\Http\Controllers\ServiceBusinessLegalSecController;
+Route::get('/service-business-legal-sec', [ServiceBusinessLegalSecController::class, 'indexF'])->name('user.pages.service_business_legal_sec');
+Route::resource('admin-service-business-legal-sec', ServiceBusinessLegalSecController::class)->middleware(['auth', 'verified']);

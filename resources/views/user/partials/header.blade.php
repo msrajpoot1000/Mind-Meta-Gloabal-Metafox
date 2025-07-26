@@ -6,7 +6,9 @@
 
 @php
     use App\Models\ComReg;
+    use App\Models\FinService;
     $comRegs = ComReg::with('comRegPages')->get();
+    $finServices = FinService::with('finServicePages')->get();
 @endphp
 
 
@@ -86,6 +88,7 @@
                     </li>
 
 
+                    {{-- company registraton  --}}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Company Registration</a>
                         <ul class="dropdown-menu p-2" style="width: 800px;background-color:white;margin-top:-1rem">
@@ -113,96 +116,35 @@
                         </ul>
                     </li>
 
+                    {{-- financial servicss  --}}
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Financial Services</a>
-                        <ul class="dropdown-menu p-2" style="width: 600px;background-color:white;margin-top:-1rem">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Financial Services </a>
+                        <ul class="dropdown-menu p-2" style="width: 800px;background-color:white;margin-top:-1rem">
                             <div class="row p-2">
-                                <div class="col-lg-4 mt-2">
-                                    <a style="font-size:1rem;color:black;">Juridiction</a>
-                                    <ul>
-                                        <li class="ml-2">
-                                            <a href="{{ route('user.pages.dumy') }}"
-                                                style="font-size:0.8rem;padding:0px;margin:0px"
-                                                class="d-flex align-items-center">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span>Mainland</span> </a>
-                                        </li>
-                                        <li>
-                                            <a href="project.html" style="font-size:0.8rem;">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span> FreeZone</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="project.html" style="font-size:0.8rem;">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span> Offshore</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-4 mt-2">
-                                    <a style="font-size:1rem;color:black;">Juridiction</a>
-                                    <ul>
-                                        <li class="ml-2">
-                                            <a href="{{ route('user.pages.dumy') }}"
-                                                style="font-size:0.8rem;padding:0px;margin:0px"
-                                                class="d-flex align-items-center">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span>Mainland</span> </a>
-                                        </li>
-                                        <li>
-                                            <a href="project.html" style="font-size:0.8rem;">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span> FreeZone</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="project.html" style="font-size:0.8rem;">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span> Offshore</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-4 mt-2">
-                                    <a style="font-size:1rem;color:black;">Juridiction</a>
-                                    <ul>
-                                        <li class="ml-2">
-                                            <a href="{{ route('user.pages.dumy') }}"
-                                                style="font-size:0.8rem;padding:0px;margin:0px"
-                                                class="d-flex align-items-center">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span>Mainland</span> </a>
-                                        </li>
-                                        <li>
-                                            <a href="project.html" style="font-size:0.8rem;">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span> FreeZone</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="project.html" style="font-size:0.8rem;">
-                                                <i class="fas fa-chevron-right "
-                                                    style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
-                                                <span> Offshore</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
+                                @foreach ($finServices as $finService)
+                                    <div class="col-lg-4 mt-2">
+                                        <a style="font-size:1rem;color:black;">{{ $finService->name }}</a>
+                                        <ul>
+                                            @foreach ($finService->finServicePages->where('ref_id', $finService->id) as $page)
+                                                <li class="ml-2">
+                                                    <a href="{{ route('user.pages.finService', $page->id) }}"
+                                                        style="font-size:0.9rem;padding:0px;margin:0px"
+                                                        class="d-flex align-items-center">
+                                                        <i class="fas fa-chevron-right "
+                                                            style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                        <span>{{ $page->name }}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
 
                             </div>
                         </ul>
                     </li>
+
+
 
 
                     <li><a href="{{ route('user.pages.contact', '') }}">Contact Us</a></li>
@@ -215,7 +157,8 @@
                                         style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>About
                                     Us</a></li>
                             <li>
-                            <li><a href="{{ route('user.pages.blog') }}" style="padding:0px"><i class="fas fa-chevron-right "
+                            <li><a href="{{ route('user.pages.blog') }}" style="padding:0px"><i
+                                        class="fas fa-chevron-right "
                                         style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>Blogs</a>
                             </li>
                             <li>

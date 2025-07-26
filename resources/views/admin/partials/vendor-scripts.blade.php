@@ -64,15 +64,34 @@
 
         descriptionFields.forEach((element) => {
             CKEDITOR.replace(element.id, {
-                extraPlugins: 'colorbutton,font',
-
+                extraPlugins: 'colorbutton,font,justify,format,print,table,image2,link,liststyle,stylescombo',
 
                 colorButton_colors: '000000,FF0000,00FF00,0000FF,F1C40F,9B59B6,34495E,1ABC9C,FFFFFF',
-                colorButton_enableMore: true, // shows “More Colors...” popup
+                colorButton_enableMore: true,
 
                 toolbar: [{
+                        name: 'document',
+                        items: ['Source', 'Preview', 'Print', '-', 'Templates']
+                    },
+                    {
+                        name: 'clipboard',
+                        items: ['Undo', 'Redo', 'Cut', 'Copy', 'Paste', 'PasteText',
+                            'PasteFromWord'
+                        ]
+                    },
+                    {
+                        name: 'editing',
+                        items: ['Find', 'Replace', '-', 'SelectAll']
+                    },
+                    {
+                        name: 'styles',
+                        items: ['Styles', 'Format', 'Font', 'FontSize']
+                    },
+                    {
                         name: 'basicstyles',
-                        items: ['Bold', 'Italic', 'Underline', 'Font', 'FontSize']
+                        items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript',
+                            'Superscript', '-', 'RemoveFormat'
+                        ]
                     },
                     {
                         name: 'colors',
@@ -80,20 +99,30 @@
                     },
                     {
                         name: 'paragraph',
-                        items: ['NumberedList', 'BulletedList']
+                        items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                            '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft',
+                            'JustifyCenter', 'JustifyRight', 'JustifyBlock'
+                        ]
+                    },
+                    {
+                        name: 'links',
+                        items: ['Link', 'Unlink', 'Anchor']
+                    },
+                    {
+                        name: 'insert',
+                        items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']
                     },
                     {
                         name: 'tools',
-                        items: ['Maximize']
+                        items: ['Maximize', 'ShowBlocks']
                     }
                 ],
-                height: 200
-            });
 
+                height: 300
+            });
         });
     });
 </script>
-
 
 
 

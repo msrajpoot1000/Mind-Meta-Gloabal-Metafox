@@ -55,7 +55,6 @@
 
 
     {{-- hero section  --}}
-    {{-- @if ($comRegPage->banner_heading) --}}
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url('{{ asset($comRegPage->banner_image ?? '') }}');">
         <div class="breadcrum-shape">
@@ -79,7 +78,7 @@
     {{-- benifits && features --}}
     @if ($comRegPage->benefits_description && $comRegPage->features_description)
         <div class="mission-vision-style-one-area overflow-hidden default-padding"
-            style="background-image: url('{{ asset('assets/img/shape/banner-4.png') }}');">
+            style="background-image: url('{{ asset('assets/img/shape/banner.jpg') }}');">
 
             <div class="shape-top-left">
             </div>
@@ -151,9 +150,7 @@
     @endif
 
 
-    <!-- License
-                                                                 
-                                                            ============================================= -->
+    <!-- License ============================================= -->
     @if ($comRegPage->type_section_heading)
         <div class="home-blog-area default-padding bottom-less bg-gray">
             <div class="container">
@@ -198,7 +195,7 @@
 
 
     <!-- Business Legal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     @if ($comRegPage->business_legal_description)
         <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
             <div class="container">
@@ -293,7 +290,7 @@
 
 
     {{-- <!-- Business Legal    --}}
-    @if ($comRegPage->step_section_heading) ============================================= -->
+    @if ($comRegPage->step_section_heading)
         <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
             <div class="container">
                 <div class="row offset-lg-1">
@@ -336,7 +333,7 @@
 
 
     <!-- about
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
 
     @if ($comRegPage->why_section_heading && $comRegWhySec->count())
         <div class="mission-vision-style-one-area overflow-hidden default-padding">

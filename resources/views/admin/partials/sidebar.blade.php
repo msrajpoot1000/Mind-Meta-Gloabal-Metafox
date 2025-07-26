@@ -68,6 +68,15 @@
                             </li>
                             <li><a href="{{ route('admin-our-partners.index') }}" data-key="t-inbox">Our Partners</a>
                             </li>
+                            <li><a href="{{ route('admin-key-cor-services.index') }}" data-key="t-inbox">
+                                    Key Corporate Services
+                                </a>
+                            </li>
+                            <li><a href="{{ route('admin-in-corporation-services.index') }}" data-key="t-inbox">
+                                    In Corporate Services
+                                </a>
+                            </li>
+
 
 
                         </ul>
@@ -108,6 +117,7 @@
                         </ul>
                     </li>
 
+                    {{-- company registration  --}}
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
                             <i class="bx bx-file icon nav-icon"></i>
@@ -159,6 +169,113 @@
                             </li>
                         </ul>
                     </li>
+
+                    {{-- financial servics  --}}
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="bx bx-file icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-email">Financial Services</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('admin-fin-service.index') }}" data-key="t-inbox">Category</a></li>
+                            <li><a href="{{ route('admin-fin-service-page.index') }}" data-key="t-inbox">Pages</a>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-file icon nav-icon"></i>
+                                    <span class="menu-item" data-key="t-email">Section</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="{{ route('admin-fin-service-benefit-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>Benefit Section </a>
+                                    </li>
+
+
+
+                                    <li>
+                                        <a href="{{ route('admin-fin-service-why-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>Why
+                                            Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-fin-service-faq-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>
+                                            Faq Section </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    {{-- financial servics  --}}
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="bx bx-file icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-email"> Services</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('admin-service.index') }}" data-key="t-inbox">Category</a></li>
+                            <li><a href="{{ route('admin-service-page.index') }}" data-key="t-inbox">Pages</a>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i class="bx bx-file icon nav-icon"></i>
+                                    <span class="menu-item" data-key="t-email">Section</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li>
+                                        <a href="{{ route('admin-service-benefit-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>Benefit Section </a>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="{{ route('admin-service-why-sec.index') }}" data-key="t-inbox"><i
+                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>Why
+                                            Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-service-faq-sec.index') }}" data-key="t-inbox"><i
+                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>
+                                            Faq Section </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin-service-require-doc-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>
+                                            Require Doc </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('admin-service-license-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>
+                                            License Section </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('admin-service-step-sec.index') }}" data-key="t-inbox"><i
+                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>
+                                            Step Section </a>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+
 
 
                     <li>

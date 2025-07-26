@@ -69,7 +69,7 @@
 
 
     <!-- Start Breadcrumb
-                                                                                                                                                                                                                                                                                ============================================= -->
+                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/about_banner.jpg);">
         <div class="breadcrum-shape">
@@ -113,19 +113,124 @@
 
 
     {{-- what we offer  --}}
-    <div class="services-details-area overflow-hidden default-padding">
+    <div class="services-details-area overflow-hidden default-padding"
+        style="background-image: url('{{ asset('assets/img/shape/52.png') }}')">
         <div class="container">
             <div class="services-details-items">
                 <div class="row">
                     <h2 class="title">What We Offer</h2>
 
 
-                    <div class="features mt-40 mt-xs-30 mb-30 mb-xs-20">
+                    <div class="features mt-xs-30 mb-30 mb-xs-20">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Company Formation/Registration</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Company License Renewals</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>UAE Local Sponsorship Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Visa Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Corporate PRO Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Document Clearing Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Accounting and Bookkeeping Services</h5>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="col-lg-6 col-md-6">
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>External Audit Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Internal Audit Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Trademark Registration Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Economic Substance Regulation Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>Ultimate Beneficial Owner Disclosure Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>VAT Registration and Consultation Services</h5>
+                                    </div>
+                                </div>
+
+                                <div class="list-item-style-two wow fadeInUp">
+                                    <div class="number"><i class="fas fa-chevron-right mr-4"></i></div>
+                                    <div class="info" style="margin-top: 0.55rem">
+                                        <h5>AML Regulations</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {{-- <div class="col-lg-6 col-md-6">
                                 <div class="content">
-                                    <ul class="feature-list-item">
-                                        <li>Company Formation/Registration</li>
+                                    <ul class="">
+                                        <li>
+                                            Company Formation/Registration
+                                        </li>
                                         <li>Company License Renewals</li>
                                         <li>UAE Local Sponsorship Services</li>
                                         <li>Visa Services</li>
@@ -134,8 +239,8 @@
                                         <li>Accounting and Bookkeeping Services</li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
+                            </div> --}}
+                            {{-- <div class="col-lg-6 col-md-6">
                                 <div class="content">
 
                                     <ul class="feature-list-item">
@@ -148,7 +253,7 @@
                                         <li>AML Regulations</li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -165,7 +270,7 @@
     {{-- our partners  --}}
 
     <!-- Start Partner Area
-                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                            ============================================= -->
 
     <!-- Logo Section -->
     {{-- <section class="partner-logo-section bg-light " style="padding-top: 2rem;">
@@ -222,7 +327,8 @@
 
 
     {{-- partners secrtion  --}}
-    <div class="project-details-area default-padding">
+    <div class="project-details-area default-padding"
+        style="background-image: url('{{ asset('assets/img/shape/banner-1.png') }}');background-repeat:no-repeat;background-size:100% 100%;">
         <div class="container">
             <div class="row align-center">
                 <div class="about-style-one col-xl-12 col-lg-11">
@@ -263,6 +369,6 @@
 
 
 
-    @include('user.partials.register-for-corporate-tax-section')
+    {{-- @include('user.partials.register-for-corporate-tax-section') --}}
 
 @endsection

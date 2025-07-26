@@ -75,7 +75,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="rating" class="form-label">Rating (1-5)</label>
-                                    <input type="number" min="1" max="5"
+                                    <input type="text" min="1" max="5"
                                         class="form-control @error('rating') is-invalid @enderror" name="rating"
                                         id="rating" value="{{ old('rating', 5) }}">
                                     @error('rating')

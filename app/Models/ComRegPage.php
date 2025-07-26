@@ -18,6 +18,7 @@ class ComRegPage extends Model
         
     ];
     
+    
     public function comReg()
     {
         return $this->belongsTo(ComReg::class, 'ref_id');

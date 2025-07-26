@@ -199,4 +199,18 @@
     </div>
     <!-- End Footer Bottom -->
 
+
+    <!-- Fixed WhatsApp Button -->
+    <p>{{ str_replace(' ', '', $company->phone) }}
+    </p>
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+        <a href="https://wa.me/{{ str_replace(' ', '', $company->phone) }}" target="_blank"
+            style="background-color: #25D366; color: white; padding-top: 0.5rem; padding-bottom: 0.5rem;  padding-left: 0.7rem;padding-right: 0.7rem;border-radius: 50%; text-align: center; display: inline-block; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+            <i class="fab fa-whatsapp" style="font-size: 2rem;aspect-ratio:1/1"></i>
+        </a>
+    </div>
+
+
+
+
 </footer>

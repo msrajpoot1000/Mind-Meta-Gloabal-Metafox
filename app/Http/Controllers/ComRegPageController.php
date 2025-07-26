@@ -14,8 +14,10 @@ use App\Models\ComRegRequireDocSec;
 use Illuminate\Support\Collection;
 
 
+
 class ComRegPageController extends Controller
 {
+    
     public function index()
     {
         $items1 = ComReg::get();
@@ -34,6 +36,7 @@ class ComRegPageController extends Controller
 
    public function store(Request $request)
 {
+
     // dd($request);
     $data = $request->validate([
         'name' => 'required|string',
@@ -192,6 +195,7 @@ public function edit(string $id)
         'comRegFaqSec'
     ));
 }
+
 
 
 

@@ -7,6 +7,7 @@ use App\Models\Companyinfo;
 use App\Models\Blog;
 use App\Models\Testimonial;
 use App\Models\ContentPagesContent;
+
 use App\Models\ComReg;
 use App\Models\ComRegPage;
 use App\Models\ComRegLicenseSec;
@@ -15,21 +16,44 @@ use App\Models\ComRegRequireDocSec;
 use App\Models\ComRegStepSec;
 use App\Models\ComRegWhySec;
 use App\Models\ComRegFaqSec;
+
+
+use App\Models\ComService;
+use App\Models\FinServicePage;
+use App\Models\FinServiceBenefitSec;
+use App\Models\FinServiceWhySec;
+use App\Models\FinServiceFaqSec;
+
+
+use App\Models\Service;
+use App\Models\ServicePage;
+use App\Models\ServiceLicenseSec;
+use App\Models\ServiceBusinessLegalSec;
+use App\Models\ServiceRequireDocSec;
+use App\Models\ServiceStepSec;
+use App\Models\ServiceWhySec;
+use App\Models\ServiceFaqSec;
+use App\Models\ServiceBenefitSec;
+
 use App\Models\HomeSlider;
 use App\Models\OurPartners;
 use App\Models\KeyCorServices;
-
+use App\Models\InCorporationServices;
 
 class IndexController extends Controller
 {
     public function index()
     {  
         $homeSliders = HomeSlider::latest()->get();
+        $inCorporationServices = InCorporationServices::latest()->get();
         $ourPartners = OurPartners::latest()->get();
         $keyCorServices = KeyCorServices::latest()->get();
         $testimonials = Testimonial::latest()->get();
         $companyinfos = Companyinfo::first();
-      $blogs = Blog::latest()->take(3)->get();
+        $blogs = Blog::latest()->take(3)->get();
+
+
+        $services = Service::with('servicePages')->get();
 
 
 
@@ -47,6 +71,9 @@ class IndexController extends Controller
     // Step 2: Get the first related ComRegPage
     $firstComRegPage = ComRegPage::where('ref_id', $firstComReg->id)->first();
 
+     $firstThreeComRegPage = ComRegPage::where('ref_id', $firstComReg->id)->take(3)->get();
+
+
     if (!$firstComRegPage) {
         return response()->json(['message' => 'No related comRegPage found'], 404);
     }
@@ -60,8 +87,11 @@ class IndexController extends Controller
 
     // ✅ Step 4: Get all FAQs
     $faqs = ComRegFaqSec::whereIn('id', $faqIds)->get();
-        return view('user.pages.index', compact('homeSliders', 'faqs', 'testimonials','companyinfos','blogs','ourPartners','keyCorServices'));
+        return view('user.pages.index', compact('homeSliders', 'faqs', 'testimonials','companyinfos','blogs','ourPartners','keyCorServices','firstThreeComRegPage','inCorporationServices','services'));
     }
+
+
+    
 
   
     public function about()
@@ -121,8 +151,95 @@ public function comRegPage($id)
 
 
 
-public function finService(){
+
+
+
+public function finServicePage($id)
+{
+    $item2 = finServicePage::findOrFail($id);
     $ourPartners = OurPartners::latest()->get();
-    return view('user.pages.fin-service',compact('ourPartners'));
+
+    // Decode all ID arrays from JSON
+    $faqIds = json_decode($item2->faq_ids ?? '[]', true);
+    $whyIds = json_decode($item2->why_ids ?? '[]', true);
+    $benefitIds = json_decode($item2->benefit_ids ?? '[]', true);
+
+    // Ensure arrays are valid
+    $faqIds = is_array($faqIds) ? $faqIds : [];
+    $whyIds = is_array($whyIds) ? $whyIds : [];
+    $benefitIds = is_array($benefitIds) ? $benefitIds : [];
+
+    // Fetch records in given ID order
+    $orderedFetch = function ($model, $ids) {
+        $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+        return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
+    };
+
+    $finServiceBenefitSec = $orderedFetch(FinServiceBenefitSec::class, $benefitIds);
+    $finServiceFaqSec = $orderedFetch(FinServiceFaqSec::class, $faqIds);
+    $finServiceWhySec = $orderedFetch(FinServiceWhySec::class, $whyIds);
+
+    return view('user.pages.fin-service', compact(
+        'ourPartners',
+        'item2',
+        'finServiceBenefitSec',
+        'finServiceFaqSec',
+        'finServiceWhySec'
+    ));
+}
+
+
+
+
+
+
+public function servicePage($id)
+{
+    $servicePage = ServicePage::findOrFail($id);
+
+    // Decode all ID arrays from JSON (fallback to empty arrays)
+    $faqIds = json_decode($servicePage->faq_ids ?? '[]', true);
+    $whyIds = json_decode($servicePage->why_ids ?? '[]', true);
+    $stepIds = json_decode($servicePage->step_ids ?? '[]', true);
+    $requireDocIds = json_decode($servicePage->require_doc_ids ?? '[]', true);
+    $businessLegalIds = json_decode($servicePage->business_legal_ids ?? '[]', true);
+    $licenseIds = json_decode($servicePage->license_ids ?? '[]', true);
+     $benefitIds = json_decode($servicePage->benefit_ids ?? '[]', true);
+
+
+    // Ensure arrays are valid
+    $faqIds = is_array($faqIds) ? $faqIds : [];
+    $whyIds = is_array($whyIds) ? $whyIds : [];
+    $stepIds = is_array($stepIds) ? $stepIds : [];
+    $requireDocIds = is_array($requireDocIds) ? $requireDocIds : [];
+    $businessLegalIds = is_array($businessLegalIds) ? $businessLegalIds : [];
+    $licenseIds = is_array($licenseIds) ? $licenseIds : [];
+     $benefitIds = is_array($benefitIds) ? $benefitIds : [];
+
+    // Function to fetch records in given ID order
+    $orderedFetch = function ($model, $ids) {
+        $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+        return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
+    };
+
+    $serviceFaqSec = $orderedFetch(ServiceFaqSec::class, $faqIds);
+    $serviceWhySec = $orderedFetch(ServiceWhySec::class, $whyIds);
+    $serviceStepSec = $orderedFetch(ServiceStepSec::class, $stepIds);
+    $serviceRequireDocSec = $orderedFetch(ServiceRequireDocSec::class, $requireDocIds);
+    $serviceBusinessLegalSec = $orderedFetch(ServiceBusinessLegalSec::class, $businessLegalIds);
+    $serviceLicenseSec = $orderedFetch(ServiceLicenseSec::class, $licenseIds);
+    $serviceBenefitSec = $orderedFetch(ServiceBenefitSec::class, $benefitIds);
+
+    // dd($serviceBusinessLegalSec);
+    return view('user.pages.service-page', compact(
+        'servicePage',
+        'serviceFaqSec',
+        'serviceWhySec',
+        'serviceStepSec',
+        'serviceRequireDocSec',
+        'serviceBusinessLegalSec',
+        'serviceLicenseSec',
+        'serviceBenefitSec'
+    ));
 }
 }

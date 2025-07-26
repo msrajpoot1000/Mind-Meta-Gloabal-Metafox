@@ -353,6 +353,7 @@
 
 
 
+
                     <div class="mb-3">
                         <label for="is_active" class="form-label">Is Active</label>
                         <select name="is_active" id="is_active"
@@ -375,12 +376,16 @@
 
 
             <div class="">
-                <button type="submit" class="btn btn-primary ml-2" style="margin-left:2rem;margin-bottom:2rem;">Submit</button>
+                <button type="submit" class="btn btn-primary ml-2"
+                    style="margin-left:2rem;margin-bottom:2rem;">Submit</button>
             </div>
             </form>
         </div>
     </div>
     </div>
+
+    
+
 
     <div class="mt-4 card">
         <div class="card-header">
