@@ -15,23 +15,7 @@
 
 @section('style')
     <style>
-        .navbar.validnavs.navbar-default .navbar-nav li a {
-            color: white;
-        }
 
-        .navbar.validnavs.navbar-default.scrolled .navbar-nav li a {
-            color: black !important;
-        }
-
-        .dropdown-menu1 {
-            min-width: 300px !important;
-            max-width: 1000px !important;
-        }
-
-
-        nav.navbar.validnavs ul li.dropdown ul.dropdown-menu li a {
-            padding: 0px
-        }
     </style>
 @endsection
 
@@ -76,7 +60,8 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
 
                 <div class="collapse-header">
-                    <img src="{{ $company->logo ?? 'default/image/company_log/company_log.png' }}" alt="Logo">
+                    <img src="{{ asset($company->logo ?? 'default/image/company_log/company_log.png') }}"
+                        alt="Logo">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                         <i class="fa fa-times"></i>
                     </button>
@@ -95,7 +80,7 @@
                             <div class="row p-2">
                                 @foreach ($comRegs as $comReg)
                                     <div class="col-lg-4 mt-2">
-                                        <a style="font-size:1rem;color:black;">{{ $comReg->name }}</a>
+                                        <a style="font-size:1rem;">{{ $comReg->name }}</a>
                                         <ul>
                                             @foreach ($comReg->comRegPages->where('ref_id', $comReg->id) as $page)
                                                 <li class="ml-2">

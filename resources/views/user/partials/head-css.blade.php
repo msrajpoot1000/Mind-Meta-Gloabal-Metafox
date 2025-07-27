@@ -22,7 +22,7 @@
 <link href="{{ asset('assets/css/unit-test.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('style.css') }}" rel="stylesheet">
-<link href="{{ asset('cutom-style.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/custom-style.css') }}" rel="stylesheet">
 <link href="{{ asset('default/css/default-style.css') }}" rel="stylesheet">
 
 

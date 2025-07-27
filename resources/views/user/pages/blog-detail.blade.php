@@ -9,33 +9,7 @@
 
 
 @section('style')
-    <style>
-        .navbar.validnavs.navbar-default .navbar-nav li a {
-            color: white;
-        }
 
-        .navbar.validnavs.navbar-default.scrolled .navbar-nav li a {
-            color: black !important;
-        }
-
-        .headerContact p,
-        .headerContact h5 a {
-            color: white !important;
-        }
-
-        .headerContact .icon i {
-            color: #022b6d !important;
-        }
-
-        .navbar.validnavs.navbar-default.scrolled .headerContact p,
-        .navbar.validnavs.navbar-default.scrolled .headerContact h5 a {
-            color: #022b6d !important;
-        }
-
-        .navbar.validnavs.navbar-default.scrolled .headerContact .icon i {
-            color: black !important;
-        }
-    </style>
 @endsection
 @section('content')
     <!-- banner                                                                                                                                                                                                                                                                                  ============================================= -->
