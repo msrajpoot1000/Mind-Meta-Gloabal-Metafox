@@ -6,10 +6,80 @@
 
 @section('title', $comRegPage->name . ' | Meta Mind Global')
 
+@section('style')
+    <style>
+        .rich-content {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #333;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            margin: 0 auto;
+        }
+
+        /* Headings */
+        .rich-content h1,
+        .rich-content h2,
+        .rich-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        /* Paragraphs */
+        .rich-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* Lists */
+        .rich-content ul {
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+        }
+
+        .rich-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Bold / Strong text */
+        .rich-content strong {
+            color: #000;
+        }
+
+        /* Emojis / Icons (optional enhancement) */
+        .rich-content span {
+            font-size: 1.1rem;
+        }
+
+        /* Links */
+        .rich-content a {
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        .rich-content a:hover {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .rich-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+@endsection
 
 
 
 @section('content')
+
+
 
 
 
@@ -157,7 +227,7 @@
 
 
     <!-- Business Legal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     @if ($comRegPage->business_legal_description)
         <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
             <div class="container">
@@ -295,7 +365,7 @@
 
 
     <!-- about
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
 
     @if ($comRegPage->why_section_heading && $comRegWhySec->count())
         <div class="mission-vision-style-one-area overflow-hidden default-padding">
@@ -435,7 +505,7 @@
 
 
     @if ($comRegPage->extra_section)
-        <div class="putTickBeforeLi container {{ empty($comRegPage->banner_image) ? 'mt-5' : '' }}">
+        <div class="putTickBeforeLi  rich-content container {{ empty($comRegPage->banner_image) ? 'mt-5' : '' }}">
 
             {!! $comRegPage->extra_section !!}
         </div>

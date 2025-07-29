@@ -179,20 +179,20 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="benifits_sec_heading" class="form-label">Benifits Sec Heading </label>
-                            <input type="text" name="benifits_sec_heading" id="benifits_sec_heading"
-                                class="form-control @error('benifits_sec_heading') is-invalid @enderror"
-                                value="{{ old('benifits_sec_heading', $item2->benifits_sec_heading ?? '') }}">
-                            @error('benifits_sec_heading')
+                            <label for="benefit_sec_heading" class="form-label">Benifits Sec Heading </label>
+                            <input type="text" name="benefit_sec_heading" id="benefit_sec_heading"
+                                class="form-control @error('benefit_sec_heading') is-invalid @enderror"
+                                value="{{ old('benefit_sec_heading', $item2->benefit_sec_heading ?? '') }}">
+                            @error('benefit_sec_heading')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="description4" class="form-label">Benefits Description </label>
-                            <textarea name="benefits_description" id="description4"
-                                class="form-control @error('benefits_description') is-invalid @enderror" rows="4">{{ old('benefits_description', $item2->benefits_description ?? '') }}</textarea>
-                            @error('benefits_description')
+                            <textarea name="benefit_sec_description" id="description4"
+                                class="form-control @error('benefit_sec_description') is-invalid @enderror" rows="4">{{ old('benefit_sec_description', $item2->benefit_sec_description ?? '') }}</textarea>
+                            @error('benefit_sec_description')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -224,7 +224,7 @@
                             @php
                                 $selectedbenefit = old('benefit_ids', json_decode($item2->benefit_ids ?? '[]', true));
                             @endphp
-                            <label for="benefit_ids" class="form-label">benefit Section</label>
+                            <label for="benefit_ids" class="form-label">Benefit Section</label>
                             <select id="benefit_ids"
                                 class="multi-select form-select @error('benefit_ids') is-invalid @enderror" multiple
                                 size="5" style="max-height: 150px; overflow-y: auto;" data-order-select

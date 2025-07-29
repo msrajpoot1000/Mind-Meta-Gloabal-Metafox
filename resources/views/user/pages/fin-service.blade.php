@@ -7,6 +7,7 @@
 @section('title', 'Financial Services | Meta Mind Global')
 
 @section('style')
+
     <style>
         .fin-description-css {
             /* border:1px solid red; */
@@ -23,17 +24,16 @@
 
     {{-- hero section  --}}
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
-        style="background-image: url({{ asset('assets/img/fin-service.jpg') }});">
+        style="background-image: url({{ asset($item2->banner_image) }});">
         <div class="breadcrum-shape">
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <h1>
-                        Accounting Services in Dubai, UAE</h1>
+                        {{ $item2->banner_heading }}</h1>
                     <p class="hero-description">
-                        Looking for the top accounting company in Dubai? Avyanco is here to provide professional accounting
-                        services to fulfill the accounting needs of your business.
+                        {!! $item2->banner_description !!}
                     </p>
                 </div>
             </div>
@@ -155,81 +155,33 @@
 
     {{-- descibe sevice page  --}}
 
-    <div class="mission-vision-style-one-area overflow-hidden default-padding" style="background-color:#e1e1e1">
+    @if ($item2->page_sec_heading || $item2->page_sec_description)
+        <div class="mission-vision-style-one-area overflow-hidden default-padding" style="background-color:#e1e1e1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tab-content mission-tab-content" id="nav-tabContent">
+                            <!-- Tab Single Item -->
+                            <div class="tab-pane fade show active" id="tab1" role="tabpanel"
+                                aria-labelledby="nav-id-1">
+                                <h2> {{ $item2->page_sec_heading }}</h2>
+                                <p>
+                                    {!! $item2->page_sec_description !!} </p>
 
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-12">
-                    <div class="tab-content mission-tab-content" id="nav-tabContent">
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="nav-id-1">
-                            <h2> Professional Accounting
-                                Services in UAE</h2>
-                            <p>
-                                Avyanco offers professional accounting services in Dubai to all types of businesses. Whether
-                                you are a startup or an established business, you need accounting service providers to run
-                                the business smoothly.
-
-                                As a proficient accounting services provider, we have a team of experienced chartered
-                                accountants. They record and maintain daily transactions, which can be instantly presented
-                                for discrepancies or other issues.
-
-                                Our team is intent on providing quality service to its clients by delivering reliable,
-                                accurate, and timely advice to its customers. Our team consists of CA veterans who are
-                                knowledgeable in various accounting services.
-
-                                By connecting with us, you enjoy
-
-                                Hassle-free account management
-                                Reduced stress to focus on your business
-                                Increased profitability
-                                Minimize business risks by enhancing internal controls
-                            </p>
-
+                            </div>
+                            <!-- End Tab Single Item -->
                         </div>
-                        <!-- End Tab Single Item -->
                     </div>
-                    {{-- 
-                        <div class="col-lg-5 offset-lg-1 mt-md-50 mt-xs-40">
-                        <div class="faq-style-one">
-                        <div class="accordion" id="faqAccordion">
-
-                            @foreach ($comRegWhySec as $item)
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading{{ $loop->index }}">
-                                        <button class="accordion-button {{ $loop->first ? '' : 'collapsed' }}"
-                                            type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse{{ $loop->index }}"
-                                            aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
-                                            aria-controls="collapse{{ $loop->index }}">
-                                            {{ $item->name }}
-                                        </button>
-                                    </h2>
-                                    <div id="collapse{{ $loop->index }}"
-                                        class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
-                                        aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            <p>{!! $item->description !!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-
-                        </div>
-                    </div> --}}
                 </div>
-
-
             </div>
         </div>
-    </div>
+    @endif
 
 
+
+    {{-- extra section  --}}
     @if ($item2->extra_section)
-        <div class="putTickBeforeLi container {{ empty($item2->banner_image) ? '' : 'default-padding' }}">
-
+        <div class="default-padding putTickBeforeLi container">
             {!! $item2->extra_section !!}
         </div>
     @endif
@@ -237,13 +189,14 @@
 
 
     <!-- benefit section
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ============================================= -->
+    {{-- hello --}}
     @if ($finServiceBenefitSec->count())
         <div class="home-blog-area default-padding bottom-less bg-gray">
             <div class="container">
                 <div class="row pb-4">
-                    <h2 class="title text-center">{{ $item2->page_sec_heading }}</h2>
-                    <p class="text-center">{!! $item2->page_sec_description !!}</p>
+                    <h2 class="title text-center">{{ $item2->benefit_sec_heading }}</h2>
+                    <p class="text-center">{!! $item2->benefit_sec_description !!}</p>
                     <div class="devider"></div>
                 </div>
 
@@ -255,7 +208,9 @@
                                     <h4 class="text-center fw-bold">
                                         {{ $item->name }}
                                     </h4>
-                                    <p> {!! $item->description !!}</p>
+                                    <div class="putTickBeforeLi">
+                                        <p> {!! $item->description !!}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -273,60 +228,64 @@
 
 
     <!-- about
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
-    <div class="mission-vision-style-one-area overflow-hidden default-padding">
-        <div class="container">
-            <div class="row">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
+    @if ($item2->why_section_heading)
+        <div class="putTickBeforeLi mission-vision-style-one-area overflow-hidden default-padding">
+            <div class="container">
+                <div class="row">
 
-                <div class="col-lg-6">
-                    <div class="tab-content mission-tab-content" id="nav-tabContent">
-                        <!-- Tab Single Item -->
-                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="nav-id-1">
-                            <h2> {{ $item2->why_section_heading }}</h2>
-                            <p>
-                                {!! $item2->why_section_description !!}
-                            </p>
+                    <div class="col-lg-6">
+                        <div class="tab-content mission-tab-content" id="nav-tabContent">
+                            <!-- Tab Single Item -->
+                            <div class="tab-pane fade show active" id="tab1" role="tabpanel"
+                                aria-labelledby="nav-id-1">
+                                <h2> {{ $item2->why_section_heading }}</h2>
+                                <p>
+                                    {!! $item2->why_section_description !!}
+                                </p>
 
+                            </div>
                         </div>
+
+
                     </div>
 
+                    <div class="col-lg-5 offset-lg-1 mt-md-50 mt-xs-40">
+                        <div class="faq-style-one">
+                            <div class="accordion" id="faqAccordion">
 
-                </div>
-
-                <div class="col-lg-5 offset-lg-1 mt-md-50 mt-xs-40">
-                    <div class="faq-style-one">
-                        <div class="accordion" id="faqAccordion">
-
-                            <!-- Accordion Item 1 -->
-                            @foreach ($finServiceWhySec as $index => $item)
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading{{ $index }}">
-                                        <button class="accordion-button {{ $index !== 0 ? 'collapsed' : '' }}"
-                                            type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse{{ $index }}"
-                                            aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
-                                            aria-controls="collapse{{ $index }}">
-                                            {{ $item->name }}
-                                        </button>
-                                    </h2>
-                                    <div id="collapse{{ $index }}"
-                                        class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
-                                        aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            {!! $item->description !!}
+                                <!-- Accordion Item 1 -->
+                                @foreach ($finServiceWhySec as $index => $item)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading{{ $index }}">
+                                            <button class="accordion-button {{ $index !== 0 ? 'collapsed' : '' }}"
+                                                type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapse{{ $index }}"
+                                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                                aria-controls="collapse{{ $index }}">
+                                                {{ $item->name }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ $index }}"
+                                            class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
+                                            aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                {!! $item->description !!}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+
                         </div>
-
                     </div>
+
+
                 </div>
-
-
             </div>
         </div>
-    </div>
+
+    @endif
 
 
 

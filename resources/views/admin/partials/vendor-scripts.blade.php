@@ -58,7 +58,116 @@
 
 <script src="https://cdn.ckeditor.com/4.22.1/standard-all/ckeditor.js"></script>
 
+
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const descriptionFields = document.querySelectorAll('[id^="description"]');
+
+        descriptionFields.forEach((element) => {
+            const editorId = element.id;
+
+            CKEDITOR.replace(editorId, {
+                extraPlugins: 'colorbutton,font,justify,format,print,table,image2,link,liststyle,stylescombo',
+                removePlugins: 'image', // if you're using image2 plugin
+                filebrowserUploadUrl: "{{ route('uploadCKEditorImage') }}?_token={{ csrf_token() }}",
+                filebrowserUploadMethod: 'form',
+                colorButton_colors: '000000,FF0000,00FF00,0000FF,F1C40F,9B59B6,34495E,1ABC9C,FFFFFF',
+                colorButton_enableMore: true,
+                toolbar: [{
+                        name: 'document',
+                        items: ['Source', 'Preview', 'Print', '-', 'Templates']
+                    },
+                    {
+                        name: 'clipboard',
+                        items: ['Undo', 'Redo', 'Cut', 'Copy', 'Paste', 'PasteText',
+                            'PasteFromWord'
+                        ]
+                    },
+                    {
+                        name: 'editing',
+                        items: ['Find', 'Replace', '-', 'SelectAll']
+                    },
+                    {
+                        name: 'styles',
+                        items: ['Styles', 'Format', 'Font', 'FontSize']
+                    },
+                    {
+                        name: 'basicstyles',
+                        items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript',
+                            'Superscript', '-', 'RemoveFormat'
+                        ]
+                    },
+                    {
+                        name: 'colors',
+                        items: ['TextColor', 'BGColor']
+                    },
+                    {
+                        name: 'paragraph',
+                        items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                            '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft',
+                            'JustifyCenter', 'JustifyRight', 'JustifyBlock'
+                        ]
+                    },
+                    {
+                        name: 'links',
+                        items: ['Link', 'Unlink', 'Anchor']
+                    },
+                    {
+                        name: 'insert',
+                        items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']
+                    },
+                    {
+                        name: 'tools',
+                        items: ['Maximize', 'ShowBlocks']
+                    }
+                ],
+                height: 300
+            });
+
+            CKEDITOR.instances[editorId].on('instanceReady', function() {
+                const editorInstance = this;
+
+                editorInstance.document.on('keydown', function(event) {
+                    if (event.data.getKey() === 46) { // Delete key
+                        const selection = editorInstance.getSelection();
+                        const element = selection.getSelectedElement();
+
+                        if (element && element.getName() === 'img') {
+                            const imageUrl = element.getAttribute('src');
+
+                            // Remove image from editor
+                            element.remove();
+
+                            // Send request to server to delete image file
+                            fetch('/ckeditor/delete-image', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    body: JSON.stringify({
+                                        url: imageUrl
+                                    })
+                                })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (!data.success) {
+                                        console.warn(
+                                            'Server failed to delete image:',
+                                            data.message);
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Error deleting image:', err);
+                                });
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>
+{{-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         const descriptionFields = document.querySelectorAll('[id^="description"]');
 
@@ -68,6 +177,11 @@
 
                 colorButton_colors: '000000,FF0000,00FF00,0000FF,F1C40F,9B59B6,34495E,1ABC9C,FFFFFF',
                 colorButton_enableMore: true,
+                filebrowserUploadUrl: "{{ route('uploadCKEditorImage') }}?_token={{ csrf_token() }}",
+                filebrowserUploadMethod: 'form',
+
+
+
 
                 toolbar: [{
                         name: 'document',
@@ -123,6 +237,64 @@
         });
     });
 </script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const descriptionFields = document.querySelectorAll('[id^="description"]');
+
+        descriptionFields.forEach((element) => {
+            const editorId = element.id;
+
+            CKEDITOR.replace(editorId, {
+                extraPlugins: 'colorbutton,font,justify,format,print,table,image2,link,liststyle,stylescombo',
+                removePlugins: 'image', // recommended if using image2
+            });
+
+            CKEDITOR.instances[editorId].on('instanceReady', function() {
+                const editorInstance = this;
+
+                editorInstance.document.on('keydown', function(event) {
+                    if (event.data.getKey() === 46) { // 46 = Delete key
+                        const selection = editorInstance.getSelection();
+                        const element = selection.getSelectedElement();
+
+                        if (element && element.getName() === 'img') {
+                            const imageUrl = element.getAttribute('src');
+
+                            // Remove image from editor
+                            element.remove();
+
+                            // Send AJAX request to delete image from server
+                            fetch('/ckeditor/delete-image', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Laravel CSRF token
+                                    },
+                                    body: JSON.stringify({
+                                        url: imageUrl
+                                    })
+                                })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (!data.success) {
+                                        console.warn(
+                                            'Server failed to delete image:',
+                                            data.message);
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Error deleting image:', err);
+                                });
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script> --}}
+
 
 
 

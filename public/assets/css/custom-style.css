@@ -60,3 +60,18 @@
 
 
 }
+
+
+.putTickBeforeLi table {
+    /* border: 1px solid red; */
+    width: 100%;
+    border-collapse: collapse;
+    /* Ensure this is on the table */
+}
+
+.putTickBeforeLi table th,
+.putTickBeforeLi table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}

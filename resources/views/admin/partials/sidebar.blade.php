@@ -265,6 +265,13 @@
                                                 class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>
                                             Step Section </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('admin-service-business-legal-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>
+                                            Business Legal Section </a>
+                                    </li>
+
 
 
                                 </ul>

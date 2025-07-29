@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('page_sec_heading')->nullable();
             $table->text('page_sec_description')->nullable();
             $table->text('extra_section')->nullable();
-            $table->string('benifits_sec_heading')->nullable();
-            $table->text('benefits_description')->nullable();
+            $table->string('benifit_sec_heading')->nullable();
+            $table->text('benefit_sec_description')->nullable();
             $table->string('why_section_heading')->nullable();
             $table->text('why_section_description')->nullable();
              $table->json('benefit_ids')->nullable();

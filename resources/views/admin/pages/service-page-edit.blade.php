@@ -401,7 +401,7 @@
                             <select id="benefit_ids"
                                 class="multi-select form-select @error('benefit_ids') is-invalid @enderror" multiple
                                 size="5" style="max-height: 150px; overflow-y: auto;" data-order-select
-                                data-name="benefit_ids[]" data-hidden-container="faq_hidden_inputs">
+                                data-name="benefit_ids[]" data-hidden-container="benefit_hidden_inputs">
                                 @foreach ($serviceBenefitSec as $item)
                                     <option value="{{ $item->id }}"
                                         {{ in_array($item->id, $selectedFaqs) ? 'selected' : '' }}
@@ -410,7 +410,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <div id="faq_hidden_inputs"></div>
+                            <div id="benefit_hidden_inputs"></div>
 
                             @error('benefit_ids')
                                 <div class="invalid-feedback">{{ $message }}</div>

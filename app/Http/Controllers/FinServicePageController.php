@@ -31,6 +31,7 @@ class FinServicePageController extends Controller
 
    public function store(Request $request)
 {
+    
     $data = $request->validate([
         'name' => 'required|string',
             'banner_image' => 'nullable|image|mimes:jpg,jpeg,png',
@@ -39,8 +40,8 @@ class FinServicePageController extends Controller
             'page_sec_heading' => 'nullable|string',
             'page_sec_description' => 'nullable|string',
             'extra_section' => 'nullable|string',
-            'benifits_sec_heading' => 'nullable|string',
-            'benefits_description' => 'nullable|string',
+            'benefit_sec_heading' => 'nullable|string',
+            'benefit_sec_description' => 'nullable|string',
             'why_section_heading' => 'nullable|string',
             'why_section_description' => 'nullable|string',
 
@@ -154,8 +155,8 @@ class FinServicePageController extends Controller
             'page_sec_heading' => 'nullable|string',
             'page_sec_description' => 'nullable|string',
             'extra_section' => 'nullable|string',
-            'benifits_sec_heading' => 'nullable|string',
-            'benefits_description' => 'nullable|string',
+            'benefit_sec_heading' => 'nullable|string',
+            'benefit_sec_description' => 'nullable|string',
             'why_section_heading' => 'nullable|string',
             'why_section_description' => 'nullable|string',
 

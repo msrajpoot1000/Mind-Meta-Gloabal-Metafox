@@ -12,6 +12,8 @@ use App\Http\Controllers\ContentPagesController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\SubIndustryController;
+use App\Http\Controllers\CkController;
+
 
 
 Route::get('/', [IndexController::class, 'index'])->name('user.pages.index');
@@ -269,3 +271,8 @@ Route::resource('admin-service-step-sec', ServiceStepSecController::class)->midd
 use App\Http\Controllers\ServiceBusinessLegalSecController;
 Route::get('/service-business-legal-sec', [ServiceBusinessLegalSecController::class, 'indexF'])->name('user.pages.service_business_legal_sec');
 Route::resource('admin-service-business-legal-sec', ServiceBusinessLegalSecController::class)->middleware(['auth', 'verified']);
+
+
+
+Route::post('/upload-image-endpoint', [CkController::class, 'uploadCKEditorImage'])->name('uploadCKEditorImage');
+Route::post('/ckeditor/delete-image', [CkController::class, 'deleteCKEditorImage']);

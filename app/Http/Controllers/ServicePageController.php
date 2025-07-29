@@ -228,6 +228,7 @@ class ServicePageController extends Controller
 
     public function update(Request $request, string $id)
 {
+    // dd($request);
     $item = ServicePage::findOrFail($id);
     $data = $request->validate([
         'name' => 'required|string',

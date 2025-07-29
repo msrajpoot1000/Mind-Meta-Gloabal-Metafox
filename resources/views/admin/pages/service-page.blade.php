@@ -197,23 +197,20 @@
                     {{-- business legal  --}}
                     <div class="mb-3">
                         <label for="faq" class="form-label">Business Legal Section </label>
-                        <select name="business_legal_ids[]" id="faq"
-                            class="multi-select form-select @error('faq') is-invalid @enderror" multiple size="5"
+                        <select name="business_legal_ids[]" id="business_legal_ids"
+                            class="multi-select form-select @error('business_legal_ids') is-invalid @enderror" multiple size="5"
                             style="max-height: 150px; overflow-y: auto;">
                             <option disabled style="padding:0.5rem; border-radius: 5px;margin-bottom:0.2rem">
                                 Select </option>
-                            @foreach ($serviceWhySec as $item)
+                            @foreach ($serviceBusinessLegalSec as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ collect(old('faq'))->contains($item->id) ? 'selected' : '' }}
+                                    {{ collect(old('business_legal_ids'))->contains($item->id) ? 'selected' : '' }}
                                     style="padding:0.5rem;border:1px solid black; border-radius: 5px;margin-bottom:0.2rem">
                                     {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
-
-
-
-                        @error('faq')
+                        @error('business_legal_ids')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

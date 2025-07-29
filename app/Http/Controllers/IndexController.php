@@ -157,6 +157,7 @@ public function comRegPage($id)
 public function finServicePage($id)
 {
     $item2 = finServicePage::findOrFail($id);
+    // dd($item2);
     $ourPartners = OurPartners::latest()->get();
 
     // Decode all ID arrays from JSON

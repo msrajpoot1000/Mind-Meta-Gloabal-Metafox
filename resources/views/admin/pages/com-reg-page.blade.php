@@ -14,6 +14,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -384,7 +385,7 @@
     </div>
     </div>
 
-    
+
 
 
     <div class="mt-4 card">

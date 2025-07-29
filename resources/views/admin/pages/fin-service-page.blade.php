@@ -166,20 +166,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="benifits_sec_heading" class="form-label">Benifits Sec Heading </label>
-                        <input type="text" name="benifits_sec_heading" id="benifits_sec_heading"
-                            class="form-control @error('benifits_sec_heading') is-invalid @enderror"
-                            value="{{ old('benifits_sec_heading') }}">
-                        @error('benifits_sec_heading')
+                        <label for="benefit_sec_heading" class="form-label">Benefit Sec Heading </label>
+                        <input type="text" name="benefit_sec_heading" id="benefit_sec_heading"
+                            class="form-control @error('benefit_sec_heading') is-invalid @enderror"
+                            value="{{ old('benefit_sec_heading') }}">
+                        @error('benefit_sec_heading')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="description4" class="form-label">Benefits Description </label>
-                        <textarea name="benefits_description" id="description4"
-                            class="form-control @error('benefits_description') is-invalid @enderror" rows="4">{{ old('benefits_description') }}</textarea>
-                        @error('benefits_description')
+                        <label for="description4" class="form-label">Benefit Sec Description </label>
+                        <textarea name="benefit_sec_description" id="description4"
+                            class="form-control @error('benefit_sec_description') is-invalid @enderror" rows="4">{{ old('benefit_sec_description') }}</textarea>
+                        @error('benefit_sec_description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -311,8 +311,8 @@
                         <th>Page Sec Heading</th>
                         <th>Page Sec Description</th>
                         <th>Extra Section</th>
-                        <th>Benifits Sec Heading</th>
-                        <th>Benefits Description</th>
+                        <th>Benefit Sec Heading</th>
+                        <th>Benefit Description</th>
                         <th>Why Section Heading</th>
                         <th>Why Section Description</th>
                         <th>Is Active</th>
@@ -337,9 +337,9 @@
                                 {{ strip_tags($item->page_sec_description) }}</td>
                             <td class="v-center text-truncate" style="max-width:200px;">
                                 {{ strip_tags($item->extra_section) }}</td>
-                            <td class="v-center">{{ $item->benifits_sec_heading ?? 'N/A' }}</td>
+                            <td class="v-center">{{ $item->benefit_sec_heading ?? 'N/A' }}</td>
                             <td class="v-center text-truncate" style="max-width:200px;">
-                                {{ strip_tags($item->benefits_description) }}</td>
+                                {{ strip_tags($item->benefit_sec_description) }}</td>
                             <td class="v-center">{{ $item->why_section_heading ?? 'N/A' }}</td>
                             <td class="v-center text-truncate" style="max-width:200px;">
                                 {{ strip_tags($item->why_section_description) }}</td>
