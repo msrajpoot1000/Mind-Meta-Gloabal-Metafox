@@ -35,6 +35,55 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #022b6d, #363795);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+
+        .section-title {
+            color: #343a40;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .mantras li {
+            margin-bottom: 15px;
+        }
+
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+
+        .mantras .card {
+            transition: transform 0.5s ease;
+        }
+
+        .mantras .card:hover {
+            transform: scale(1.05);
+            z-index: 1;
+        }
     </style>
 @endsection
 
@@ -42,7 +91,7 @@
 
 
     <!-- Start Breadcrumb
-                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/about_banner.jpg);">
         <div class="breadcrum-shape">
@@ -83,6 +132,127 @@
         </a>
 
     </div>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 style="color:white">Unlocking the UAE's Potential</h1>
+            <p class="lead">Navigating Business Success with Mind Meta Global</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="container py-5">
+        <p>
+            The United Arab Emirates (UAE) market is renowned globally as a dynamic force that truly brings out the best in
+            entrepreneurial potential.
+            Celebrated for its status as one of the world's most diversified and rapidly expanding economies, the UAE stands
+            as a beacon for aspiring entrepreneurs
+            and established foreign companies alike.
+        </p>
+        <p>
+            However, the journey of establishing a business in this vibrant economy, despite its numerous benefits, comes
+            with a unique set of complex challenges.
+            This is precisely where Mind Meta Global steps in.
+        </p>
+    </section>
+
+    <!-- About Company Section -->
+    <section class="container py-4">
+        <h2 class="section-title">Your Trusted Partner in the UAE Business Landscape</h2>
+        <p>
+            Mind Meta Global is a certified business setup consultant firm based in Dubai. With a team of highly qualified
+            and expert professionals,
+            we offer the essential guidance and expertise needed to transform complexity into clarity.
+        </p>
+        <p>
+            Our core services include company registration in Dubai, robust financial compliance services, and customized
+            support for entrepreneurs and
+            foreign companies alike.
+        </p>
+    </section>
+
+    <section class="py-5 bg-light" style="background-image: url('assets/img/mantras.avif');">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">The Five Mantras: Guiding Principles</h2>
+            <div class="row g-4 mantras">
+
+                <!-- Customer Focus -->
+                <div class="col-lg-4 wow fadeInUp">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">1) Customer Focus</h5>
+                            <p class="card-text">We make every customer feel valued by deeply understanding individual
+                                requirements and tailoring precise, supportive solutions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integrity -->
+                <div class="col-lg-4 wow fadeInUp">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">2) Integrity</h5>
+                            <p class="card-text">We uphold the highest standards of ethics, governance, and transparency,
+                                building long-term relationships based on trust.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inclusivity -->
+                <div class="col-lg-4 wow fadeInUp">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">3) Inclusivity</h5>
+                            <p class="card-text">We champion diversity and equal opportunity—internally and externally—by
+                                serving unserved and underserved populations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Innovation -->
+                <div class="col-lg-6 wow fadeInUp">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">4) Innovation</h5>
+                            <p class="card-text">We continuously improve our processes and services by embracing technology
+                                and forward-thinking strategies that simplify business setup.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Excellence -->
+                <div class="col-lg-6 rounded-lg wow fadeInUp">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">5) Excellence</h5>
+                            <p class="card-text">We deliver high-quality services with a strong focus on risk management,
+                                continuous improvement, and adaptability to market changes.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA Section -->
+    <section class="container py-5 text-center">
+        <p class="fs-5">
+            For entrepreneurs and companies ready to harness the vast opportunities the UAE offers, partnering with a
+            strategic consultant like Mind Meta Global
+            is not just an advantage—it's a necessity for thriving in this dynamic economy.
+        </p>
+        <h4 class="mt-4 fw-bold">Mind Meta Global</h4>
+        <p class="fst-italic">Elevate Your Vision, We Empower Your Business.</p>
+        <p class="text-primary">#EmpowerYourBusiness</p>
+    </section>
+
+
+
+
 
 
     {{-- what we offer  --}}
@@ -243,7 +413,7 @@
     {{-- our partners  --}}
 
     <!-- Start Partner Area
-                                                                                                                                                                                                                                ============================================= -->
+                                                                                                                                                                                                                                                                            ============================================= -->
 
     <!-- Logo Section -->
     {{-- <section class="partner-logo-section bg-light " style="padding-top: 2rem;">

@@ -19,7 +19,7 @@ use App\Http\Controllers\CkController;
 Route::get('/', [IndexController::class, 'index'])->name('user.pages.index');
 Route::get('/about', [IndexController::class, 'about'])->name('user.pages.aboutus');
 
-Route::get('/dumy', [IndexController::class, 'dumy'])->name('user.pages.dumy');
+Route::get('/career', [IndexController::class, 'career'])->name('user.pages.career');
 
 Route::fallback(function () {
     return response()->view('user.pages.errors.404', [], 404);
@@ -55,7 +55,8 @@ Route::get('/contact', [ContactController::class, 'contactF'])->name('user.pages
 Route::post('/contact-store', [ContactController::class, 'storeContact'])->name('contact.store');
 // Admin Contact
 Route::resource('admin-contact', ContactController::class)->middleware(['auth', 'verified']);
-
+// For both GET and POST
+Route::match(['get', 'post'], '/contact-export', [ContactController::class, 'exportContact'])->name('user.pages.contact-export');
 
 
 
@@ -78,12 +79,15 @@ Route::get('/request-email', [MailVerificationController::class, 'showForm'])->n
 
 // Handle form submission and send verification email
 Route::get('/request-email', [MailVerificationController::class, 'send'])->name('email.request.send');
-Route::get('/request-email-resend-otp', [MailVerificationController::class, 'send'])->name('email.request.send');
+// Route::get('/request-email-resend-otp', [MailVerificationController::class, 'send'])->name('email.request.send');
+
+
 
 // Handle the email verification (with signed URL)
 Route::get('/verify-email/{user}', [MailVerificationController::class, 'verifyMail'])
     ->name('email.verify')
     ->middleware('signed');
+    
 
 // user content pages 
 Route::get('/privacy-policy', [ContentPagesController::class, 'privacyPolicy'])->name('user.pages.privacy-policy');
@@ -276,3 +280,23 @@ Route::resource('admin-service-business-legal-sec', ServiceBusinessLegalSecContr
 
 Route::post('/upload-image-endpoint', [CkController::class, 'uploadCKEditorImage'])->name('uploadCKEditorImage');
 Route::post('/ckeditor/delete-image', [CkController::class, 'deleteCKEditorImage']);
+
+
+// CareerController
+use App\Http\Controllers\CareerController;
+Route::resource('admin-career', CareerController::class)->middleware(['auth', 'verified']);
+
+// CareerJobController
+use App\Http\Controllers\CareerJobController;
+Route::get('/career-job', [CareerJobController::class, 'indexF'])->name('user.pages.career-job');
+Route::resource('/admin-career-job', CareerJobController::class)->middleware(['auth', 'verified']);
+
+
+
+use App\Http\Controllers\CareerRecordController;
+
+Route::post('/career-record', [CareerRecordController::class, 'store'])->name('user.pages.career-record');
+Route::get('/career-record', [CareerRecordController::class, 'index'])->name('user.pages.career-record-index')->middleware(['auth', 'verified']);
+
+Route::delete('/career-record/{id}', [CareerRecordController::class, 'destroy'])->name('career-record.destroy');
+Route::get('/admin/career-records/{id}', [CareerRecordController::class, 'show'])->name('admin-career-record.show');

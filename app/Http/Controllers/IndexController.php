@@ -40,6 +40,11 @@ use App\Models\OurPartners;
 use App\Models\KeyCorServices;
 use App\Models\InCorporationServices;
 
+
+
+use App\Models\Career;
+use App\Models\CareerJob;
+
 class IndexController extends Controller
 {
     public function index()
@@ -61,37 +66,51 @@ class IndexController extends Controller
 
         // to find the first comReg of first of comRegPage of all faq 
         
-    // Step 1: Get the first ComReg
-    $firstComReg = ComReg::first();
+   // Step 1: Get the first ComReg
+$firstComReg = ComReg::first();
 
-    if (!$firstComReg) {
-        return response()->json(['message' => 'No comReg found'], 404);
+if (!$firstComReg) {
+    return response()->json(['message' => 'No comReg found'], 404);
+}
+
+// Step 2: Get the first 3 related ComRegPages
+$firstThreeComRegPage = ComRegPage::where('ref_id', $firstComReg->id)->take(3)->get();
+
+if ($firstThreeComRegPage->isEmpty()) {
+    return response()->json(['message' => 'No related ComRegPages found'], 404);
+}
+
+$allFaqs = collect(); // To store all the FAQs from each page
+
+// Step 3: Loop through each page and fetch its FAQs
+foreach ($firstThreeComRegPage as $comRegPage) {
+    $faqIds = json_decode($comRegPage->faq_ids, true);
+
+    if (!empty($faqIds) && is_array($faqIds)) {
+        $faqs = ComRegFaqSec::whereIn('id', $faqIds)->get()->sortBy(function ($faq) use ($faqIds) {
+            return array_search($faq->id, $faqIds);
+        });
+
+        $allFaqs = $allFaqs->merge($faqs);
+
+         // Stop if we've collected 10 or more
+        if ($allFaqs->count() >= 10) {
+            $allFaqs = $allFaqs->take(10);
+            break;
+        }
     }
+}
 
-    // Step 2: Get the first related ComRegPage
-    $firstComRegPage = ComRegPage::where('ref_id', $firstComReg->id)->first();
-
-     $firstThreeComRegPage = ComRegPage::where('ref_id', $firstComReg->id)->take(3)->get();
+// Optional: reset keys
+$faqs = $allFaqs->values();
 
 
-    if (!$firstComRegPage) {
-        return response()->json(['message' => 'No related comRegPage found'], 404);
-    }
-
-    // Step 3: Decode faq_ids
-    $faqIds = json_decode($firstComRegPage->faq_ids, true);
-
-    if (empty($faqIds) || !is_array($faqIds)) {
-        return response()->json(['message' => 'No FAQ IDs found'], 404);
-    }
-
-    // ✅ Step 4: Get all FAQs
-    $faqs = ComRegFaqSec::whereIn('id', $faqIds)->get();
         return view('user.pages.index', compact('homeSliders', 'faqs', 'testimonials','companyinfos','blogs','ourPartners','keyCorServices','firstThreeComRegPage','inCorporationServices','services'));
     }
 
 
     
+
 
   
     public function about()
@@ -243,4 +262,22 @@ public function servicePage($id)
         'serviceBenefitSec'
     ));
 }
+
+
+public function career(){
+    // dd("mais");
+    $jobType = Career::where('is_active', 1)->latest()->get();
+   $jobs = CareerJob::where('is_active', 1)
+    ->whereHas('career', function ($query) {
+        $query->where('is_active', 1);
+    })
+    ->latest()
+    ->get();
+
+
+    return view("user.pages.career" ,compact('jobType','jobs'));;
+}
+
+
+
 }

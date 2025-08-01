@@ -51,7 +51,7 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="{{ route('dashboard') }}" data-key="t-ecommerce">Information</a></li>
-                            <li><a href="{{ route('admin-home-slider.index') }}" data-key="t-sales">Home Slider</a></li>
+                            {{-- <li><a href="{{ route('admin-home-slider.index') }}" data-key="t-sales">Home Slider</a></li> --}}
                         </ul>
                     </li>
 
@@ -76,6 +76,28 @@
                                     In Corporate Services
                                 </a>
                             </li>
+
+
+
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="bx bx-file icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-email">Career Page</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('admin-career.index') }}" data-key="t-inbox">Career</a>
+                            </li>
+                            <li><a href="{{ route('admin-career-job.index') }}" data-key="t-inbox">Career Job</a>
+                            </li>
+                            <li><a href="{{ route('user.pages.career-record-index') }}" data-key="t-inbox">
+                                    Career Records
+                                </a>
+                            </li>
+
 
 
 
@@ -133,8 +155,9 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li>
-                                        <a href="{{ route('admin-com-reg-license-sec.index') }}" data-key="t-inbox"><i
-                                                class="fas fa-chevron-right" style="margin-right: 0.2rem"></i>License
+                                        <a href="{{ route('admin-com-reg-license-sec.index') }}"
+                                            data-key="t-inbox"><i class="fas fa-chevron-right"
+                                                style="margin-right: 0.2rem"></i>License
                                             Section</a>
                                     </li>
                                     <li>

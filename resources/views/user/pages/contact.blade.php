@@ -23,7 +23,7 @@
 
 
     <!-- banner
-                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/shape/contact.jpg);">
         <div class="breadcrum-shape">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="container">
-            <div class="row align-center">
+            <div class="row ">
 
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -68,50 +68,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-
-                <div class="contact-stye-one col-lg-5 mb-md-50 mb-xs-20">
-
-                    <div class="contact-style-one-info">
-                        <h2>Contact Information</h2>
-                        <p>
-                            Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why
-                            she shewing.
-                        </p>
-                        <ul>
-                            <li class="wow fadeInUp">
-                                <div class="icon">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div class="content">
-                                    <h5 class="title">Phone</h5>
-                                    <a href="">{{ $company->phone }}</a>
-                                </div>
-                            </li>
-                            <li class="wow fadeInUp" data-wow-delay="300ms">
-                                <div class="icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="info">
-                                    <h5 class="title">Our Location</h5>
-                                    <p>
-                                        {{ $company->address }}
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="wow fadeInUp" data-wow-delay="500ms">
-                                <div class="icon">
-                                    <i class="fas fa-envelope-open-text"></i>
-                                </div>
-                                <div class="info">
-                                    <h5 class="title">Official Email</h5>
-                                    <a href="mailto:info@agrul.com.com"> {{ $company->email }}</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-
 
 
                 <div class="contact-stye-one col-lg-7 pl-60 pl-md-15 pl-xs-15">
@@ -203,6 +159,54 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="contact-stye-one col-lg-5 mb-md-50 mb-xs-20 ">
+
+                    <div class="contact-style-one-info">
+                        <h2>Contact Information</h2>
+                        <p>
+                            Plan upon yet way get cold spot its week. Almost do am or limits hearts. Resolve parties but why
+                            she shewing.
+                        </p>
+                        <ul>
+                            <li class="wow fadeInUp">
+                                <div class="icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="info">
+                                    <h5 class="title">Phone</h5>
+                                    <a href="tel:{{ $company->phone }}">{{ $company->phone }}</a>
+                                </div>
+                            </li>
+
+                            <li class="wow fadeInUp" data-wow-delay="300ms">
+                                <div class="icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="info">
+                                    <h5 class="title">Our Location</h5>
+                                    <p>{{ $company->address }}</p>
+                                </div>
+                            </li>
+
+                            <li class="wow fadeInUp" data-wow-delay="500ms">
+                                <div class="icon">
+                                    <i class="fas fa-envelope-open-text"></i>
+                                </div>
+                                <div class="info">
+                                    <h5 class="title">Official Email</h5>
+                                    <a href="mailto:{{ $company->email }}">{{ $company->email }}</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+
+
+
+
 
 
 

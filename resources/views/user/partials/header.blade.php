@@ -146,6 +146,11 @@
                                         class="fas fa-chevron-right "
                                         style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>Blogs</a>
                             </li>
+                            <li><a href="{{ route('user.pages.career') }}" style="padding:0px"><i
+                                        class="fas fa-chevron-right "
+                                        style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>Career</a>
+                            </li>
+
                             <li>
                         </ul>
                     </li>

@@ -93,6 +93,40 @@
         });
     </script>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("converted-list");
+            if (!container) return;
+
+            // Find all <ul> elements inside the container
+            const ulElements = container.querySelectorAll("ul");
+
+            ulElements.forEach(ul => {
+                const listItems = ul.querySelectorAll("li");
+                const newRow = document.createElement("div");
+                newRow.className = "row";
+
+                listItems.forEach((li, index) => {
+                    const col = document.createElement("div");
+                    col.className = "col-md-6 mb-2";
+
+                    // Clone the icon and text
+                    const icon = li.querySelector("i")?.outerHTML ||
+                        '<i class="fas fa-check round-tick-icon"></i>';
+                    col.innerHTML = `${icon} ${li.textContent.trim()}`;
+
+                    newRow.appendChild(col);
+                });
+
+                // Replace original <ul> with the new row
+                ul.parentNode.replaceChild(newRow, ul);
+            });
+        });
+    </script>
+
+
+
 @endsection
 
 
@@ -100,18 +134,21 @@
 
 
     {{-- hero section  --}}
-    <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
+    <div class="breadcrumb-area bg-cover shadow dark  text-light"
         style="background-image: url({{ asset($servicePage->banner_image) }});">
         <div class="breadcrum-shape">
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <h1>
-                        {{ $servicePage->banner_heading }}</h1>
-                    <p class="hero-description">
-                        {!! $servicePage->banner_description !!}
-                    </p>
+            <div>
+                <div class="col-lg-12 col-md-12 ">
+                    <h1 class="text-center">{{ $servicePage->banner_heading }}</h1>
+                    <div class="putTickBeforeLi " id="converted-list">
+                        <p class="hero-description">
+                            {!! $servicePage->banner_description !!}
+                        </p>
+                    </div>
+
+
                 </div>
             </div>
         </div>

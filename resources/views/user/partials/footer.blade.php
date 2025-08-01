@@ -107,15 +107,19 @@
                     <div class="f-item link">
                         <h4 class="widget-title">Useful Links</h4>
                         <ul>
+
                             <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Business Setup
                                     Blog</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Mainland
+                            <li><a href="{{ route('user.pages.comRegPage', 1) }}"><i
+                                        class="fas fa-chevron-right mr-4"></i> Mainland
                                     Company Formation</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Freezone
+                            <li><a href="{{ route('user.pages.comRegPage', 5) }}"><i
+                                        class="fas fa-chevron-right mr-4"></i> Freezone
                                     Company Formation</a></li>
                             <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> How to start a
                                     business in Dubai</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Corporate PRO
+                            <li><a href="{{ route('user.pages.servicePage', 13) }}"><i
+                                        class="fas fa-chevron-right mr-4"></i> Corporate PRO
                                     Services</a></li>
                             <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Coworking
                                     Spaces</a></li>
@@ -200,8 +204,7 @@
     <!-- End Footer Bottom -->
 
 
-    <!-- Fixed WhatsApp Button -->
-    <p>{{ str_replace(' ', '', $company->phone) }}
+    {{-- <!-- Fixed WhatsApp Button -- --}}
     </p>
     <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
         <a href="https://wa.me/{{ str_replace(' ', '', $company->phone) }}" target="_blank"

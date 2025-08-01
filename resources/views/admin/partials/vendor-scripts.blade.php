@@ -56,7 +56,8 @@
 </script>
 
 
-<script src="https://cdn.ckeditor.com/4.22.1/standard-all/ckeditor.js"></script>
+{{-- <script src="https://cdn.ckeditor.com/4.22.1/standard-all/ckeditor.js"></script> --}}
+<script src="https://cdn.ckeditor.com/4.21.0/full-all/ckeditor.js"></script>
 
 
 <script>
@@ -65,14 +66,17 @@
 
         descriptionFields.forEach((element) => {
             const editorId = element.id;
-
             CKEDITOR.replace(editorId, {
-                extraPlugins: 'colorbutton,font,justify,format,print,table,image2,link,liststyle,stylescombo',
-                removePlugins: 'image', // if you're using image2 plugin
+                extraPlugins: 'colorbutton,font,justify,format,print,table,image2,link,liststyle,stylescombo,embed,embedbase,autoembed,iframe',
+                removePlugins: 'image', // using image2
                 filebrowserUploadUrl: "{{ route('uploadCKEditorImage') }}?_token={{ csrf_token() }}",
                 filebrowserUploadMethod: 'form',
                 colorButton_colors: '000000,FF0000,00FF00,0000FF,F1C40F,9B59B6,34495E,1ABC9C,FFFFFF',
                 colorButton_enableMore: true,
+
+                // ✅ This allows iframe and its attributes
+                allowedContent: true,
+                extraAllowedContent: 'iframe[*];',
                 toolbar: [{
                         name: 'document',
                         items: ['Source', 'Preview', 'Print', '-', 'Templates']
@@ -114,15 +118,20 @@
                     },
                     {
                         name: 'insert',
-                        items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar']
+                        items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Embed',
+                            'Iframe'
+                        ]
                     },
                     {
                         name: 'tools',
                         items: ['Maximize', 'ShowBlocks']
                     }
                 ],
+
                 height: 300
             });
+
+
 
             CKEDITOR.instances[editorId].on('instanceReady', function() {
                 const editorInstance = this;

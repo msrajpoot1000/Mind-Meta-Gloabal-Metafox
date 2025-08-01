@@ -7,6 +7,8 @@
 @section('title', 'Home | Meta Mind Global')
 
 @section('style')
+
+
     <style>
         .clampx {
             display: -webkit-box;
@@ -119,7 +121,9 @@
         }
 
 
-       
+
+
+
 
 
         .img-head {
@@ -157,16 +161,44 @@
         .step-item:hover,
         .step-item.active {
             background-color: #f0f0f0;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .serviceJi {
             background-color: white !important;
         }
+
+        .para {
+            transition: all 0.3s ease;
+        }
+
+        .para.expanded {
+            display: block;
+        }
+
+        <style>.goog-te-banner-frame.skiptranslate,
+        .goog-te-gadget-icon,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        .goog-text-highlight {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        #google_translate_element {
+            display: none;
+        }
+    </style>
+
+
     </style>
 @endsection
 
 @section('script')
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const stepItems = document.querySelectorAll(".step-item");
@@ -188,6 +220,54 @@
             });
         });
     </script>
+    <!-- Google Translate script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Custom Language Switch Script -->
+    <script>
+        function changeLanguage(langCode) {
+            console.log(langCode);
+            const interval = setInterval(() => {
+                const frame = document.querySelector("iframe.goog-te-menu-frame");
+                if (!frame) return;
+
+                const innerDoc = frame.contentDocument || frame.contentWindow.document;
+                const langItems = innerDoc.querySelectorAll(".goog-te-menu2-item span.text");
+
+                if (!langItems.length) return;
+
+                for (const item of langItems) {
+                    if (item.innerHTML.toLowerCase().includes(langCode.toLowerCase())) {
+                        item.click();
+                        clearInterval(interval);
+                        break;
+                    }
+                }
+            }, 500);
+        }
+
+        // Set event listener after DOM load
+        document.addEventListener("DOMContentLoaded", function() {
+            const selector = document.getElementById("languageSelect");
+            selector.addEventListener("change", function() {
+                const selectedLang = this.value;
+                if (selectedLang === "en") {
+                    location.reload(); // Reload to reset to default English
+                } else {
+                    changeLanguage(selectedLang);
+                }
+            });
+        });
+    </script>
+
 
 @endsection
 
@@ -195,8 +275,11 @@
 
 @section('content')
 
+
+
+
     <!-- Start Banner Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="banner-area banner-style-one shadow navigation-custom-large zoom-effect overflow-hidden text-light">
         <!-- Slider main container -->
         <div class="banner-fade">
@@ -242,8 +325,29 @@
         </div>
     </div>
     <!-- End Main -->
+
+
+    <!-- Hidden Google Translate container -->
+    <div id="google_translate_element"></div>
+
+    <!-- Custom Language Selector -->
+    {{-- <select id="languageSelect" class="lang-select form-control" style="max-width: 300px;">
+        <option value="en" selected>English</option>
+        <option value="hi">Hindi</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="de">German</option>
+        <option value="ar">Arabic</option>
+        <option value="zh-CN">Chinese (Simplified)</option>
+        <!-- Add more languages as needed -->
+    </select> --}}
+
+
+
+
+
     <!-- Start Our Features
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="feature-style-one-area half-angle-shape overflow-hidden default-padding">
         <div class="container">
             <div class="row align-center">
@@ -281,8 +385,11 @@
     </div>
     <!-- End Our Features -->
 
+
+
+
     <!-- Start Aobut
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding"
         style="background-image: url(assets/img/shape/29.png);">
         <div class="container">
@@ -291,9 +398,11 @@
                     <div class="site-heading text-center">
                         <h4 class="sub-heading">Incorporation Services</h4>
                         <h2 class="title">Streamline your Business Setup in Dubai with Our Expert Guidance</h2>
-                        <p>Meta Mind Global, your partner for business setup in Dubai, the UAE, not only makes the process
+                        <p>Meta Mind Global, your partner for business setup in Dubai, the UAE, not only makes the
+                            process
                             hassle-free, straightforward, and budget-friendly but also ensures that you are choosing the
-                            right legal structure and jurisdiction for your company objective to run your business in the
+                            right legal structure and jurisdiction for your company objective to run your business in
+                            the
                             long run. Find here 5 steps for setting up a business in Dubai and the UAE</p>
                         <div class="devider"></div>
                     </div>
@@ -306,7 +415,7 @@
                                 <ol class="custom-list">
                                     @foreach ($inCorporationServices as $item)
                                         <li class="step-item {{ $loop->first ? 'active' : '' }}"
-                                            data-step="{{ $item->id }}">
+                                            data-step="{{ $item->id }}" style="color:#022b6d">
                                             {{ $loop->iteration }} {{ $item->name }}
                                         </li>
                                     @endforeach
@@ -336,8 +445,11 @@
     </div>
     <!-- End About -->
 
+
+
+
     <!-- Start Services
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-two-area default-padding bottom-less bg-cover bg-gray"
         style="background-image: url(assets/img/shape/27.png);">
         <div class="container">
@@ -368,12 +480,12 @@
                                 </div>
                             </div>
                             <div class="info">
-                                <p class="para para1" data-lines="3">
-                                    {!! $item->banner_description !!}
-
+                                <p class="para para{{ $item->id }}" data-lines="3">
+                                    {{ strip_tags($item->banner_description) }}
                                 </p>
                                 <div class="button">
-                                    <a class="toggle-btn-read-more" data-target="para1" role="button">Read More</a>
+                                    <a class="toggle-btn-read-more" data-target="para{{ $item->id }}"
+                                        role="button">Read More</a>
                                     <div class="devider"></div>
                                 </div>
                             </div>
@@ -381,180 +493,19 @@
                     </div>
                     <!-- End Single Item -->
                 @endforeach
-
-
-
-
-
             </div>
         </div>
     </div>
     <!-- End Services -->
-    <!-- Start Pricing
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
-    {{-- <div class="pricing-style-one-area secondary default-padding bottom-less">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="site-heading secondary text-center">
 
-                        <h2 class="title">How Much Does Business Setup in Dubai Cost?</h2>
 
-                        <div class="devider"></div>
-                    </div>
-                </div>
-                <p>The cost of business setup in Dubai starts from AED 12,000*, but it is flexible and depends on multiple
-                    factors. Some of the major reasons for a significant difference in costs include the jurisdiction
-                    selected for company registration, type of business activity, shareholders involved, visas, and office
-                    space.</p>
-                <p>Both Mainland and Free Zone have their own requirements and fee structures that affect the overall
-                    expenses in the beginning stage. Furthermore, complex business activities requiring a specialized
-                    license or permit will also increase the costs. The total number of shareholders can also affect the
-                    overall expenditure due to associated administrative fees and capital requirements during incorporation.
-                    New office space and employee visas will add more expenses to the list.</p>
-                <p>
-                    Basically, the cost of business setup in Dubai can be quite different for different investors based on
-                    these factors. Therefore, investors must research adequately and budget accordingly before starting the
-                    incorporation process
-                </p>
-            </div>
-        </div> --}}
 
-    {{-- <div class="container">
-            <div class="row">
-                <!-- Single Itme -->
-                <div class="col-xl-3 col-md-6 mb-30">
-                    <div class="pricing-style-one" style="background-image: url(assets/img/shape/15.webp);">
-                        <div class="pricing-header">
-                            <h4>Sharjah Freezone</h4>
-                            <h2>
-                                AED 5,750*
-                            </h2>
-                        </div>
-                        <div class="pricing-content">
-                            <div class="price">
-                                <p><strong>0 Visa</strong></p>
-                            </div>
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> Business Consultation</li>
-                                <li><i class="fas fa-check-circle"></i>0 Visa</li>
-                                <li><i class="fas fa-check-circle"></i>100% Foreign Ownership</li>
-                                <li><i class="fas fa-check-circle"></i>Business License</li>
-                                <li><i class="fas fa-check-circle"></i>MOA and AOA</li>
-                                <li><i class="fas fa-check-circle"></i>Free 1 session of Tax and VAT consultation</li>
-                                <li><i class="fas fa-check-circle"></i>0% withhold tax</li>
-                                <li><i class="fas fa-check-circle"></i>100% profit repatriation</li>
-                                <li><i class="fas fa-check-circle"></i>Flexi desk</li>
-                                <li><i class="fas fa-check-circle"></i>Dedicated relationship manager</li>
 
-                            </ul>
-                            <a class="btn mt-25 btn-sm btn-dark animation get-started-btn" href="#">Get Started</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Itme -->
 
-                <!-- Single Itme -->
-                <div class="col-xl-3 col-md-6 mb-30">
-                    <div class="pricing-style-one" style="background-image: url(assets/img/shape/15.webp);">
-                        <div class="pricing-header">
-                            <h4>Dubai Freezone</h4>
-                            <h2>
-                                AED 12,500*
-                            </h2>
-                        </div>
-                        <div class="pricing-content">
-                            <div class="price">
-                                <p><strong>0 Visa</strong></p>
-                            </div>
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> Business Consultation</li>
-                                <li><i class="fas fa-check-circle"></i>0 Visa</li>
-                                <li><i class="fas fa-check-circle"></i>100% Foreign Ownership</li>
-                                <li><i class="fas fa-check-circle"></i>Business License</li>
-                                <li><i class="fas fa-check-circle"></i>MOA and AOA</li>
-                                <li><i class="fas fa-check-circle"></i>Free 1 session of Tax and VAT consultation</li>
-                                <li><i class="fas fa-check-circle"></i>0% withhold tax</li>
-                                <li><i class="fas fa-check-circle"></i>100% profit repatriation</li>
-                                <li><i class="fas fa-check-circle"></i>Flexi desk</li>
-                                <li><i class="fas fa-check-circle"></i>Dedicated relationship manager</li>
-                            </ul>
-                            <a class="btn mt-25 btn-sm btn-dark animation get-started-btn" href="#">Get Started</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Itme -->
 
-                <!-- Single Itme -->
-                <div class="col-xl-3 col-md-6 mb-30">
-                    <div class="pricing-style-one" style="background-image: url(assets/img/shape/15.webp);">
-                        <div class="pricing-header">
-                            <h4>Rakez Freezone</h4>
-                            <h2>
-                                AED 11,990*
-                            </h2>
-                        </div>
-                        <div class="pricing-content">
-                            <div class="price">
-                                <p><strong>1 Free Lifetime Visa</strong></p>
-                            </div>
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> Business Consultation </li>
-                                <li><i class="fas fa-check-circle"></i>0 Visa</li>
-                                <li><i class="fas fa-check-circle"></i>1 Visa(Lifetime)</li>
-                                <li><i class="fas fa-check-circle"></i>100% Foreign Ownership</li>
-                                <li><i class="fas fa-check-circle"></i>Business License</li>
-                                <li><i class="fas fa-check-circle"></i>MOA and AOA</li>
-                                <li><i class="fas fa-check-circle"></i>Free 1 session of Tax and VAT consultation</li>
-                                <li><i class="fas fa-check-circle"></i>0% withhold tax</li>
-                                <li><i class="fas fa-check-circle"></i>100% profit repatriation</li>
-                                <!--<li><i class="fas fa-check-circle"></i>Flexi desk</li>-->
-                                <li><i class="fas fa-check-circle"></i> Dedicated relationship manager</li>
-                            </ul>
-                            <a class="btn mt-25 btn-sm btn-dark animation get-started-btn" href="#">Get Started</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Itme -->
-
-                <!-- Single Itme -->
-                <div class="col-xl-3 col-md-6 mb-30">
-                    <div class="pricing-style-one" style="background-image: url(assets/img/shape/15.webp);">
-                        <div class="pricing-header">
-                            <h4>Dubai Mainland</h4>
-                            <h2>
-                                AED 19,999*
-                            </h2>
-                        </div>
-                        <div class="pricing-content">
-                            <div class="price">
-                                <p><strong>1 Visa</strong></p>
-                            </div>
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> Business Consultation</li>
-                                <li><i class="fas fa-check-circle"></i>1 Visa</li>
-                                <li><i class="fas fa-check-circle"></i>100% Foreign Ownership</li>
-                                <li><i class="fas fa-check-circle"></i>Business License</li>
-                                <li><i class="fas fa-check-circle"></i>MOA and AOA</li>
-                                <li><i class="fas fa-check-circle"></i>Free 1 session of Tax and VAT consultation</li>
-                                <li><i class="fas fa-check-circle"></i>0% withhold tax</li>
-                                <li><i class="fas fa-check-circle"></i>100% profit repatriation</li>
-                                <li><i class="fas fa-check-circle"></i>Flexi desk</li>
-                                <li><i class="fas fa-check-circle"></i>Dedicated relationship manager</li>
-                            </ul>
-                            <a class="btn mt-25 btn-sm btn-dark animation get-started-btn" href="#">Get Started</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Itme -->
-
-            </div>
-        </div> --}}
-    {{-- </div> --}}
-    <!-- End Pricng -->
 
     <!-- Start About
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-one-area default-padding">
         <div class="shape-animated-left">
             <img src="assets/img/shape/anim-1.png" alt="Image Not Found">
@@ -567,28 +518,19 @@
                     <h2 class="title mb-25">Why Choose Meta Mind Global for Your Business Setup Needs?​</h2>
                     <p>
                         Meta Mind Global provides tailored business setup services to help entrepreneurs start and grow
-                        their businesses in the Dubai Mainland and Free zones. Our team will guide you through every step,
-                        from advising you on choosing the right jurisdiction and your company’s legal structure to getting a
+                        their businesses in the Dubai Mainland and Free zones. Our team will guide you through every
+                        step,
+                        from advising you on choosing the right jurisdiction and your company’s legal structure to
+                        getting a
                         business license within the required documents and with no hassle for paperwork, i.e. from the
                         comfort of your home. We make it stress-free by informing you about upcoming yearly compliances,
-                        which every company needs to follow if they are operating in the UAE. We also offer a wide range of
-                        support services to help you keep your company running smoothly by providing A-Z business solutions
+                        which every company needs to follow if they are operating in the UAE. We also offer a wide range
+                        of
+                        support services to help you keep your company running smoothly by providing A-Z business
+                        solutions
                         under one roof.
                     </p>
-                    {{-- <div class="owner-info">
-                        <div class="left-info">
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i>Diverse Industry Experience</li>
-                                <li><i class="fas fa-check-circle"></i>Personalized Attention</li>
-                                <li><i class="fas fa-check-circle"></i>Transparent fee and Pricing</li>
 
-                            </ul>
-                            <h4>Still confused about taking your decision.</h4>
-                        </div>
-                        <div class="right-info">
-
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="about-style-one col-xl-5 offset-xl-1 col-lg-6 offset-lg-1">
                     <div class="about-thumb">
@@ -605,8 +547,10 @@
     </div>
     <!-- End About -->
 
+
+
     <!-- Start Servics Style One
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-one-area default-padding bg-gray">
         {{-- <div class="triangle-shape">
             <img src="assets/img/shape/10.png" alt="Shape">
@@ -616,10 +560,13 @@
             <div class="row align-center">
                 <div class="col-lg-5 mb-md-60">
                     <div class="service-nav-info">
-                        <h4 class="sub-title"> <span style="color:#2C3F7E">Meta Mind Global Will Help You With</span></h4>
+                        <h4 class="sub-title"> <span style="color:#2C3F7E">Meta Mind Global Will Help You With</span>
+                        </h4>
                         <h2>All In One Business Setup Services</h2>
-                        <p>We offer you the all-in-one company services needed for Dubai mainland company formation and free
-                            zones in one place. With everything you need to get your company up and running, you won’t have
+                        <p>We offer you the all-in-one company services needed for Dubai mainland company formation and
+                            free
+                            zones in one place. With everything you need to get your company up and running, you won’t
+                            have
                             to deal with multiple business setup companies.</p>
                         <div class="nav nav-tabs service-tab-navs" id="nav-tab" role="tablist">
 
@@ -688,7 +635,8 @@
                     <!--<div class="h4 sub-heading">Feel Valued & Rewarded</div>-->
                     <h2 class="title mb-25">Our Affiliations With Government Bodies​</h2>
                     <p>
-                        Our recognized association with government authorities helps us access resources and support from
+                        Our recognized association with government authorities helps us access resources and support
+                        from
                         them. You can trust us to be adhering to government rules and standards. We’ll be your credible
                         partners as you set up your firm in Dubai.
                     </p>
@@ -725,10 +673,12 @@
                     <div class="col-lg-8 offset-lg-2">
                         <div class="site-heading text-light text-center">
                             <h4 class="sub-heading">Success Stories</h4>
-                            <h2 class="title">Join 1000 Happy Customers</h2>
-                            <p>Don't just take our word for it. Hear from entrepreneurs who have successfully established
+                            <h2 class="title">Join 100+ Happy Customers</h2>
+                            <p>Don't just take our word for it. Hear from entrepreneurs who have successfully
+                                established
                                 their
-                                businesses in Dubai. Learn from their experiences and gain insights into the possibilities
+                                businesses in Dubai. Learn from their experiences and gain insights into the
+                                possibilities
                                 that
                                 await you.</p>
                             <div class="devider"></div>
@@ -809,7 +759,8 @@
                     <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation" target="_blank"
                         href="#">Grow</a>
                 </div>
-                <p class="mt-4">With company setup in Dubai, run your business freely. Repatriate your profits and tap
+                <p class="mt-4">With company setup in Dubai, run your business freely. Repatriate your profits and
+                    tap
                     into both local and global markets.</p>
 
             </div>
@@ -872,8 +823,8 @@
 
 
     <!-- Start Faq Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
 
     @if ($faqs->count())
         <div class="faq-area bg-gray default-padding">

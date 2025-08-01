@@ -7,9 +7,19 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 
 use App\Models\Companyinfo;
+use App\Exports\ContactExport;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class ContactController extends Controller
 {
+
+    public function exportContact(Request $request)
+{
+    
+    $date=$request->input('export_date');
+    return Excel::download(new ContactExport($date), 'users.xlsx');
+}
     public function contactF()
     {   
          $company = Companyinfo::first();
