@@ -44,19 +44,19 @@
 
 <div class="mb-3">
     <label for="banner_heading" class="form-label">Banner Heading <span class="text-danger">*</span></label>
-    <textarea name="banner_heading" id="banner_heading" class="form-control @error('banner_heading') is-invalid @enderror" rows="4">{{ old('banner_heading', $item->banner_heading ?? '') }}</textarea>
+    <textarea name="banner_heading" id="description1" class="form-control @error('banner_heading') is-invalid @enderror" rows="4">{{ old('banner_heading', $item->banner_heading ?? '') }}</textarea>
     @error('banner_heading')<div class="invalid-feedback">{{ $message }}</div>@enderror
 </div>
 
 <div class="mb-3">
     <label for="banner_sub_heading" class="form-label">Banner Sub Heading </label>
-    <textarea name="banner_sub_heading" id="banner_sub_heading" class="form-control @error('banner_sub_heading') is-invalid @enderror" rows="4">{{ old('banner_sub_heading', $item->banner_sub_heading ?? '') }}</textarea>
+    <textarea name="banner_sub_heading" id="description2" class="form-control @error('banner_sub_heading') is-invalid @enderror" rows="4">{{ old('banner_sub_heading', $item->banner_sub_heading ?? '') }}</textarea>
     @error('banner_sub_heading')<div class="invalid-feedback">{{ $message }}</div>@enderror
 </div>
 
 <div class="mb-3">
     <label for="banner_description" class="form-label">Banner Description </label>
-    <textarea name="banner_description" id="banner_description" class="form-control @error('banner_description') is-invalid @enderror" rows="4">{{ old('banner_description', $item->banner_description ?? '') }}</textarea>
+    <textarea name="banner_description" id="description3" class="form-control @error('banner_description') is-invalid @enderror" rows="4">{{ old('banner_description', $item->banner_description ?? '') }}</textarea>
     @error('banner_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
 </div>
 

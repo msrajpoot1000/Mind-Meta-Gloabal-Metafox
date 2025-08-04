@@ -388,6 +388,7 @@
 
 
 
+    
     <div class="mt-4 card">
         <div class="card-header">
             <h4>All {{ ucfirst('Com Reg Page') }}</h4>

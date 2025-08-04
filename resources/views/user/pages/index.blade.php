@@ -4,7 +4,7 @@
 @endphp
 @extends('user.layouts.app')
 
-@section('title', 'Home | Meta Mind Global')
+@section('title', 'Home | Mind Meta Global')
 
 @section('style')
 
@@ -175,22 +175,6 @@
         .para.expanded {
             display: block;
         }
-
-        <style>.goog-te-banner-frame.skiptranslate,
-        .goog-te-gadget-icon,
-        #goog-gt-tt,
-        .goog-te-balloon-frame,
-        .goog-text-highlight {
-            display: none !important;
-        }
-
-        body {
-            top: 0px !important;
-        }
-
-        #google_translate_element {
-            display: none;
-        }
     </style>
 
 
@@ -220,53 +204,8 @@
             });
         });
     </script>
-    <!-- Google Translate script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!-- Custom Language Switch Script -->
-    <script>
-        function changeLanguage(langCode) {
-            console.log(langCode);
-            const interval = setInterval(() => {
-                const frame = document.querySelector("iframe.goog-te-menu-frame");
-                if (!frame) return;
 
-                const innerDoc = frame.contentDocument || frame.contentWindow.document;
-                const langItems = innerDoc.querySelectorAll(".goog-te-menu2-item span.text");
-
-                if (!langItems.length) return;
-
-                for (const item of langItems) {
-                    if (item.innerHTML.toLowerCase().includes(langCode.toLowerCase())) {
-                        item.click();
-                        clearInterval(interval);
-                        break;
-                    }
-                }
-            }, 500);
-        }
-
-        // Set event listener after DOM load
-        document.addEventListener("DOMContentLoaded", function() {
-            const selector = document.getElementById("languageSelect");
-            selector.addEventListener("change", function() {
-                const selectedLang = this.value;
-                if (selectedLang === "en") {
-                    location.reload(); // Reload to reset to default English
-                } else {
-                    changeLanguage(selectedLang);
-                }
-            });
-        });
-    </script>
 
 
 @endsection
@@ -279,7 +218,7 @@
 
 
     <!-- Start Banner Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="banner-area banner-style-one shadow navigation-custom-large zoom-effect overflow-hidden text-light">
         <!-- Slider main container -->
         <div class="banner-fade">
@@ -324,30 +263,15 @@
 
         </div>
     </div>
-    <!-- End Main -->
 
 
-    <!-- Hidden Google Translate container -->
-    <div id="google_translate_element"></div>
-
-    <!-- Custom Language Selector -->
-    {{-- <select id="languageSelect" class="lang-select form-control" style="max-width: 300px;">
-        <option value="en" selected>English</option>
-        <option value="hi">Hindi</option>
-        <option value="fr">French</option>
-        <option value="es">Spanish</option>
-        <option value="de">German</option>
-        <option value="ar">Arabic</option>
-        <option value="zh-CN">Chinese (Simplified)</option>
-        <!-- Add more languages as needed -->
-    </select> --}}
 
 
 
 
 
     <!-- Start Our Features
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="feature-style-one-area half-angle-shape overflow-hidden default-padding">
         <div class="container">
             <div class="row align-center">
@@ -359,7 +283,7 @@
                         </div>
                         <h2 class="title mb-25">Have a business vision in mind? Let's turn it into reality!</h2>
                         <p>
-                            Choose a unique name and bring your company to life with Meta Mind Global.
+                            Choose a unique name and bring your company to life with Mind Meta Global.
                         </p>
 
                     </div>
@@ -389,7 +313,7 @@
 
 
     <!-- Start Aobut
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding"
         style="background-image: url(assets/img/shape/29.png);">
         <div class="container">
@@ -398,7 +322,7 @@
                     <div class="site-heading text-center">
                         <h4 class="sub-heading">Incorporation Services</h4>
                         <h2 class="title">Streamline your Business Setup in Dubai with Our Expert Guidance</h2>
-                        <p>Meta Mind Global, your partner for business setup in Dubai, the UAE, not only makes the
+                        <p>Mind Meta Global, your partner for business setup in Dubai, the UAE, not only makes the
                             process
                             hassle-free, straightforward, and budget-friendly but also ensures that you are choosing the
                             right legal structure and jurisdiction for your company objective to run your business in
@@ -449,7 +373,7 @@
 
 
     <!-- Start Services
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="services-style-two-area default-padding bottom-less bg-cover bg-gray"
         style="background-image: url(assets/img/shape/27.png);">
         <div class="container">
@@ -457,7 +381,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="site-heading text-center">
                         <!--<h4 class="sub-heading">What we do</h4>-->
-                        <h2 class="title">Choose the Right Jurisdiction for your Dubai Business Setup</h2>
+                        <h2 class="title">Choose the Right Jurisdiction for your UAE Business Setup</h2>
                         <div class="devider"></div>
                     </div>
                 </div>
@@ -468,29 +392,34 @@
 
                 @foreach ($firstThreeComRegPage as $item)
                     <!-- Single Item -->
+
                     <div class="col-xl-4 col-md-6 mb-30">
-                        <div class="services-style-two active h-100">
-                            <div class="thumb">
-                                <img src="{{ asset($item->banner_image) }}" alt="Thumb">
-                                <div class="title">
-                                    <a href="#">
-                                        <i class="flaticon-budget"></i>
-                                        <h4>{{ $item->name }} Company Setup</h4>
-                                    </a>
+                        <a href="{{ route('user.pages.comRegPage', $item->id) }}">
+                            <div class="services-style-two active h-100">
+                                <div class="thumb">
+                                    <img src="{{ asset($item->banner_image) }}" alt="Thumb">
+                                    <div class="title">
+                                        <a href="{{ route('user.pages.comRegPage', $item->id) }}">
+                                            <i class="flaticon-budget"></i>
+                                            <h4>{{ $item->name }} Company Setup</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <p class="para para{{ $item->id }}" data-lines="3">
+                                        {{ strip_tags($item->banner_description) }}
+                                    </p>
+                                    <div class="button">
+                                        <a href="{{ route('user.pages.comRegPage', $item->id) }}"
+                                            class="toggle-btn-read-more" data-target="para{{ $item->id }}"
+                                            role="button">Read More</a>
+                                        <div class="devider"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="info">
-                                <p class="para para{{ $item->id }}" data-lines="3">
-                                    {{ strip_tags($item->banner_description) }}
-                                </p>
-                                <div class="button">
-                                    <a class="toggle-btn-read-more" data-target="para{{ $item->id }}"
-                                        role="button">Read More</a>
-                                    <div class="devider"></div>
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     </div>
+
                     <!-- End Single Item -->
                 @endforeach
             </div>
@@ -505,7 +434,7 @@
 
 
     <!-- Start About
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="about-style-one-area default-padding">
         <div class="shape-animated-left">
             <img src="assets/img/shape/anim-1.png" alt="Image Not Found">
@@ -515,9 +444,9 @@
             <div class="row align-center">
                 <div class="about-style-one col-xl-6 col-lg-5">
                     <!--<div class="h4 sub-heading">Feel Valued & Rewarded</div>-->
-                    <h2 class="title mb-25">Why Choose Meta Mind Global for Your Business Setup Needs?​</h2>
+                    <h2 class="title mb-25">Why Choose Mind Meta Global for Your Business Setup Needs?​</h2>
                     <p>
-                        Meta Mind Global provides tailored business setup services to help entrepreneurs start and grow
+                        Mind Meta Global provides tailored business setup services to help entrepreneurs start and grow
                         their businesses in the Dubai Mainland and Free zones. Our team will guide you through every
                         step,
                         from advising you on choosing the right jurisdiction and your company’s legal structure to
@@ -550,7 +479,7 @@
 
 
     <!-- Start Servics Style One
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="services-style-one-area default-padding bg-gray">
         {{-- <div class="triangle-shape">
             <img src="assets/img/shape/10.png" alt="Shape">
@@ -560,7 +489,7 @@
             <div class="row align-center">
                 <div class="col-lg-5 mb-md-60">
                     <div class="service-nav-info">
-                        <h4 class="sub-title"> <span style="color:#2C3F7E">Meta Mind Global Will Help You With</span>
+                        <h4 class="sub-title"> <span style="color:#2C3F7E">Mind Meta Global Will Help You With</span>
                         </h4>
                         <h2>All In One Business Setup Services</h2>
                         <p>We offer you the all-in-one company services needed for Dubai mainland company formation and
@@ -823,8 +752,8 @@
 
 
     <!-- Start Faq Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
 
     @if ($faqs->count())
         <div class="faq-area bg-gray default-padding">

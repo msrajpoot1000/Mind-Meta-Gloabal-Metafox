@@ -1,7 +1,3 @@
- <?php
- use Illuminate\Support\Facades\DB;
- $company = DB::table('companyinfos')->first();
- ?>
  <x-guest-layout>
      <div class="authentication-bg min-vh-100">
          <div class="bg-overlay bg-light"></div>

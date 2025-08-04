@@ -227,9 +227,9 @@
 
 
     <!-- Business Legal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     @if ($comRegPage->business_legal_description)
-        <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
+        <div class="about-style-two-area overflow-hidden bg-contain default-padding">
             <div class="container">
                 <div class="row align-center">
                     <div class="about-style-two col-lg-12 ">
@@ -323,7 +323,7 @@
 
     {{-- <!-- Business Legal    --}}
     @if ($comRegPage->step_section_heading)
-        <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding">
+        <div class="about-style-two-area overflow-hidden bg-contain  default-padding">
             <div class="container">
                 <div class="row offset-lg-1">
                     <div class="about-style-two text-center">
@@ -364,11 +364,10 @@
 
 
 
-    <!-- about
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+    {{-- why section  --}}
 
     @if ($comRegPage->why_section_heading && $comRegWhySec->count())
-        <div class="mission-vision-style-one-area overflow-hidden default-padding">
+        <div class="mission-vision-style-one-area overflow-hidden bg-gray default-padding">
             <div class="container">
                 <div class="row">
 
@@ -505,7 +504,8 @@
 
 
     @if ($comRegPage->extra_section)
-        <div class="putTickBeforeLi  rich-content container {{ empty($comRegPage->banner_image) ? 'mt-5' : '' }}">
+        <div
+            class="putTickBeforeLi  rich-content container {{ empty($comRegPage->banner_image) ? 'default-padding' : '' }}">
 
             {!! $comRegPage->extra_section !!}
         </div>

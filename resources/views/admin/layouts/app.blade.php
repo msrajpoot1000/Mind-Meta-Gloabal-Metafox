@@ -42,7 +42,6 @@
         <link rel="icon" href="{{ asset($faviconPath) }}" type="image/x-icon">
     @endif
 
-
     <!-- include head css -->
     @include('admin.partials.head-css')
 

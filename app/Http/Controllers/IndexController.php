@@ -49,13 +49,13 @@ class IndexController extends Controller
 {
     public function index()
     {  
-        $homeSliders = HomeSlider::latest()->get();
-        $inCorporationServices = InCorporationServices::latest()->get();
-        $ourPartners = OurPartners::latest()->get();
-        $keyCorServices = KeyCorServices::latest()->get();
-        $testimonials = Testimonial::latest()->get();
-        $companyinfos = Companyinfo::first();
-        $blogs = Blog::latest()->take(3)->get();
+        $homeSliders = HomeSlider::where('is_active', 1)->latest()->get();
+$inCorporationServices = InCorporationServices::where('is_active', 1)->latest()->get();
+$ourPartners = OurPartners::where('is_active', 1)->latest()->get();
+$keyCorServices = KeyCorServices::where('is_active', 1)->latest()->get();
+$testimonials = Testimonial::where('status', 1)->latest()->get();
+$companyinfos = Companyinfo::first();
+$blogs = Blog::where('is_active', 1)->latest()->take(3)->get();
 
 
         $services = Service::with('servicePages')->get();
@@ -67,14 +67,14 @@ class IndexController extends Controller
         // to find the first comReg of first of comRegPage of all faq 
         
    // Step 1: Get the first ComReg
-$firstComReg = ComReg::first();
+$firstComReg = ComReg::where('is_active', 1)->first();
 
 if (!$firstComReg) {
     return response()->json(['message' => 'No comReg found'], 404);
 }
 
 // Step 2: Get the first 3 related ComRegPages
-$firstThreeComRegPage = ComRegPage::where('ref_id', $firstComReg->id)->take(3)->get();
+$firstThreeComRegPage = ComRegPage::where('is_active', 1)->where('ref_id', $firstComReg->id)->take(3)->get();
 
 if ($firstThreeComRegPage->isEmpty()) {
     return response()->json(['message' => 'No related ComRegPages found'], 404);
@@ -87,7 +87,7 @@ foreach ($firstThreeComRegPage as $comRegPage) {
     $faqIds = json_decode($comRegPage->faq_ids, true);
 
     if (!empty($faqIds) && is_array($faqIds)) {
-        $faqs = ComRegFaqSec::whereIn('id', $faqIds)->get()->sortBy(function ($faq) use ($faqIds) {
+        $faqs = ComRegFaqSec::where('is_active', 1)->whereIn('id', $faqIds)->get()->sortBy(function ($faq) use ($faqIds) {
             return array_search($faq->id, $faqIds);
         });
 
@@ -115,8 +115,8 @@ $faqs = $allFaqs->values();
   
     public function about()
     {   
-          $ourPartners = OurPartners::latest()->get();
-        $testimonials = Testimonial::latest()->get();
+          $ourPartners = OurPartners::where('is_active', 1)->latest()->get();
+        $testimonials = Testimonial::where('is_active', 1)->latest()->get();
          $company = Companyinfo::first();
         
        
@@ -145,8 +145,18 @@ public function comRegPage($id)
     $licenseIds = is_array($licenseIds) ? $licenseIds : [];
 
     // Function to fetch records in given ID order
+    // $orderedFetch = function ($model, $ids) {
+    //     $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+    //     return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
+    // };
+
+
+      // Function to fetch records in given ID order, filtering by is_active = 1
     $orderedFetch = function ($model, $ids) {
-        $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+        $items = $model::whereIn('id', $ids)
+                        ->where('is_active', 1)
+                        ->get()
+                        ->keyBy('id');
         return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
     };
 
@@ -177,7 +187,7 @@ public function finServicePage($id)
 {
     $item2 = finServicePage::findOrFail($id);
     // dd($item2);
-    $ourPartners = OurPartners::latest()->get();
+    $ourPartners = OurPartners::where('is_active', 1)->latest()->get();
 
     // Decode all ID arrays from JSON
     $faqIds = json_decode($item2->faq_ids ?? '[]', true);
@@ -190,8 +200,18 @@ public function finServicePage($id)
     $benefitIds = is_array($benefitIds) ? $benefitIds : [];
 
     // Fetch records in given ID order
+    // $orderedFetch = function ($model, $ids) {
+    //     $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+    //     return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
+    // };
+
+
+    // Function to fetch records in given ID order with is_active filter
     $orderedFetch = function ($model, $ids) {
-        $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+        $items = $model::whereIn('id', $ids)
+                        ->where('is_active', 1) // <-- is_active applied here
+                        ->get()
+                        ->keyBy('id');
         return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
     };
 
@@ -237,8 +257,18 @@ public function servicePage($id)
      $benefitIds = is_array($benefitIds) ? $benefitIds : [];
 
     // Function to fetch records in given ID order
+    // $orderedFetch = function ($model, $ids) {
+    //     $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+    //     return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
+    // };
+
+
+    // Function to fetch records in given ID order and filter by is_active = 1
     $orderedFetch = function ($model, $ids) {
-        $items = $model::whereIn('id', $ids)->get()->keyBy('id');
+        $items = $model::whereIn('id', $ids)
+                        ->where('is_active', 1)  // <-- Filtering active records
+                        ->get()
+                        ->keyBy('id');
         return collect($ids)->map(fn($id) => $items[$id] ?? null)->filter();
     };
 

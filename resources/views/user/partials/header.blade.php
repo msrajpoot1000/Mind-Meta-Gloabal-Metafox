@@ -7,8 +7,22 @@
 @php
     use App\Models\ComReg;
     use App\Models\FinService;
-    $comRegs = ComReg::with('comRegPages')->get();
-    $finServices = FinService::with('finServicePages')->get();
+    $comRegs = ComReg::with([
+        'comRegPages' => function ($query) {
+            $query->where('is_active', 1);
+        },
+    ])
+        ->where('is_active', 1)
+        ->get();
+
+    $finServices = FinService::with([
+        'finServicePages' => function ($query) {
+            $query->where('is_active', 1);
+        },
+    ])
+        ->where('is_active', 1)
+        ->get();
+
 @endphp
 
 

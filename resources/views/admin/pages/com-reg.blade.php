@@ -13,6 +13,7 @@
             </ul>
         </div>
     @endif
+   
 
     <div class="mb-2 d-flex justify-content-end fw-bold">
         <button id="toggleButton" class="btn btn-sm btn-success px-4 fs-5">Create {{ ucfirst('Com Reg') }}</button>
@@ -82,6 +83,7 @@
                                         <td class="v-center">{{ $loop->iteration }}</td>
                                         <td class="v-center">{{ $item->name ?? 'N/A' }}</td>
                                         <td class="v-center">
+                                                {{-- <button class="btn btn-primary">Test</button> --}}
                                             @if ($item->is_active == 1)
                                                 <span class="badge bg-success">Active</span>
                                             @elseif ($item->is_active == 0)

@@ -8,7 +8,7 @@
     <!-- Start Breadcrumb
                                                         ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
-        style="background-image: url(assets/img/banner/cookie_banner.jpeg);">
+        style="background-image: url(assets/img/banner/cookie_banner.jpg);">
         <div class="breadcrum-shape">
             {{-- <img src="assets/img/shape/50.png" alt="Image Not Found"> --}}
         </div>
