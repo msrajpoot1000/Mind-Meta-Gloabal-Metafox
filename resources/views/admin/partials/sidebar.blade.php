@@ -140,8 +140,8 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('user.pages.book-appointment.index') }}" class="has-arrow">
-
+                        <a href="{{ route('user.pages.book-appointment.index') }}" >
+                            <i class="bx bx-calendar icon nav-icon"></i>
                             <span class="menu-item" data-key="t-email">Appointments</span>
                         </a>
                     </li>
