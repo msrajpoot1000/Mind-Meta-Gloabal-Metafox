@@ -16,8 +16,10 @@
                         'data-country_code');
                     document.getElementById('modalPhone').innerText = this.getAttribute(
                         'data-phone');
-                    document.getElementById('modalDateTime').innerText = this.getAttribute(
-                        'data-date_time');
+                    document.getElementById('modalUserDateTime').innerText = this.getAttribute(
+                        'data-user_date_time');
+                    document.getElementById('modalAdminDateTime').innerText = this.getAttribute(
+                        'data-admin_date_time');
                     document.getElementById('modalTimezone').innerText = this.getAttribute(
                         'data-timezone');
                     document.getElementById('modalMessage').innerText = this.getAttribute(
@@ -69,10 +71,11 @@
                                     <th>Admin (Date & Time)</th>
                                     <th>Timezone</th>
                                     <th>Message</th>
-                                    <th>Created At
+                                    <th>Created At</th> <!-- FIXED closing th tag -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($appointment as $ittem)
                                     <tr>
@@ -91,13 +94,15 @@
                                                 data-name="{{ $ittem->name }}" data-email="{{ $ittem->email }}"
                                                 data-country_code="{{ $ittem->country_code }}"
                                                 data-phone="{{ $ittem->phone }}"
-                                                data-date_time="{{ \Carbon\Carbon::parse($ittem->date_time)->format('d-m-Y h:i A') }}"
+                                                data-user_date_time="{{ \Carbon\Carbon::parse($ittem->user_date_time)->format('d-m-Y h:i A') }}"
+                                                data-admin_date_time="{{ \Carbon\Carbon::parse($ittem->admin_date_time)->format('d-m-Y h:i A') }}"
                                                 data-timezone="{{ $ittem->timezone }}"
                                                 data-message="{{ $ittem->message }}" data-bs-toggle="modal"
                                                 data-bs-target="#viewModal">
                                                 View
                                             </button>
                                         </td>
+
 
                                     </tr>
                                 @endforeach
@@ -125,13 +130,15 @@
                     <p><strong>Email:</strong> <span id="modalEmail"></span></p>
                     <p><strong>Country Code:</strong> <span id="modalCountryCode"></span></p>
                     <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
-                    <p><strong>Date & Time:</strong> <span id="modalDateTime"></span></p>
+                    <p><strong>User (Date & Time):</strong> <span id="modalUserDateTime"></span></p>
+                    <p><strong>Admin (Date & Time):</strong> <span id="modalAdminDateTime"></span></p>
                     <p><strong>Timezone:</strong> <span id="modalTimezone"></span></p>
                     <p><strong>Message:</strong> <span id="modalMessage"></span></p>
                 </div>
             </div>
         </div>
     </div>
+
 
 @endsection
 
