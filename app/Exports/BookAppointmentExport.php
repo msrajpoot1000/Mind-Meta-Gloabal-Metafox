@@ -20,10 +20,10 @@ class BookAppointmentExport implements FromCollection, WithHeadings, WithMapping
 {
     if ($this->date) {
         return BookAppointment::whereDate('created_at', '>=', $this->date)->get([
-            'id', 'name', 'email', 'country_code', 'phone', 'date_time', 'timezone', 'message', 'created_at'
+            'id', 'name', 'email', 'country_code', 'phone', 'user_date_time','admin_date_time', 'timezone', 'message', 'created_at'
         ]);
     } else {
-        return BookAppointment::all(['id', 'name', 'email', 'country_code', 'phone', 'date_time', 'timezone', 'message', 'created_at']);
+        return BookAppointment::all(['id', 'name', 'email', 'country_code', 'phone', 'user_date_time','admin_date_time', 'timezone', 'message', 'created_at']);
     }
 }
 
@@ -36,7 +36,8 @@ class BookAppointmentExport implements FromCollection, WithHeadings, WithMapping
             'Email',
             'Country Code',
             'Phone',
-            'Date & Time',
+            'User (Date & Time)',
+            'Admin (Date & Time)',
             'Timezone',
             'Message',
             'Submitted At',
@@ -51,7 +52,8 @@ class BookAppointmentExport implements FromCollection, WithHeadings, WithMapping
             $appointment->email,
             $appointment->country_code,
             $appointment->phone,
-            \Carbon\Carbon::parse($appointment->date_time)->format('d-m-Y h:i A'),
+            \Carbon\Carbon::parse($appointment->user_date_time)->format('d-m-Y h:i A'),
+             \Carbon\Carbon::parse($appointment->user_date_time)->format('d-m-Y h:i A'),
             $appointment->timezone,
             $appointment->message,
             \Carbon\Carbon::parse($appointment->created_at)->format('d-m-Y h:i A'),
