@@ -181,7 +181,7 @@
         /* ==================================================
 		    Nice Select Init
 		===============================================*/
-       $("select").not(".country-code, .lang-select").niceSelect();
+       $("select").not(".country-code, .lang-select,.timezone").niceSelect();
 
 
         /* ==================================================

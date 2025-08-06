@@ -14,9 +14,9 @@
 @section('content')
     <!-- banner                                                                                                                                                                                                                                                                                  ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
-        style="background-image: url('{{ asset('assets/img/blog2.jpg') }}')">
+        style="background-image: url('{{ asset('assets/img/blog_banner1.jpg') }}')">
         <div class="breadcrum-shape">
-            <img src="{{ asset('assets/img/blog2.jpg') }}" alt="Image Not Found" style="width: 100%;opacity:0.5">
+            {{-- <img src="{{ asset('assets/img/blog_banner1.jpg') }}" alt="Image Not Found" style="width: 100%;opacity:0.5"> --}}
         </div>
         <div class="container">
             <div class="row">

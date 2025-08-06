@@ -206,12 +206,92 @@
 
     {{-- <!-- Fixed WhatsApp Button -- --}}
     </p>
-    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-        <a href="https://wa.me/{{ str_replace(' ', '', $company->phone) }}" target="_blank"
-            style="background-color: #25D366; color: white; padding-top: 0.5rem; padding-bottom: 0.5rem;  padding-left: 0.7rem;padding-right: 0.7rem;border-radius: 50%; text-align: center; display: inline-block; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
-            <i class="fab fa-whatsapp" style="font-size: 2rem;aspect-ratio:1/1"></i>
-        </a>
-    </div>
+    <style>
+        .fab-btn {
+            position: fixed;
+            right: 1.25rem;
+            /* 20px */
+            z-index: 9999;
+            width: 3.75rem;
+            /* 60px */
+            height: 3.75rem;
+            /* 60px */
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+            /* 4px 8px */
+            text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .fab-btn i {
+            font-size: 1.625rem;
+            /* 26px */
+            aspect-ratio: 1/1;
+        }
+
+        .fab-btn:hover {
+            transform: scale(1.1);
+            background-color: #1ebd59;
+        }
+
+        
+
+        .fab-calendar {
+            bottom: 12rem;
+            /* 90px */
+        }
+
+        .fab-whatsapp {
+            bottom: 7.5rem;
+            /* 20px */
+        }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 36rem) {
+
+            /* 576px */
+            .fab-btn {
+                width: 3.125rem;
+                /* 50px */
+                height: 3.125rem;
+                /* 50px */
+            }
+
+            .fab-btn i {
+                font-size: 1.375rem;
+                /* 22px */
+            }
+
+           
+
+            .fab-calendar {
+                bottom: 5rem;
+                /* 80px */
+            }
+
+            .fab-whatsapp {
+                bottom: 5rem;
+                /* 20px */
+            }
+        }
+    </style>
+
+
+    <a href="{{ route('user.pages.book-appointment') }}" class="fab-btn fab-calendar" title="Book Appointment"
+        style="background-color:#17a2b8 ">
+        <i class="fas fa-calendar-alt"></i>
+    </a>
+
+    <a href="https://wa.me/{{ str_replace(' ', '', $company->phone) }}" target="_blank" class="fab-btn fab-whatsapp"
+        title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
 
 
 

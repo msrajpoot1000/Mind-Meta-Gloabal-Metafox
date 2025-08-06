@@ -7,6 +7,7 @@
 @php
     use App\Models\ComReg;
     use App\Models\FinService;
+    use App\Models\PromotionPage;
     $comRegs = ComReg::with([
         'comRegPages' => function ($query) {
             $query->where('is_active', 1);
@@ -23,6 +24,10 @@
         ->where('is_active', 1)
         ->get();
 
+    $promotions = PromotionPage::where('is_active', 1)->get();
+
+    // dd($promotions);
+
 @endphp
 
 
@@ -32,6 +37,17 @@
 
     </style>
 @endsection
+
+<style>
+    @media (min-width: 1023px) {
+        .scrollable-div {
+            height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 10px;
+        }
+    }
+</style>
 
 
 <script>
@@ -91,7 +107,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Company Registration</a>
                         <ul class="dropdown-menu p-2" style="width: 800px;background-color:white;margin-top:-1rem">
-                            <div class="row p-2">
+                            <div class="row p-2 scrollable-div">
                                 @foreach ($comRegs as $comReg)
                                     <div class="col-lg-4 mt-2">
                                         <a style="font-size:1rem;">{{ $comReg->name }}</a>
@@ -111,6 +127,24 @@
                                     </div>
                                 @endforeach
 
+                                <div class="col-lg-4 mt-2">
+                                    <a href="{{ route('user.pages.promotionAll') }}" style="font-size:1rem;">Promotion
+                                        And Offers</a>
+                                    <ul>
+                                        @foreach ($promotions as $item)
+                                            <li class="ml-2">
+                                                <a href="{{ route('user.pages.promotion', $item->id) }}"
+                                                    style="font-size:0.9rem;padding:0px;margin:0px"
+                                                    class="d-flex align-items-center">
+                                                    <i class="fas fa-chevron-right "
+                                                        style="font-size:0.6rem;margin-right:0.2rem;margin-left:0.5rem"></i>
+                                                    <span>{{ $item->name }}</span>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
                             </div>
                         </ul>
                     </li>
@@ -119,7 +153,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Financial Services </a>
                         <ul class="dropdown-menu p-2" style="width: 800px;background-color:white;margin-top:-1rem">
-                            <div class="row p-2">
+
+
+                            <div class="row p-2 scrollable-div">
                                 @foreach ($finServices as $finService)
                                     <div class="col-lg-4 mt-2">
                                         <a style="font-size:1rem;color:black;">{{ $finService->name }}</a>

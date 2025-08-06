@@ -13,13 +13,26 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\SubIndustryController;
 use App\Http\Controllers\CkController;
+use App\Http\Controllers\BookAppointmentController;
+
 
 
 
 Route::get('/', [IndexController::class, 'index'])->name('user.pages.index');
 Route::get('/about', [IndexController::class, 'about'])->name('user.pages.aboutus');
 
+
 Route::get('/career', [IndexController::class, 'career'])->name('user.pages.career');
+Route::get('/promotion-all', [IndexController::class, 'promotionOfferAll'])->name('user.pages.promotionAll');
+Route::get('/promotion/{id}', [IndexController::class, 'promotionOffer'])->name('user.pages.promotion');
+
+Route::get('/book-appointment', [IndexController::class, 'bookAppointment'])->name('user.pages.book-appointment');
+Route::post('/book-appointment', [BookAppointmentController::class, 'bookAppointmentStore'])->name('user.pages.book-appointment.store');
+Route::get('/admin-book-appointment', [BookAppointmentController::class, 'bookAppointmentIndex'])->name('user.pages.book-appointment.index')->middleware(['auth', 'verified']);
+// export appointment 
+Route::post('/admin-book-appointment-export', [BookAppointmentController::class, 'exportBookAppointment'])->name('book-appointment.export');
+
+
 
 Route::fallback(function () {
     return response()->view('user.pages.errors.404', [], 404);
@@ -300,3 +313,23 @@ Route::get('/career-record', [CareerRecordController::class, 'index'])->name('us
 
 Route::delete('/career-record/{id}', [CareerRecordController::class, 'destroy'])->name('career-record.destroy');
 Route::get('/admin/career-records/{id}', [CareerRecordController::class, 'show'])->name('admin-career-record.show');
+
+// PromotionController
+use App\Http\Controllers\PromotionController;
+Route::resource('admin-promotion', PromotionController::class)->middleware(['auth', 'verified']);
+
+// PromotionPageController
+use App\Http\Controllers\PromotionPageController;
+Route::get('/promotion-page', [PromotionPageController::class, 'indexF'])->name('user.pages.promotion-page');
+Route::resource('/admin-promotion-page', PromotionPageController::class)->middleware(['auth', 'verified']);
+
+
+// PromotionOfferController
+use App\Http\Controllers\PromotionOfferController;
+Route::get('/promotion-offer', [PromotionOfferController::class, 'indexF'])->name('user.pages.promotion-offers');
+Route::resource('admin-promotion-offer', PromotionOfferController::class)->middleware(['auth', 'verified']);
+
+// Dynamic dependent dropdown route
+Route::get('/get-promotion-pages/{id}', function ($id) {
+    return \App\Models\PromotionPage::where('ref_id', $id)->get(['id', 'name']);
+});

@@ -139,6 +139,13 @@
                         </ul>
                     </li>
 
+                    <li>
+                        <a href="{{ route('user.pages.book-appointment.index') }}" class="has-arrow">
+
+                            <span class="menu-item" data-key="t-email">Appointments</span>
+                        </a>
+                    </li>
+
                     {{-- company registration  --}}
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
@@ -236,7 +243,7 @@
                     </li>
 
 
-                    {{-- financial servics  --}}
+                    {{--  servics  --}}
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
                             <i class="bx bx-file icon nav-icon"></i>
@@ -299,6 +306,23 @@
 
                                 </ul>
                             </li>
+                        </ul>
+                    </li>
+
+
+                    {{--  promtion   --}}
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="bx bx-file icon nav-icon"></i>
+                            <span class="menu-item" data-key="t-email"> Promotion</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('admin-promotion.index') }}" data-key="t-inbox">Category</a></li>
+                            <li><a href="{{ route('admin-promotion-page.index') }}" data-key="t-inbox">Pages</a>
+                            </li>
+                            <li><a href="{{ route('admin-promotion-offer.index') }}" data-key="t-inbox">Offers</a>
+                            </li>
+
                         </ul>
                     </li>
 

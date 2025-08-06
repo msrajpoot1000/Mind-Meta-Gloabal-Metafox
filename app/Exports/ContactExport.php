@@ -15,16 +15,17 @@ class ContactExport implements FromCollection, WithHeadings
         $this->date = $date;
     }
 
-    public function collection()
-    {
-        if ($this->date) {
-            return Contact::whereDate('created_at', $this->date)->get([
-                'id', 'name', 'email', 'phone', 'subject', 'message', 'created_at'
-            ]);
-        } else {
-            return Contact::all(['id', 'name', 'email', 'phone', 'subject', 'message', 'created_at']);
-        }
+   public function collection()
+{
+    if ($this->date) {
+        return Contact::whereDate('created_at', '>=', $this->date)->get([
+            'id', 'name', 'email', 'phone', 'subject', 'message', 'created_at'
+        ]);
+    } else {
+        return Contact::all(['id', 'name', 'email', 'phone', 'subject', 'message', 'created_at']);
     }
+}
+
 
     public function headings(): array
     {

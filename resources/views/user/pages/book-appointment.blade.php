@@ -4,7 +4,7 @@
 @endphp
 @extends('user.layouts.app')
 
-@section('title', 'Contact Page | Meta Mind Global')
+@section('title', 'Book Appointment Page | Meta Mind Global')
 
 @section('style')
     <style>
@@ -26,12 +26,38 @@
             box-sizing: border-box;
         }
     </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+    <script>
+        window.onload = function() {
+            flatpickr("#datetime", {
+                enableTime: true,
+                dateFormat: "d/m/Y H:i", // dd/mm/yyyy hh:mm
+                time_24hr: true
+            });
+        };
+    </script>
+
+
+
+
+
+@endsection
+
+@section('script')
+
+
 @endsection
 @section('content')
 
 
     <!-- banner
-                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/shape/contact.jpg);">
         <div class="breadcrum-shape">
@@ -40,10 +66,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    <h1>Contact Us</h1>
+                    <h1>Book Appointment</h1>
                     <ul class="breadcrumb">
                         <li><a href="{{ route('user.pages.index') }}"><i class="fas fa-home"></i> Home</a></li>
-                        <li>Contact</li>
+                        <li>Book Appointment</li>
                     </ul>
                 </div>
             </div>
@@ -80,12 +106,12 @@
 
                 <div class="contact-stye-one col-lg-7 pl-60 pl-md-15 pl-xs-15">
                     <div class="contact-form-style-one">
-                        <h5 class="sub-title">Have Questions?</h5>
-                        <h2 class="heading">Send us a Message</h2>
+                        <h5 class="sub-title">Book Appointment?</h5>
+                        <h2 class="heading">Schedule Your Appointment</h2>
 
 
 
-                        <form action="{{ route('contact.store') }}" method="POST">
+                        <form action="{{ route('user.pages.book-appointment.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
@@ -129,15 +155,8 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <select id="timezone" class="timezone">
-                                        <option value="">-- Select Timezone --</option>
-                                    </select>
-                                </div>
-                            </div>
 
-
+                            {{-- phone   --}}
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="form-group">
@@ -150,6 +169,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- date time  --}}
+                            <div class="row d-flex align-items-center">
+
+                                <div class="col-lg-12">
+                                    <!-- Input Field -->
+                                    <input type="text" name="user_date_time" id="datetime" style="width:100%;"
+                                        placeholder="(select date & time ) (dd/mm/yyyy hh:mm)">
+                                </div>
+
+                            </div>
+
+                            {{-- timezone  --}}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <select name="timezone" id="timezone" class="timezone">
+                                        <option value="">-- Select Timezone --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
 
                             <div class="row">
                                 <div class="col-lg-12">
@@ -176,7 +218,7 @@
                         </form>
                     </div>
                 </div>
-
+                {{-- 
                 <div class="contact-stye-one col-lg-5 mb-md-50 mb-xs-20 ">
 
                     <div class="contact-style-one-info">
@@ -218,15 +260,7 @@
                         </ul>
 
                     </div>
-                </div>
-
-
-
-
-
-
-
-
+                </div> --}}
             </div>
         </div>
     </div>

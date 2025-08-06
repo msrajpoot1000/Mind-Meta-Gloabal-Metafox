@@ -49,14 +49,17 @@ public function subscribe(Request $request)
         // dd($request->country_code);
 
 
-        Contact::create([
-    'name'         => $request->name,
-    'email'        => $request->email,
-    'phone'        => $request->phone,
-    'country_code' => $request->country_code, // map this correctly
-    'subject'      => $request->subject,
-    'message'      => $request->message,
-]);
+            Contact::create([
+        'name'         => $request->name,
+        'email'        => $request->email,
+        'phone'        => $request->phone,
+        'country_code' => $request->country_code, // map this correctly
+        'subject'      => $request->subject,
+        'message'      => $request->message,
+        
+      
+    ]);
+      
 
 
         return back()->with('success', 'Message sent successfully!');

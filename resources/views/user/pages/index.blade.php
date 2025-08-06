@@ -463,7 +463,7 @@
                 </div>
                 <div class="about-style-one col-xl-5 offset-xl-1 col-lg-6 offset-lg-1">
                     <div class="about-thumb">
-                        <img class="wow fadeInRight" src="assets/img/why_choose.png" alt="Image Not Found">
+                        <img class="wow fadeInRight" src="assets/img/why_choose2.jpg" alt="Image Not Found">
 
                         <div class="thumb-shape-bottom wow fadeInDown" data-wow-delay="300ms">
                             <!--<img src="assets/img/shape/anim-3.png" alt="Image Not Found">-->

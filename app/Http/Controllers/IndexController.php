@@ -45,6 +45,11 @@ use App\Models\InCorporationServices;
 use App\Models\Career;
 use App\Models\CareerJob;
 
+
+use App\Models\Promotion;
+use App\Models\PromotionPage;
+use App\Models\PromotionOffer;
+
 class IndexController extends Controller
 {
     public function index()
@@ -307,6 +312,45 @@ public function career(){
 
     return view("user.pages.career" ,compact('jobType','jobs'));;
 }
+
+public function promotionOfferAll(){
+
+     $promotions = Promotion::with([
+    'promotionPages' => function($query) {
+        $query->where('is_active', 1)
+              ->with(['promotionOffers' => function($subQuery) {
+                  $subQuery->where('is_active', 1);
+              }]);
+    }
+])
+->where('is_active', 1)
+->get();
+
+    return view("user.pages.promotion-all",compact('promotions'));
+}
+
+public function promotionOffer($id)
+{
+    $promotionPage = PromotionPage::where('id', $id)
+        ->where('is_active', 1)
+        ->with([
+            'promotion', // Parent Promotion (Category)
+            'promotionOffers' => function($query) {
+                $query->where('is_active', 1);
+            }
+        ])
+        ->firstOrFail();
+
+    return view('user.pages.promotion', compact('promotionPage'));
+}
+
+
+public function bookAppointment(){
+    return view('user.pages.book-appointment');
+}
+
+
+
 
 
 

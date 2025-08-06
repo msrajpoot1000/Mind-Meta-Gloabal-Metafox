@@ -20,4 +20,4 @@
 <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('assets/js/validnavs.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
-<script src="{{ asset('default/js/default-script.js') }}"></script>
+<script type="module" src="{{ asset('default/js/default-script.js') }}"></script>
