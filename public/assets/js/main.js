@@ -371,7 +371,7 @@
              grabCursor: true,
              slidesPerView: 1,
              centeredSlides: true,
-             spaceBetween: 50,
+             spaceBetween: 2,
              autoplay: true,
              pagination: {
                  el: ".swiper-pagination",
@@ -379,7 +379,7 @@
              },
              breakpoints: {
                  1200: {
-                     slidesPerView: 2.5,
+                     slidesPerView: 3,
                  },
              },
          });

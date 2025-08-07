@@ -121,7 +121,7 @@ $faqs = $allFaqs->values();
     public function about()
     {   
           $ourPartners = OurPartners::where('is_active', 1)->latest()->get();
-        $testimonials = Testimonial::where('is_active', 1)->latest()->get();
+        $testimonials = Testimonial::where('status', 1)->latest()->get();
          $company = Companyinfo::first();
         
        

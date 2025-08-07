@@ -52,7 +52,7 @@
                             <div class="col-lg-4 col-md-4 item">
                                 <div class="fun-fact">
                                     <div class="counter">
-                                        <div class="timer" data-to="10" data-speed="1000">10</div>
+                                        <div class="timer" data-to="2" data-speed="1000">2</div>
                                         <div class="operator">+</div>
 
                                     </div>
@@ -60,14 +60,19 @@
                                 </div>
                             </div>
                             <p>
-                                Avyanco offers the best accounting services in Dubai. We have a team of skilled experts who
-                                are dedicated to helping your business succeed. With our top-notch accounting service in
-                                Dubai, we ensure you realize your corporate goals.
+                                Mind Meta Global provides premier accounting services in Dubai, tailored to support your
+                                business growth. Our team of experienced professionals is committed to delivering accurate
+                                and reliable financial solutions. With our expert accounting support, we help you stay
+                                focused on your corporate objectives and achieve lasting success.
+                            <div class="putTickBeforeLi">
+                                <ul>
+                                    <li>Register from anywhere</li>
+                                    <li>Best in knowledge & support</li>
+                                    <li>Transparent fees and pricing</li>
+                                    <li>Still confused about making your decision?</li>
+                                </ul>
+                            </div>
 
-                                Register From Anywhere
-                                Best In knowledge & Support
-                                Transparent fee and Pricing
-                                Still Confused about taking your decision?
                             </p>
                         </div>
                     </div>
@@ -85,7 +90,7 @@
                                             class="img-fluid" /></a>
                                 </div>
                                 <div class="info">
-                                    <h4><a>1500+</a></h4>
+                                    <h4><a>50+</a></h4>
                                     <p>Audit Completed</p>
                                 </div>
                             </div>
@@ -113,19 +118,19 @@
                                             alt="Consultation" class="img-fluid" /></a>
                                 </div>
                                 <div class="info">
-                                    <h4><a>2500+</a></h4>
+                                    <h4><a>250+</a></h4>
                                     <p>Consultation</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="testimonial-style-two-carousel2 swiper">
+                    <div class="row" >
+                        <div class="testimonial-style-two-carousel2 swiper" >
                             <p>Government Agencies We Are Affiliated With</p>
-                            <div class="swiper-wrapper">
+                            <div class="swiper-wrapper" >
                                 @foreach ($ourPartners as $item)
-                                    <div class="swiper-slide">
+                                    <div class="swiper-slide" >
                                         <div class="testimonial-style-two" style="padding:0px">
                                             <div class="info">
                                                 <div id="testimonialText1" style="display: flex; flex-direction: column;">
@@ -189,7 +194,7 @@
 
 
     <!-- benefit section
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ============================================= -->
     {{-- hello --}}
     @if ($finServiceBenefitSec->count())
         <div class="home-blog-area default-padding bottom-less bg-gray">
@@ -228,7 +233,7 @@
 
 
     <!-- about
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     @if ($item2->why_section_heading)
         <div class="putTickBeforeLi mission-vision-style-one-area overflow-hidden default-padding">
             <div class="container">
