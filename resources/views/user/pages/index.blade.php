@@ -218,7 +218,7 @@
 
 
     <!-- Start Banner Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="banner-area banner-style-one shadow navigation-custom-large zoom-effect overflow-hidden text-light">
         <!-- Slider main container -->
         <div class="banner-fade">
@@ -271,7 +271,7 @@
 
 
     <!-- Start Our Features
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="feature-style-one-area half-angle-shape overflow-hidden default-padding">
         <div class="container">
             <div class="row align-center">
@@ -313,7 +313,7 @@
 
 
     <!-- Start Aobut
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding"
         style="background-image: url(assets/img/shape/29.png);">
         <div class="container">
@@ -439,7 +439,7 @@
 
 
     <!-- Start About
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="about-style-one-area default-padding">
         <div class="shape-animated-left">
             <img src="assets/img/shape/anim-1.png" alt="Image Not Found">
@@ -484,8 +484,8 @@
 
 
     <!-- Start Servics Style One
-                   
-                  bg-gray                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                   
+                                  bg-gray                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
     <div class="services-style-one-area default-padding "
         style="background: linear-gradient(to right, #046ace, #94bae0);">
         {{-- <div class="triangle-shape">
@@ -689,12 +689,9 @@
             <div class="row align-center">
                 <div class="col-lg-12">
                     <h2 class="title">Tap on a Wide Range of Opportunities </h2>
-                    <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation" target="_blank"
-                        href="#">Innovate</a>
-                    <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation" target="_blank"
-                        href="#">Learn</a>
-                    <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation" target="_blank"
-                        href="#">Grow</a>
+                    <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation">Innovate</a>
+                    <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation">Learn</a>
+                    <a class="btn circle btn-light mt-30 mt-md-15 mt-xs-10 btn-md radius animation">Grow</a>
                 </div>
                 <p class="mt-4">With company setup in Dubai, run your business freely. Repatriate your profits and
                     tap
@@ -760,8 +757,8 @@
 
 
     <!-- Start Faq Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
 
     @if ($faqs->count())
         <div class="faq-area bg-gray default-padding">
