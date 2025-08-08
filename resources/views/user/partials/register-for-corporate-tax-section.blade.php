@@ -24,13 +24,13 @@
                             </div>
                             <div class="fun-fact">
                                 <div class="counter">
-                                    <div class="timer" data-to="500" data-speed="2000">500</div>
+                                    <div class="timer" data-to="50" data-speed="2000">50</div>
                                     <div class="operator">+</div>
                                 </div>
-                                <span class="medium">Business advices given over 30 years</span>
+                                <span class="medium">Business advices given over 2 years</span>
                             </div>
                         </li>
-                        <li>
+                        {{-- <li>
                             <div class="icon">
                                 <i class="flaticon-employee"></i>
                             </div>
@@ -41,7 +41,7 @@
                                 </div>
                                 <span class="medium">Business Excellence awards achieved</span>
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
