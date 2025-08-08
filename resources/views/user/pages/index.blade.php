@@ -563,8 +563,9 @@
 
 
     {{-- partners secrtion  --}}
+    {{-- style="background-image: url('{{ asset('assets/img/shape/banner-1.png') }}');background-repeat:no-repeat;background-size:100% 100%;" --}}
     <div class="project-details-area default-padding"
-        style="background-image: url('{{ asset('assets/img/shape/banner-1.png') }}');background-repeat:no-repeat;background-size:100% 100%;">
+        style="background-image: url('{{ asset('assets/img/shape/our_affi.jpeg') }}');background-repeat:no-repeat;background-size:100% 100%;">
         <div class="container">
             <div class="row align-center">
                 <div class="about-style-one col-xl-12 col-lg-11">
