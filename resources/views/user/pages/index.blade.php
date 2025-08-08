@@ -175,6 +175,18 @@
         .para.expanded {
             display: block;
         }
+
+
+
+        .setup-button {
+            transition: transform 0.3s ease;
+            /* smooth transition */
+        }
+
+        .setup-button:hover {
+            transform: translateY(-5px);
+            /* move up by 5px */
+        }
     </style>
 
 
@@ -218,7 +230,7 @@
 
 
     <!-- Start Banner Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="banner-area banner-style-one shadow navigation-custom-large zoom-effect overflow-hidden text-light">
         <!-- Slider main container -->
         <div class="banner-fade">
@@ -271,7 +283,7 @@
 
 
     <!-- Start Our Features
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="feature-style-one-area half-angle-shape overflow-hidden default-padding">
         <div class="container">
             <div class="row align-center">
@@ -313,7 +325,7 @@
 
 
     <!-- Start Aobut
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="about-style-two-area overflow-hidden bg-contain bg-gray default-padding"
         style="background-image: url(assets/img/shape/29.png);">
         <div class="container">
@@ -439,7 +451,7 @@
 
 
     <!-- Start About
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ============================================= -->
     <div class="about-style-one-area default-padding">
         <div class="shape-animated-left">
             <img src="assets/img/shape/anim-1.png" alt="Image Not Found">
@@ -484,8 +496,8 @@
 
 
     <!-- Start Servics Style One
-                                       
-                                      bg-gray                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                           
+                                          bg-gray                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
     <div class="services-style-one-area default-padding "
         style="background: linear-gradient(to right, #046ace, #94bae0);">
         {{-- <div class="triangle-shape">
@@ -507,7 +519,7 @@
                         <div class="nav nav-tabs service-tab-navs" id="nav-tab" role="tablist">
 
                             @foreach ($services as $service)
-                                <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                <button class=" nav-link {{ $loop->first ? 'active' : '' }}"
                                     id="nav-id-{{ $loop->iteration }}" data-bs-toggle="tab"
                                     data-bs-target="#tab{{ $loop->iteration }}" type="button" role="tab"
                                     aria-controls="tab{{ $loop->iteration }}" aria-selected="false">
@@ -522,14 +534,14 @@
                     <div class="tab-content services-tab-content" id="nav-tabContent">
                         @foreach ($services as $service)
                             <!-- Tab Single Item -->
-                            <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}"
+                            <div class=" tab-pane fade show {{ $loop->first ? 'active' : '' }}"
                                 id="tab{{ $loop->iteration }}" role="tabpanel"
-                                aria-labelledby="nav-id-{{ $loop->iteration }}">
+                                aria-labelledby="nav-id-{{ $loop->iteration }}" >
                                 <div class="row ">
                                     @foreach ($service->servicePages as $page)
                                         <!-- Single Item -->
                                         {{-- wow fadeInUp --}}
-                                        <div class="col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 pb-4 d-flex">
+                                        <div class="setup-button col-lg-6 col-md-6 mt-60 mt-md-30 mt-xs-30 pb-4 d-flex">
                                             <div class="shadow-sm flex-column"
                                                 style="background-color:white;border-radius:10px;padding:2rem;margin-right:0rem">
                                                 <a href="{{ route('user.pages.servicePage', $page->id) }}"
@@ -757,8 +769,8 @@
 
 
     <!-- Start Faq Area
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
 
     @if ($faqs->count())
         <div class="faq-area bg-gray default-padding">
