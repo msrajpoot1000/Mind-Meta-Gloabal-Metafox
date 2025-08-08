@@ -155,7 +155,7 @@
 
     {{-- chat boat script  --}}
     <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         var Tawk_API = Tawk_API || {},
             Tawk_LoadStart = new Date();
         (function() {
@@ -163,6 +163,25 @@
                 s0 = document.getElementsByTagName("script")[0];
             s1.async = true;
             s1.src = 'https://embed.tawk.to/6891fe2cbe6f23192336d305/1j1t4hodj';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script> --}}
+    <!--End of Tawk.to Script-->
+
+
+
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6895ce652f4d2419293f781a/1j24isfq2';
             s1.charset = 'UTF-8';
             s1.setAttribute('crossorigin', '*');
             s0.parentNode.insertBefore(s1, s0);
@@ -247,7 +266,7 @@
 
     <!-- Floating Language Icon Button -->
     <div class="language-fab" onclick="openLanguageModal()">
-        <i class="fas fa-language" ></i>
+        <i class="fas fa-language"></i>
     </div>
 
     <!-- Modal -->

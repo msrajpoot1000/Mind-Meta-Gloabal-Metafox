@@ -77,27 +77,20 @@
                     <div class="f-item link">
                         <h4 class="widget-title">Quick Links</h4>
                         <ul>
-
-
                             <li><a href="{{ route('user.pages.aboutus') }}"><i class="fas fa-chevron-right mr-4"></i>
                                     About Us</a></li>
-                            <li><a href="company-registration.html"><i class="fas fa-chevron-right mr-4"></i> Company
+                            <li><a href="{{ route('user.pages.comRegPage', 1) }}"><i
+                                        class="fas fa-chevron-right mr-4"></i> Company
                                     Registration</a></li>
-                            <li><a href="corporate-tax-services.html"><i class="fas fa-chevron-right mr-4"></i>
+                            <li><a href="{{ route('user.pages.finService', 13) }}"><i
+                                        class="fas fa-chevron-right mr-4"></i>
                                     Corporate Tax Services</a></li>
-                            {{-- <li><a href="{{ route('user.pages.privacy-policy') }}"><i
-                                        class="fas fa-chevron-right mr-4"></i> Privacy
-                                    Policy</a></li> --}}
-                            {{-- <li><a href="{{ route('user.pages.terms-conditions') }}"><i
-                                        class="fas fa-chevron-right mr-4"></i> Terms &
-                                    Conditions</a></li> --}}
+
                             <li><a href="{{ route('user.pages.contact', '') }}"><i
                                         class="fas fa-chevron-right mr-4"></i>
                                     Contact Us</a></li>
-                            {{-- <li><a href="career.html"><i class="fas fa-chevron-right mr-4"></i> Career</a></li> --}}
-                            {{-- <li><a href="pricing.html"><i class="fas fa-chevron-right mr-4"></i> Plans & Pricing</a> --}}
                             </li>
-                            {{-- <li><a href="faq.html"><i class="fas fa-chevron-right mr-4"></i> Help Center</a></li> --}}
+
 
                         </ul>
 
@@ -108,7 +101,9 @@
                         <h4 class="widget-title">Useful Links</h4>
                         <ul>
 
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Business Setup
+
+                            <li><a href="{{ route('user.pages.blog') }}"><i class="fas fa-chevron-right mr-4"></i>
+                                    Business Setup
                                     Blog</a></li>
                             <li><a href="{{ route('user.pages.comRegPage', 1) }}"><i
                                         class="fas fa-chevron-right mr-4"></i> Mainland
@@ -116,12 +111,14 @@
                             <li><a href="{{ route('user.pages.comRegPage', 5) }}"><i
                                         class="fas fa-chevron-right mr-4"></i> Freezone
                                     Company Formation</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> How to start a
+                            <li><a href="{{ route('user.pages.comRegPage', 23) }}"><i
+                                        class="fas fa-chevron-right mr-4"></i> How to start a
                                     business in Dubai</a></li>
                             <li><a href="{{ route('user.pages.servicePage', 13) }}"><i
                                         class="fas fa-chevron-right mr-4"></i> Corporate PRO
                                     Services</a></li>
-                            <li><a href="services-details.html"><i class="fas fa-chevron-right mr-4"></i> Coworking
+                            <li><a href="{{ route('user.pages.comRegPage', 14) }}"><i
+                                        class="fas fa-chevron-right mr-4"></i> Coworking
                                     Spaces</a></li>
 
 
@@ -239,7 +236,7 @@
             background-color: #1ebd59;
         }
 
-        
+
 
         .fab-calendar {
             bottom: 12rem;
@@ -267,7 +264,7 @@
                 /* 22px */
             }
 
-           
+
 
             .fab-calendar {
                 bottom: 5rem;
