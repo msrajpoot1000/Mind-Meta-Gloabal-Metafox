@@ -152,10 +152,10 @@
                     {{-- financial servicss  --}}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Financial Services </a>
-                        <ul class="dropdown-menu p-2" style="width: 800px;background-color:white;margin-top:-1rem">
+                        <ul class="dropdown-menu p-2" style="width: 800px;background-color:white;margin-top:-1rem;">
 
 
-                            <div class="row p-2 scrollable-div">
+                            <div class="row p-2 scrollable-div" style="">
                                 @foreach ($finServices as $finService)
                                     <div class="col-lg-4 mt-2">
                                         <a style="font-size:1rem;color:black;">{{ $finService->name }}</a>
@@ -206,6 +206,18 @@
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
+            <style>
+                @media (max-width:1200px) {
+                    .attr-right {
+                        display: none;
+                    }
+                }
+                /* @media (min-width:1023px) {
+                    .attr-right {
+                        display: block;
+                    }
+                } */
+            </style>
 
             <div class="attr-right">
                 <!-- Start Atribute Navigation -->

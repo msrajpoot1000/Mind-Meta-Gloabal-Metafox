@@ -54,7 +54,7 @@
 
 
     <!-- banner
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     <div class="breadcrumb-area bg-cover shadow dark text-center text-light"
         style="background-image: url(assets/img/shape/promotion-banner.webp);">
         <div class="breadcrum-shape">
@@ -76,7 +76,7 @@
 
 
     <!-- Start Services
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
     <div class="services-style-two-area default-padding bottom-less bg-cover bg-gray"
         style="background-image: url(assets/img/shape/27.png);">
         <div class="container">
@@ -96,29 +96,38 @@
                     @foreach ($promotion->promotionPages as $page)
                         @foreach ($page->promotionOffers as $offer)
                             <div class="col-xl-4 col-md-6 mb-30">
-                                <div class="offer-card" data-bs-toggle="modal"
-                                    data-bs-target="#offerModal{{ $offer->id }}">
+                                <div class="offer-card">
                                     <div class="services-style-two active h-100">
                                         <div class="thumb">
-                                            <img src="{{ asset($offer->offer_image) }}" alt="Thumb">
-                                            <div>
-                                                <div class="border:1px solid red"> <i class="flaticon-budget"></i> </div>
-                                                <div class="title py-2">
+                                            <!-- Image Clickable -->
+                                            <img src="{{ asset($offer->offer_image) }}" alt="Thumb"
+                                                data-bs-toggle="modal" data-bs-target="#offerModal{{ $offer->id }}">
 
-                                                    <h4>{{ $offer->offer_title }}<br><span>{{ $offer->offer_price }}</span>
+                                            <div>
+                                                <div>
+                                                    <i class="flaticon-budget"></i>
+                                                </div>
+                                                <div class="title py-2">
+                                                    <!-- Title Clickable -->
+                                                    <h4 data-bs-toggle="modal"
+                                                        data-bs-target="#offerModal{{ $offer->id }}">
+                                                        {{ $offer->offer_title }}<br>
+                                                        <span>{{ $offer->offer_price }}</span>
                                                     </h4>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="info" style="margin:0px;padding:1rem">
-                                            <a href="#" class="app-btn">Make
+                                            <a href="{{ route('user.pages.book-appointment') }}" class="app-btn">Make
                                                 Appointment</a>
                                             <p class="offer-des-2">
                                                 {{ strip_tags($offer->offer_description) }}
                                             </p>
                                             <div class="button">
-                                                <a class="toggle-btn-read-more" role="button">
+                                                <!-- Read More Clickable -->
+                                                <a class="toggle-btn-read-more" role="button" data-bs-toggle="modal"
+                                                    data-bs-target="#offerModal{{ $offer->id }}">
                                                     Read More
                                                 </a>
                                                 <div class="devider"></div>
@@ -126,23 +135,55 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <!-- Modal -->
+                            <div class="modal fade" id="offerModal{{ $offer->id }}" tabindex="-1"
+                                aria-labelledby="offerModalLabel{{ $offer->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                    <div style="background-color:white">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="offerModalLabel{{ $offer->id }}">
+                                                {{ $offer->offer_title }}
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="{{ asset($offer->offer_image) }}" class="img-fluid mb-3"
+                                                alt="Offer Image">
+                                            <h3>Price: <span style="font-weight: bold">{{ $offer->offer_price }}</span>
+                                            </h3>
+                                            <a href="{{ route('user.pages.book-appointment') }}" class="app-btn">Make
+                                                Appointment</a>
+                                            <p>{!! $offer->offer_description !!}</p>
+                                            <a href="{{ route('user.pages.book-appointment') }}" class="app-btn">Make
+                                                Appointment</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     @endforeach
                 @endforeach
-                <!-- End Single Item -->
-                {{-- @endforeach --}}
             </div>
+
+            <style>
+                /* Make clickable elements show a hand cursor */
+                [data-bs-toggle="modal"] {
+                    cursor: pointer;
+                }
+            </style>
+
         </div>
     </div>
     <!-- End Services -->
 
 
-    <div class="modal fade" id="offerModal{{ $offer->id }}" tabindex="-1"
+    {{-- <div class="modal fade" id="offerModal{{ $offer->id }}" tabindex="-1"
         aria-labelledby="offerModalLabel{{ $offer->id }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
+            <div class="" style="background-color:white">
                 <div class="modal-header">
                     <h5 class="modal-title" id="offerModalLabel{{ $offer->id }}">{{ $offer->offer_title }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -158,7 +199,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 

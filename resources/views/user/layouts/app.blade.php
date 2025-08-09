@@ -120,6 +120,18 @@
         }
     </style>
 
+    <script>
+        window.addEventListener("scroll", function() {
+            const element = document.getElementById("lang-change-btn");
+            if (window.scrollY > 0) {
+                element.style.display = "none"; // Hide
+            } else {
+                element.style.display = "flex"; // Show
+            }
+        });
+    </script>
+
+
 
     {{-- @yield('favicon') --}}
     @php
@@ -169,6 +181,7 @@
         })();
     </script> --}}
     <!--End of Tawk.to Script-->
+
 
 
 
@@ -265,7 +278,7 @@
 
 
     <!-- Floating Language Icon Button -->
-    <div class="language-fab" onclick="openLanguageModal()">
+    <div class="language-fab" id="lang-change-btn" onclick="openLanguageModal()">
         <i class="fas fa-language"></i>
     </div>
 

@@ -227,7 +227,7 @@
 
 
     <!-- Business Legal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ============================================= -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ============================================= -->
     @if ($comRegPage->business_legal_description)
         <div class="about-style-two-area overflow-hidden bg-contain default-padding">
             <div class="container">
@@ -297,18 +297,24 @@
                                 UAE.
                             </p>
                             <div class="nav nav-tabs service-tab-navs" id="nav-tab" role="tablist">
-                                @foreach ($comRegRequireDocSec as $item)
-                                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="nav-id-3"
-                                        data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab"
-                                        aria-controls="tab3" aria-selected="false">
-                                        <i class="fas fa-file-alt"></i>
 
-                                        {{ $item->name }}
-                                    </button>
-                                @endforeach
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr);  gap: 1rem">
+                                    @foreach ($comRegRequireDocSec as $item)
+                                        <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="nav-id-3"
+                                            data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab"
+                                            aria-controls="tab3" aria-selected="false">
+                                            <i class="fas fa-file-alt"></i>
+
+                                            {{ $item->name }}
+                                        </button>
+                                    @endforeach
+                                </div>
 
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-6 ">
+                        {{-- <img src="{{ asset('assets/img/doc1.png') }}" style="width:100%;height:100%;object-fit:contain"> --}}
                     </div>
                 </div>
             </div>

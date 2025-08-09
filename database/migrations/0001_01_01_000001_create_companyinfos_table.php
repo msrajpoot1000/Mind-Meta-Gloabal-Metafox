@@ -24,6 +24,7 @@ return new class extends Migration
         $table->string('phone2', 20)->nullable();
         $table->string('phone3', 20)->nullable();
         $table->string('address')->nullable();
+           $table->string('address2')->nullable();
         $table->string('facebook')->nullable();
         $table->string('instagram')->nullable();
         $table->string('twitter')->nullable();

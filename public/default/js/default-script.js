@@ -97,6 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const timezoneSelect = document.getElementById("timezone");
 
+    if (!timezoneSelect) {
+        // Element not found, just exit
+        return;
+    }
+
     timezones.forEach((tz) => {
         const option = document.createElement("option");
         option.value = `${tz.name} (${tz.offset})`;
@@ -104,3 +109,4 @@ document.addEventListener("DOMContentLoaded", function () {
         timezoneSelect.appendChild(option);
     });
 });
+

@@ -32,6 +32,7 @@ public function store(Request $request)
         'phone2'          => 'nullable|string|max:20',
         'phone3'          => 'nullable|string|max:20',
         'address'         => 'nullable|string|max:500',
+           'address2'         => 'nullable|string|max:500',
         'facebook'        => 'nullable|url',
         'instagram'       => 'nullable|url',
         'twitter'         => 'nullable|url',
@@ -154,6 +155,7 @@ if ($request->hasFile($aboutPdfField)) {
     $company->phone2      = $request->phone2;
     $company->phone3      = $request->phone3;
     $company->address     = $request->address;
+     $company->address2     = $request->address2;
     $company->facebook    = $request->facebook;
     $company->instagram   = $request->instagram;
     $company->twitter     = $request->twitter;

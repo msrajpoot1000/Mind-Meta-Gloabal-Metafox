@@ -9,7 +9,7 @@
 
 
 @section('style')
-  
+
 @endsection
 @section('content')
     <!-- banner                                                                                                                                                                                                                                                                                  ============================================= -->
@@ -32,8 +32,8 @@
     </div>
 
 
-    <!-- Start Blog
-                                                    ============================================= -->
+    {{-- <!-- Start Blog --}}
+
     <div class="blog-area blog-grid default-padding">
         <div class="container">
             <div class="blog-item-box">
@@ -51,15 +51,16 @@
                                         <ul>
                                             <li>
                                                 <i class="fas fa-user"></i>
-                                                <a href="#">John Baus</a>
+                                                <a href="{{ route('user.pages.blogDetail', $blog->id) }}">Admin</a>
                                             </li>
                                             <li>
-                                                12 August, 2023
+                                                {{ $blog->created_at->format('d/m/Y') }}
+
                                             </li>
                                         </ul>
                                     </div>
                                     <h3>
-                                        <a href="blog-single-with-sidebar.html">{{ $blog->blog_title }}</a>
+                                        <a href="{{ route('user.pages.blogDetail', $blog->id) }}">{{ $blog->blog_title }}</a>
                                     </h3>
                                     <a href="{{ route('user.pages.blogDetail', $blog->id) }}" class="btn-simple"><i
                                             class="fas fa-angle-right"></i> Read more</a>

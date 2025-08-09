@@ -238,6 +238,20 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label for="address2" class="form-label">Address2</label>
+                                    <input type="text" class="form-control @error('address2') is-invalid @enderror"
+                                        name="address2" placeholder="Enter address2"
+                                        value="{{ old('address2', $companyinfos->address2) }}">
+                                    @error('address2')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             @foreach (['facebook', 'instagram', 'twitter', 'youtube', 'linkedin', 'pinterest'] as $social)
                                 <div class="col-lg-6">
                                     <div class="mb-3">

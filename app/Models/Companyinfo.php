@@ -20,6 +20,7 @@ class Companyinfo extends Model
         'phone2',
         'phone3',
         'address',
+        'address2',
         'facebook',
         'instagram',
         'twitter',

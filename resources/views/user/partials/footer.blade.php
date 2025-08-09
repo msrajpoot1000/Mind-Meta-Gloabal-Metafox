@@ -6,6 +6,7 @@
 @section('style')
 @endsection
 
+
 <footer class="bg-dark text-light">
     <div class="footer-shape">
         <div class="item">
@@ -92,6 +93,16 @@
                             </li>
 
 
+
+                            <!-- Floating Language Icon Button -->
+
+                            <li><a style="cursor: pointer;" onclick="openLanguageModal()"><i
+                                        class="fas fa-chevron-right mr-4"></i>
+                                    Change Language</a></li>
+                            </li>
+
+
+
                         </ul>
 
                     </div>
@@ -135,6 +146,12 @@
                                 <li>
                                     <i class="fas fa-map-marker-alt"></i>
                                     {{ $company->address }}
+                                </li>
+                            @endif
+                            @if ($company->address2)
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ $company->address2 }}
                                 </li>
                             @endif
                             @if ($company->email)
